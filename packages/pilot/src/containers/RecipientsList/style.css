@@ -1,0 +1,10 @@
+@import "former-kit-skin-pagarme/dist/styles/spacing.css";
+
+.centralizedItem {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.marginBottom {
+  margin-bottom: var(--spacing-medium);
+}
