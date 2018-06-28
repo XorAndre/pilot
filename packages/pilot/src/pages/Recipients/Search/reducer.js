@@ -6,9 +6,9 @@ import {
 const initialState = {
   loading: true,
   query: {
-    search: '',
-    offset: 1,
     count: 15,
+    offset: 1,
+    search: '',
   },
 }
 

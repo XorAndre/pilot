@@ -40,8 +40,8 @@ const mapStateToProps = ({
 }) => ({ client, loading, query })
 
 const mapDispatchToProps = ({
-  onRequestSearch: requestSearch,
   onReceiveSearch: receiveSearch,
+  onRequestSearch: requestSearch,
   onRequestSearchFail: requestLogout,
 })
 
@@ -63,18 +63,12 @@ const normalizeTo = (defaultValue, propPath) => pipe(
 )
 
 const normalizeQueryStructure = applySpec({
+  count: pipe(normalizeTo(15, ['count']), Number),
+  offset: pipe(normalizeTo(1, ['offset']), Number),
   search: normalizeTo('', ['search']),
-  offset: pipe(
-    normalizeTo(1, ['offset']),
-    Number
-  ),
-  count: pipe(
-    normalizeTo(15, ['count']),
-    Number
-  ),
   sort: {
-    order: normalizeTo('descending', ['sort', 'order']),
     field: normalizeTo(['created_at'], ['sort', 'field']),
+    order: normalizeTo('descending', ['sort', 'order']),
   },
 })
 
@@ -103,16 +97,16 @@ class RecipientsSearch extends React.Component {
     super(props)
 
     this.state = {
+      expandedRows: [],
       result: {
-        total: {},
-        list: {
-          rows: [],
-        },
         chart: {
           dataset: [],
         },
+        list: {
+          rows: [],
+        },
+        total: {},
       },
-      expandedRows: [],
       selectedRows: [],
     }
 
@@ -151,8 +145,8 @@ class RecipientsSearch extends React.Component {
   updateQuery (query) {
     const {
       history: {
-        push,
         location,
+        push,
       },
     } = this.props
 
@@ -198,12 +192,12 @@ class RecipientsSearch extends React.Component {
       .then(res => flatten(of(res)))
       .then((res) => {
         const result = {
+          list: {
+            rows: res,
+          },
           total: {
             count: res.length,
             offset: query.offset,
-          },
-          list: {
-            rows: res,
           },
         }
 
@@ -212,8 +206,8 @@ class RecipientsSearch extends React.Component {
         })
 
         this.props.onReceiveSearch({
-          rows: res,
           query,
+          rows: res,
         })
       })
       .catch((error) => {
@@ -224,8 +218,8 @@ class RecipientsSearch extends React.Component {
   handlePageCountChange (count) {
     const query = {
       ...this.props.query,
-      offset: 1,
       count,
+      offset: 1,
     }
 
     this.updateQuery(query)
@@ -234,10 +228,10 @@ class RecipientsSearch extends React.Component {
   handleOrderChange (field) {
     const query = {
       ...this.props.query,
+      offset: 1,
       sort: {
         field,
       },
-      offset: 1,
     }
 
     this.updateQuery(query)
@@ -247,7 +241,6 @@ class RecipientsSearch extends React.Component {
     this.updateQuery({ })
   }
 
-
   handleFilterChange (filters) {
     const {
       search,
@@ -255,8 +248,8 @@ class RecipientsSearch extends React.Component {
 
     const query = {
       ...this.props.query,
-      search,
       offset: 1,
+      search,
     }
 
     this.updateQuery(query)
@@ -320,15 +313,17 @@ class RecipientsSearch extends React.Component {
       loading,
       query,
       query: {
-        offset,
         count,
+        offset,
       },
       t,
     } = this.props
 
     const pagination = {
       offset,
-      total: list.rows.length === count ? 100 : offset,
+      total: list.rows.length === count
+        ? 100
+        : offset,
     }
 
     return (

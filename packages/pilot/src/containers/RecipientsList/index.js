@@ -40,7 +40,10 @@ const RecipientsList = ({
   selectedRows,
   t,
 }) => {
-  const columns = tableColumns({ t, onDetailsClick })
+  const columns = tableColumns({
+    onDetailsClick,
+    t,
+  })
   const handleOrderChange = columnIndex =>
     onOrderChange(columns[columnIndex].accessor)
   return (
@@ -141,31 +144,31 @@ const RecipientsList = ({
 }
 
 RecipientsList.propTypes = {
-  query: PropTypes.shape({
-    search: PropTypes.string,
-  }),
   expandedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   filterOptions: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    name: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
     })),
+    key: PropTypes.string,
+    name: PropTypes.string,
   })).isRequired,
   loading: PropTypes.bool.isRequired,
   onDetailsClick: PropTypes.func.isRequired,
   onExpandRow: PropTypes.func.isRequired,
-  onRowClick: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
   onFilterClear: PropTypes.func.isRequired,
   onOrderChange: PropTypes.func.isRequired,
   onPageChange: PropTypes.func.isRequired,
+  onRowClick: PropTypes.func.isRequired,
   onSelectRow: PropTypes.func.isRequired,
   pagination: PropTypes.shape({
     offset: PropTypes.number,
     total: PropTypes.number,
   }).isRequired,
+  query: PropTypes.shape({
+    search: PropTypes.string,
+  }),
   rows: PropTypes.arrayOf(PropTypes.shape({
     anticipatable_volume_percentage: PropTypes.number,
     automatic_anticipation_days: PropTypes.string,

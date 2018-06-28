@@ -52,44 +52,43 @@ const antecipationModel = (data) => {
 
 const getDefaultColumns = ({ t }) => ([
   {
-    title: t('pages.recipients.status'),
+    accessor: ['status'],
+    orderable: false,
     renderer: item => (
       <StatusLegend
         item={item}
         t={t}
       />
     ),
-    accessor: ['status'],
-    orderable: false,
+    title: t('pages.recipients.status'),
   },
   {
-    title: t('pages.recipients.id'),
     accessor: ['id'],
     orderable: false,
+    title: t('pages.recipients.id'),
   },
   {
-    title: t('pages.recipients.bank_account_id'),
     accessor: ['bank_account', 'id'],
     orderable: false,
+    title: t('pages.recipients.bank_account_id'),
   },
   {
-    title: t('pages.recipients.bank_account_legal_name'),
     accessor: ['bank_account', 'legal_name'],
     orderable: false,
+    title: t('pages.recipients.bank_account_legal_name'),
   },
   {
-    title: t('pages.recipients.bank_account_document_number'),
     accessor: ['bank_account', 'document_number'],
     orderable: false,
+    title: t('pages.recipients.bank_account_document_number'),
   },
   {
-    title: t('pages.recipients.date_created'),
     accessor: ['created_at'],
     orderable: false,
     renderer: pipe(prop('created_at'), formatDate),
+    title: t('pages.recipients.date_created'),
   },
   {
-    title: '',
     accessor: ['updated_at'],
     isAction: false,
     renderer: data => (
@@ -104,17 +103,20 @@ const getDefaultColumns = ({ t }) => ([
           <Row>
             {columnData([
               {
-                title: t('pages.recipients.date_updated'),
                 content: formatDate(data.date_updated),
-              }, {
-                title: t('pages.recipients.automatic_anticipation_enabled'),
+                title: t('pages.recipients.date_updated'),
+              },
+              {
                 content: t(`pages.recipients.automatic_anticipation_enabled_boolean.${data.automatic_anticipation_enabled}`),
-              }, {
-                title: t('pages.recipients.anticipation_model'),
+                title: t('pages.recipients.automatic_anticipation_enabled'),
+              },
+              {
                 content: t(`pages.recipients.anticipation_model_of.${antecipationModel(data)}`),
-              }, {
-                title: t('pages.recipients.anticipatable_volume_percentage'),
+                title: t('pages.recipients.anticipation_model'),
+              },
+              {
                 content: `${data.anticipatable_volume_percentage}%`,
+                title: t('pages.recipients.anticipatable_volume_percentage'),
               },
             ])}
           </Row>
@@ -128,20 +130,23 @@ const getDefaultColumns = ({ t }) => ([
           <Row>
             {columnData([
               {
-                title: t('pages.recipients.transfer_enabled'),
                 content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
-              }, {
-                title: t('pages.recipients.transfer_interval'),
+                title: t('pages.recipients.transfer_enabled'),
+              },
+              {
                 content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
-              }, {
-                title: t('pages.recipients.transfer_day'),
+                title: t('pages.recipients.transfer_interval'),
+              },
+              {
                 content: data.transfer_day,
+                title: t('pages.recipients.transfer_day'),
               },
             ])}
           </Row>
         </Col>
       </Grid>
     ),
+    title: '',
   },
 ])
 
