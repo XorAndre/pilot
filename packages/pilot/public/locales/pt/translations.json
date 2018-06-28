@@ -21,7 +21,7 @@
   "copy_id": "Copiar id",
   "currency_symbol": "R$",
   "currency": "R$",
-  "dates" : {
+  "dates": {
     "any": "Qualquer data",
     "cancel": "Cancelar",
     "confirm": "Confirmar período",
@@ -37,7 +37,7 @@
     "no_selected": "Nenhum dia selecionado",
     "period": "Período",
     "select": "Todo o período",
-    "selected":"Dias selecionados",
+    "selected": "Dias selecionados",
     "start": "Início",
     "today": "Hoje"
   },
@@ -570,6 +570,80 @@
       "step_title_confirmation": "Confirmação",
       "step_title_result": "Conclusão"
     },
+    "recipients": {
+      "anticipatable_volume_percentage": "Volume antecipado",
+      "anticipation_model": "Modelo",
+      "anticipation_model_of": {
+        "manual": "Manual por Volume",
+        "automatic_volume": "Automática por Volume",
+        "automatic_1025": "Automática nos Dias 10/25",
+        "automatic_dx": "Automática D+X",
+        "custom": "Customizado"
+      },
+      "automatic_anticipation_1025_delay": "Antecipação 10/25 (delay)",
+      "automatic_anticipation_days": "Antecipação 10/25 (dias)",
+      "automatic_anticipation_enabled": "Antecipação automática",
+      "automatic_anticipation_enabled_boolean": {
+        "true": "Sim",
+        "false": "Não"
+      },
+      "automatic_anticipation_type_of": {
+        "full": "Completa",
+        "1025": "10/25"
+      },
+      "automatic_anticipation_type": "Tipo de antecipação automática:",
+      "bank_account_document_number": "Número do Documento",
+      "bank_account_document_type": "Tipo",
+      "bank_account_id": "Id da Conta Bancária",
+      "bank_account_legal_name": "Nome da Conta Bancária",
+      "count": "Número de recebedores",
+      "date_created": "Data de criação",
+      "date_updated": "Data da atualização",
+      "details": "Detalhes",
+      "id": "Id do Recebedor",
+      "items_per_page_plural": "{{count}} ítens por página",
+      "items_per_page": "{{count}} ítem por página",
+      "no_results": "Não foram encontrados resultados para essa busca.",
+      "show_details": "Ver Detalhes",
+      "status": "Status",
+      "status_acronym_of": {
+        "active": "A",
+        "affiliation": "AF",
+        "blocked": "TB",
+        "inactive": "PD",
+        "paid": "P",
+        "refused": "R",
+        "registration": "CR",
+        "suspended": "TS"
+      },
+      "status_of": {
+        "active": "Ativo",
+        "affiliation": "Em Afiliação",
+        "blocked": "Temporariamente Bloqueado",
+        "inactive": "Permanentemente Desativado",
+        "processing": "Processando",
+        "refused": "Recusado",
+        "registration": "Em Credenciamento",
+        "suspended": "Temporariamente Suspenso"
+      },
+      "text_search_placeholder": "Filtre por ID do recebedor, ID da conta bancária ou nome da conta",
+      "title": "Recebedores",
+      "total_amount": "Total",
+      "transfer_day": "Dia da transferência",
+      "transfer_enabled_boolean": {
+        "true": "Sim",
+        "false": "Não"
+      },
+      "transfer_enabled": "Transferência habilitada",
+      "transfer_interval_of": {
+        "daily": "Diária",
+        "weekly": "Semanal",
+        "monthly": "Mensal",
+        "null": "---"
+      },
+      "transfer_interval": "Intervalo de transferência",
+      "try_again": "Tente novamente com outros filtros"
+    },
     "refund": {
       "conclusion": "conclusão",
       "confirm": "Estornar transação",
@@ -869,50 +943,50 @@
       },
       "capture_method": "Método de captura",
       "card_brand": "Bandeira",
-      "chargeback" : {
+      "chargeback": {
         "code": {
           "unknown": "Desconhecido",
-          "30":"Visa: Mercadoria não entregue ou serviço não prestado",
-          "4855":"Master: Mercadoria não entregue ou serviço não prestado",
-          "41":"Visa: Transação recorrente cancelada",
-          "4841":"Master: Transação recorrente cancelada ou com valor diferente",
-          "53":"Visa: Disputa do portador, mercadoria diferente da descrita ou defeituosa",
-          "4853":"Master: Disputa do portador, mercadoria diferente da descrita ou defeituosa",
-          "85":"Visa: Crédito não processado",
-          "4860":"Master: Crédito não processado",
-          "4859":"Master: Adendo ou no show",
-          "77":"Visa: Número de conta inexistente",
-          "4812":"Master: Número de conta inexistente",
-          "73":"Cartão expirado",
-          "70":"Visa: Cartão em boletim de proteção",
-          "4807":"Master: Cartão em boletim de proteção",
-          "71":"Visa: Transação negada",
-          "72":"Visa: Sem autorização",
-          "78":"Visa: Violação do código de serviço",
-          "4808":"Master: Relativo a autorização",
-          "80":"Visa: Valor da transação incorreto",
-          "86":"Visa: Pagamento por outros meios",
-          "90":"Visa: Saque ou recarga não recebida em caixa eletrônico",
-          "4831":"Master: Valor da transação difere",
-          "4850":"Master: Disputa de transação parcelada",
-          "74":"Visa: Apresentação tardia",
-          "4842":"Master: Apresentação tardia",
-          "76":"Visa: Código da transação ou moeda incorreto",
-          "4846":"Master: Código da transação ou moeda incorreto",
-          "82":"Visa: Transação duplicada",
-          "4834":"Master: Erro no ponto de venda",
-          "57":"Visa: Múltiplas transações fraudulentas",
-          "62":"Visa: Transação falsificada e transferência de responsabilidade do chip",
-          "75":"Visa: Transação não reconhecida",
-          "81":"Visa: Fraude – ambiente de cartão presente",
-          "83":"Visa: Fraude – ambiente de cartão ausente",
-          "93":"Visa: Programa de monitoramento de fraude da Visa",
-          "4837":"Master: Sem autorização do portador",
-          "4840":"Master: Processamento fraudulento de transações",
-          "4849":"Master: Atividade questionável do estabelecimento",
-          "4863":"Master: Portador não reconhece – potencial de fraude",
-          "4870":"Master: Transferência de responsabilidade do chip",
-          "4871":"Master: Transferência de responsabilidade do chip e senha"
+          "30": "Visa: Mercadoria não entregue ou serviço não prestado",
+          "4855": "Master: Mercadoria não entregue ou serviço não prestado",
+          "41": "Visa: Transação recorrente cancelada",
+          "4841": "Master: Transação recorrente cancelada ou com valor diferente",
+          "53": "Visa: Disputa do portador, mercadoria diferente da descrita ou defeituosa",
+          "4853": "Master: Disputa do portador, mercadoria diferente da descrita ou defeituosa",
+          "85": "Visa: Crédito não processado",
+          "4860": "Master: Crédito não processado",
+          "4859": "Master: Adendo ou no show",
+          "77": "Visa: Número de conta inexistente",
+          "4812": "Master: Número de conta inexistente",
+          "73": "Cartão expirado",
+          "70": "Visa: Cartão em boletim de proteção",
+          "4807": "Master: Cartão em boletim de proteção",
+          "71": "Visa: Transação negada",
+          "72": "Visa: Sem autorização",
+          "78": "Visa: Violação do código de serviço",
+          "4808": "Master: Relativo a autorização",
+          "80": "Visa: Valor da transação incorreto",
+          "86": "Visa: Pagamento por outros meios",
+          "90": "Visa: Saque ou recarga não recebida em caixa eletrônico",
+          "4831": "Master: Valor da transação difere",
+          "4850": "Master: Disputa de transação parcelada",
+          "74": "Visa: Apresentação tardia",
+          "4842": "Master: Apresentação tardia",
+          "76": "Visa: Código da transação ou moeda incorreto",
+          "4846": "Master: Código da transação ou moeda incorreto",
+          "82": "Visa: Transação duplicada",
+          "4834": "Master: Erro no ponto de venda",
+          "57": "Visa: Múltiplas transações fraudulentas",
+          "62": "Visa: Transação falsificada e transferência de responsabilidade do chip",
+          "75": "Visa: Transação não reconhecida",
+          "81": "Visa: Fraude – ambiente de cartão presente",
+          "83": "Visa: Fraude – ambiente de cartão ausente",
+          "93": "Visa: Programa de monitoramento de fraude da Visa",
+          "4837": "Master: Sem autorização do portador",
+          "4840": "Master: Processamento fraudulento de transações",
+          "4849": "Master: Atividade questionável do estabelecimento",
+          "4863": "Master: Portador não reconhece – potencial de fraude",
+          "4870": "Master: Transferência de responsabilidade do chip",
+          "4871": "Master: Transferência de responsabilidade do chip e senha"
         }
       },
       "copy": "Copiar",
@@ -1030,6 +1104,16 @@
     },
     "pagination": {
       "of": "de"
+    },
+    "models": {
+      "antifraud_analyses": {
+        "status": {
+          "approve": "aprovar",
+          "refuse": "reprovar",
+          "approved": "aprovada",
+          "refused": "reprovada"
+        }
+      }
     }
   },
   "cancel_pending_request_cancel": "Não quero cancelar",
