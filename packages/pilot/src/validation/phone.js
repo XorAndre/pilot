@@ -1,3 +1,4 @@
-const isPhone = /^\([1-9]{2}\)\s([9][0-9]{4}-[0-9]{4}|[2-9][0-9]{4}-[0-9]{3}_)$/
-
-export default message => value => !isPhone.test(value) && message
+export default message => (value) => {
+  const digits = Array.from(value).filter(digit => /[0-9]/.test(digit))
+  return !(digits.length === 11 || digits.length === 10) && message
+}
