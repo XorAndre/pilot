@@ -28,6 +28,28 @@ const columnData = data => (
   ))
 )
 
+const antecipationModel = (data) => {
+  if (data.automatic_anticipation_enabled === false) {
+    return 'manual'
+  }
+
+  if (data.automatic_anticipation_type === 'full') {
+    return 'automatic_volume'
+  }
+
+  if (data.automatic_anticipation_days === '10,25') {
+    return 'automatic_1025'
+  }
+
+  const antecipationDays = data.automatic_anticipation_days.split(',')
+
+  if (antecipationDays.length === 31) {
+    return 'automatic_dx'
+  }
+
+  return 'custom'
+}
+
 const getDefaultColumns = ({ t }) => ([
   {
     title: t('pages.recipients.status'),
@@ -87,6 +109,9 @@ const getDefaultColumns = ({ t }) => ([
               }, {
                 title: t('pages.recipients.automatic_anticipation_enabled'),
                 content: t(`pages.recipients.automatic_anticipation_enabled_boolean.${data.automatic_anticipation_enabled}`),
+              }, {
+                title: t('pages.recipients.anticipation_model'),
+                content: t(`pages.recipients.anticipation_model_of.${antecipationModel(data)}`),
               }, {
                 title: t('pages.recipients.anticipatable_volume_percentage'),
                 content: `${data.anticipatable_volume_percentage}%`,
