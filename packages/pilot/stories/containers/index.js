@@ -6,6 +6,7 @@ import AnticipationForm from './Anticipation/Form'
 import BankAccountSelector from './Settings/BankAccount/Selector'
 import Balance from './Balance'
 import BankAccountForm from './Settings/BankAccount/Add'
+import AddAccount from './AddRecipient/BankAccountStep/AddAccount'
 import BoletoForm from './Refund/BoletoForm'
 import BoletoRefundConfirm from './Refund/BoletoConfirmation'
 import BoletoRefundResult from './Refund/BoletoResult'
@@ -74,6 +75,9 @@ storiesOf('Containers|Page containers', module)
   ))
   .add('Anticipation Form', () => (
     <AnticipationForm />
+  ))
+  .add('Add Account', () => (
+    <AddAccount />
   ))
   .add('Recipient list', () => (
     <RecipientListState />
