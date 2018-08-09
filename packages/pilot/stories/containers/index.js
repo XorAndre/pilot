@@ -25,6 +25,7 @@ import {
   ManualReviewRefuseResult,
   ManualReviewErrorResult,
 } from './ManualReview/Result'
+
 import {
   ManualReviewStepApproveConfirmation,
   ManualReviewStepApproveResult,
@@ -32,6 +33,7 @@ import {
   ManualReviewStepRefuseResult,
   ManualReviewStepResultError,
 } from './ManualReview'
+
 import {
   BoletoRefund,
   CreditCardRefund,
@@ -53,20 +55,25 @@ import WithdrawConfirmation from './Withdraw/Confirmation'
 import WithdrawForm from './Withdraw/Form'
 import WithdrawResultSuccess from './Withdraw/Result/Success'
 import WithdrawResultError from './Withdraw/Result/Error'
+
 import {
   AnticipationConfirmationDisabled,
   AnticipationConfirmationWithAutomaticTransfer,
   AnticipationConfirmationWithError,
   AnticipationConfirmationWithoutAutomaticTransfer,
 } from './Anticipation/Confirmation'
+
 import {
   AnticipationResultError,
   AnticipationResultWithAutomaticTransfer,
   AnticipationResultWithoutAutomaticTransfer,
 } from './Anticipation/Result'
+
 import Anticipation from './Anticipation'
 import BoletoConfigurationForm from './Settings/Boleto/Form'
 import BankAccount from './Settings/BankAccount'
+import ConclusionStepSuccess from './AddRecipient/ConclusionStep/Success'
+import ConclusionStepFail from './AddRecipient/ConclusionStep/Fail'
 
 storiesOf('Containers|Bank/Account', module)
   .add('selector', () => <BankAccountSelector />)
@@ -76,6 +83,12 @@ storiesOf('Containers|Page containers', module)
   .addDecorator(checkA11y)
   .add('Boleto Configuration Form', () => (
     <BoletoConfigurationForm />
+  ))
+  .add('Recipient Conclusion Success', () => (
+    <ConclusionStepSuccess />
+  ))
+  .add('Recipient Conclusion Fail', () => (
+    <ConclusionStepFail />
   ))
   .add('Anticipation Form', () => (
     <AnticipationForm />
