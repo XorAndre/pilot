@@ -14,8 +14,6 @@ import {
   Spacing,
 } from 'former-kit'
 
-import { isEmpty } from 'ramda'
-
 import accountTypes from '../../../../models/accountTypes'
 import createNumberValidation from '../../../../validation/number'
 import createRequiredValidation from '../../../../validation/required'
@@ -48,8 +46,8 @@ const AddAccount = ({
         agency: [required, number],
         bank: [required],
       }}
-      onSubmit={(formData, formErrors = {}) => {
-        if (isEmpty(formErrors)) onContinue(formData)
+      onSubmit={(formData, formErrors) => {
+        if (!formErrors) onContinue(formData)
       }}
       errors={errors}
     >

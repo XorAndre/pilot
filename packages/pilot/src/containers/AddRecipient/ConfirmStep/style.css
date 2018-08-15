@@ -1,0 +1,46 @@
+@import "former-kit-skin-pagarme/dist/styles/spacing.css";
+@import "former-kit-skin-pagarme/dist/styles/colors/light.css";
+
+.title {
+  color: var(--color-light-steel-100);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: var(--spacing-tiny);
+  margin-bottom: var(--spacing-tiny);
+}
+
+.subtitle {
+  color: var(--color-light-steel-100);
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.infoTitle {
+  color: var(--color-light-chromium-100);
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.info {
+  color: var(--color-light-steel-100);
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+.line {
+  width: 100%;
+}
+
+.paddingTop {
+  padding-top: var(--spacing-small);
+}
+
+.editButtonCol {
+  padding-top: 5px;
+}

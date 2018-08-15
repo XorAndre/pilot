@@ -146,9 +146,7 @@ BankAccountStep.defaultProps = {
       agency: '',
       bank: '',
     },
-    selectAccount: {
-      account_id: '',
-    },
+    selectAccount: { },
   },
   errors: {},
 }
