@@ -423,6 +423,15 @@
     }
   },
   "pages": {
+    "recipient_detail": {
+      "anticipation": "Antecipação",
+      "bank_account": "Conta Bancária",
+      "cancel": "Cancelar",
+      "disabled": "Desabilitada",
+      "enabled": "Habilidata",
+      "save": "Salvar",
+      "transfer": "Transferência"
+    },
     "add_recipient": {
       "account_name": "Nome da conta",
       "account_type": "Tipo de conta bancária",

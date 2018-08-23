@@ -6,20 +6,17 @@ import {
   Button,
   CardActions,
   CardContent,
-  Col,
-  FormDropdown,
-  Grid,
-  Row,
   Spacing,
 } from 'former-kit'
 
 import accountTypes from '../../../../models/accountTypes'
+import SelectAccountContent from './SelectAccountContent'
 import style from '../style.css'
 
-const toDropdownOptions = ({
-  account_name: accountName,
-  id,
-}) => ({ name: accountName, value: id })
+const toDropdownOptions = account => ({
+  name: `${account.account_name} - ${account.bank} - ${account.agency} - ${account.account_number}`,
+  value: account.id,
+})
 
 const SelectAccount = ({
   accounts,
@@ -45,17 +42,10 @@ const SelectAccount = ({
       }}
     >
       <CardContent>
-        <Grid>
-          <Row>
-            <Col>
-              <FormDropdown
-                label={t('pages.add_recipient.select_bank_account')}
-                name="id"
-                options={options}
-              />
-            </Col>
-          </Row>
-        </Grid>
+        {SelectAccountContent({
+          t,
+          options,
+        })}
       </CardContent>
       <div className={style.paddingTop}>
         <CardActions>

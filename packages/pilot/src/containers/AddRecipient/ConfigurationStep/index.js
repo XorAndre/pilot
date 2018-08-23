@@ -1,95 +1,22 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Form from 'react-vanilla-form'
-import IconInfo from 'emblematic-icons/svg/Info24.svg'
 
 import {
   Button,
   CardActions,
   CardContent,
   Col,
-  FormCheckbox,
-  FormDropdown,
-  FormInput,
   Grid,
-  RadioGroup,
   Row,
   Spacing,
-  Tooltip,
 } from 'former-kit'
-
-import {
-  either,
-  equals,
-  range,
-} from 'ramda'
 
 import style from './style.css'
 import createRequiredValidation from '../../../validation/required'
 import createNumberValidation from '../../../validation/number'
-
-const anticipationModelOptions = t => (
-  [
-    {
-      name: t('pages.add_recipient.manual_volume'),
-      value: 'manual',
-    },
-    {
-      name: t('pages.add_recipient.automatic_volume'),
-      value: 'automatic_volume',
-    },
-    {
-      name: t('pages.add_recipient.automatic_1025'),
-      value: 'automatic_1025',
-    },
-    {
-      name: t('pages.add_recipient.automatic_dx'),
-      value: 'automatic_dx',
-    },
-  ]
-)
-
-const transferIntervalOptions = t => (
-  [
-    {
-      name: t('pages.add_recipient.daily'),
-      value: 'daily',
-    },
-    {
-      name: t('pages.add_recipient.weekly'),
-      value: 'weekly',
-    },
-    {
-      name: t('pages.add_recipient.monthly'),
-      value: 'monthly',
-    },
-  ]
-)
-
-const transferWeekdayOptions = t => (
-  [
-    {
-      name: t('pages.add_recipient.monday'),
-      value: 'monday',
-    },
-    {
-      name: t('pages.add_recipient.tuesday'),
-      value: 'tuesday',
-    },
-    {
-      name: t('pages.add_recipient.wednesday'),
-      value: 'wednesday',
-    },
-    {
-      name: t('pages.add_recipient.thursday'),
-      value: 'thursday',
-    },
-    {
-      name: t('pages.add_recipient.friday'),
-      value: 'friday',
-    },
-  ]
-)
+import Anticipation from './Anticipation'
+import Transfer from './Transfer'
 
 const number = t => createNumberValidation(t('pages.add_recipient.field_number'))
 const required = t => createRequiredValidation(t('pages.add_recipient.field_required'))
@@ -113,8 +40,6 @@ class ConfigurationsStep extends Component {
 
     this.onFormChange = this.onFormChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.renderAnticipationInput = this.renderAnticipationInput.bind(this)
-    this.renderTransferInput = this.renderTransferInput.bind(this)
     this.transferHandler = this.transferHandler.bind(this)
   }
 
@@ -141,121 +66,6 @@ class ConfigurationsStep extends Component {
         transferEnabled: !formData.transferEnabled,
       },
     })
-  }
-
-  renderAnticipationInput () {
-    const { anticipationModel } = this.state.formData
-    const { t } = this.props
-    const volumePercentage = either(
-      equals('automatic_volume'),
-      equals('manual')
-    )
-
-    if (volumePercentage(anticipationModel)) {
-      return (
-        <Col tv={2} desk={2} tablet={4} palm={4}>
-          <FormInput
-            label={t('pages.add_recipient.anticipation_volume_percentage')}
-            max="100"
-            min="1"
-            name="anticipationVolumePercentage"
-            type="number"
-          />
-          <div className={style.heightMedium} />
-        </Col>
-      )
-    }
-
-    if (anticipationModel === 'automatic_dx') {
-      return (
-        <Col tv={2} desk={2} tablet={4} palm={4}>
-          <FormInput
-            label={t('pages.add_recipient.anticipation_days')}
-            min="1"
-            name="anticipationDays"
-            type="number"
-          />
-          <div className={style.heightMedium} />
-        </Col>
-      )
-    }
-
-    return null
-  }
-
-  renderTransferInput () {
-    const {
-      transferDay,
-      transferEnabled,
-      transferInterval,
-      transferWeekday,
-    } = this.state.formData
-
-    const { t } = this.props
-
-    const transferDayOptions = range(1, 32)
-      .map(day => ({ name: day.toString(), value: day.toString() }))
-
-    if (transferEnabled && transferInterval === 'monthly') {
-      return (
-        <Fragment>
-          <span className={style.label}>
-            {t('pages.add_recipient.transfer_day')}
-            <div className={style.tooltip}>
-              <Tooltip
-                content={t('pages.add_recipient.effective_transfer_day')}
-                placement="rightMiddle"
-              >
-                <IconInfo
-                  height={16}
-                  width={16}
-                />
-              </Tooltip>
-            </div>
-          </span>
-          <FormDropdown
-            disabled={!transferEnabled}
-            name="transferDay"
-            options={transferDayOptions}
-            key={transferDay}
-          />
-          <div className={style.heightMedium} />
-        </Fragment>
-      )
-    }
-
-    const shouldDisable = (
-      !transferEnabled ||
-      (transferEnabled && transferInterval !== 'weekly')
-    )
-
-    return (
-      <Fragment>
-        <span className={style.label}>
-          {t('pages.add_recipient.transfer_day')}
-          {!shouldDisable &&
-            <div className={style.tooltip}>
-              <Tooltip
-                content={t('pages.add_recipient.effective_transfer_day')}
-                placement="rightMiddle"
-              >
-                <IconInfo
-                  height={16}
-                  width={16}
-                />
-              </Tooltip>
-            </div>
-          }
-        </span>
-        <FormDropdown
-          disabled={shouldDisable}
-          name="transferWeekday"
-          options={transferWeekdayOptions(t)}
-          key={transferWeekday}
-        />
-        <div className={style.heightMedium} />
-      </Fragment>
-    )
   }
 
   render () {
@@ -297,46 +107,16 @@ class ConfigurationsStep extends Component {
                   {t('pages.add_recipient.choose_anticipation_model')}
                 </h3>
               </Col>
-              <Col tv={12} desk={12} tablet={12} palm={12}>
-                <span className={style.label}>
-                  {t('pages.add_recipient.anticipation_model')}
-                </span>
-                <RadioGroup
-                  name="anticipationModel"
-                  options={anticipationModelOptions(t)}
-                />
-              </Col>
-              {this.renderAnticipationInput()}
+              {Anticipation({ data: formData, t })}
             </Row>
-            <Row>
-              <h2 className={style.title}>
-                {t('pages.add_recipient.anticipation_configuration')}
-              </h2>
-              <Col tv={12} desk={12} tablet={12} palm={12}>
-                <FormCheckbox
-                  checked={formData.transferEnabled}
-                  label={t('pages.add_recipient.transfer_enabled')}
-                  name="transferEnabled"
-                  onChange={this.transferHandler}
-                  value="false"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col tv={12} desk={12} tablet={12} palm={12}>
-                <span className={style.label}>
-                  {t('pages.add_recipient.transfer_interval')}
-                </span>
-                <RadioGroup
-                  disabled={!formData.transferEnabled}
-                  name="transferInterval"
-                  options={transferIntervalOptions(t)}
-                />
-              </Col>
-              <Col tv={3} desk={3} tablet={4} palm={4}>
-                {this.renderTransferInput()}
-              </Col>
-            </Row>
+            <h2 className={style.title}>
+              {t('pages.add_recipient.transfer_configuration')}
+            </h2>
+            {Transfer({
+              data: formData,
+              t,
+              transferHandler: this.transferHandler,
+            })}
           </Grid>
         </CardContent>
         <CardActions>
