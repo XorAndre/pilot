@@ -37,8 +37,8 @@
   width: 100%;
 }
 
-.paddingTop {
-  padding-top: var(--spacing-small);
+.paddingBottom {
+  padding-bottom: 0;
 }
 
 .editButtonCol {

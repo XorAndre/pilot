@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+
 import {
   Button,
   CardActions,
@@ -9,11 +10,17 @@ import {
   Row,
   Spacing,
 } from 'former-kit'
+
 import EditButton from './EditButton'
 import ReceiverInfo from './ReceiverInfo'
 import PartnerInfo from './PartnerInfo'
-
 import styles from './style.css'
+
+import {
+  BANK_ACCOUNT,
+  CONFIGURATION,
+  IDENTIFICATION,
+} from '../stepIds'
 
 const renderPartnerInfo = (identification, action, t) => {
   if (identification.documentType === 'cpf') return null
@@ -25,7 +32,7 @@ const renderPartnerInfo = (identification, action, t) => {
         </Col>
         <Col className={styles.editButtonCol}>
           <EditButton
-            onClick={() => action('identification')}
+            onClick={() => action(IDENTIFICATION)}
             t={t}
           />
         </Col>
@@ -56,7 +63,7 @@ const renderReceiverInfo = (identification, action, t) => {
         </Col>
         <Col className={styles.editButtonCol}>
           <EditButton
-            onClick={() => action('identification')}
+            onClick={() => action(IDENTIFICATION)}
             t={t}
           />
         </Col>
@@ -78,7 +85,7 @@ const renderBankAccount = (bankAccount, action, t) => (
       </Col>
       <Col className={styles.editButtonCol}>
         <EditButton
-          onClick={() => action('bankAccount')}
+          onClick={() => action(BANK_ACCOUNT)}
           t={t}
         />
       </Col>
@@ -117,7 +124,7 @@ const renderAnticipationConfig = (configuration, action, t) => (
       </Col>
       <Col className={styles.editButtonCol}>
         <EditButton
-          onClick={() => action('configuration')}
+          onClick={() => action(CONFIGURATION)}
           t={t}
         />
       </Col>
@@ -178,7 +185,7 @@ const renderTransferConfig = (configuration, action, t) => {
         </Col>
         <Col className={styles.editButtonCol}>
           <EditButton
-            onClick={() => action('configuration')}
+            onClick={() => action(CONFIGURATION)}
             t={t}
           />
         </Col>
@@ -190,6 +197,7 @@ const renderTransferConfig = (configuration, action, t) => {
         </Col>
         {renderTransferInterval(configuration, t)}
       </Row>
+      <hr className={styles.line} />
     </Fragment>
   )
 }
@@ -199,52 +207,50 @@ const ConfirmStep = ({
   onBack,
   onEdit,
   onCancel,
-  onCreate,
+  onContinue,
   t,
 }) => (
   <Fragment>
-    <CardContent>
+    <CardContent className={styles.paddingBottom}>
       <h3 className={styles.title}>{t('add_recipient_confirm')}</h3>
       <h4 className={styles.subtitle}>
         {t('confirm_recipient_message')}
       </h4>
-      <Grid>
+      <Grid className={styles.paddingBottom}>
         <hr className={styles.line} />
-        {renderReceiverInfo(data.identification, onEdit, t)}
-        {renderPartnerInfo(data.identification, onEdit, t)}
-        {renderBankAccount(data.bankAccount, onEdit, t)}
-        {renderAnticipationConfig(data.configuration, onEdit, t)}
-        {renderTransferConfig(data.configuration, onEdit, t)}
+        {renderReceiverInfo(data[IDENTIFICATION], onEdit, t)}
+        {renderPartnerInfo(data[IDENTIFICATION], onEdit, t)}
+        {renderBankAccount(data[BANK_ACCOUNT], onEdit, t)}
+        {renderAnticipationConfig(data[CONFIGURATION], onEdit, t)}
+        {renderTransferConfig(data[CONFIGURATION], onEdit, t)}
       </Grid>
     </CardContent>
-    <div className={styles.paddingTop}>
-      <CardActions>
-        <Button
-          type="button"
-          relevance="low"
-          onClick={onCancel}
-          fill="outline"
-        >
-          {t('cancel')}
-        </Button>
-        <Spacing />
-        <Button
-          type="button"
-          onClick={onBack}
-          fill="outline"
-        >
-          {t('back')}
-        </Button>
-        <Spacing size="medium" />
-        <Button
-          type="submit"
-          fill="gradient"
-          onClick={onCreate}
-        >
-          {t('add_recipient')}
-        </Button>
-      </CardActions>
-    </div>
+    <CardActions>
+      <Button
+        type="button"
+        relevance="low"
+        onClick={onCancel}
+        fill="outline"
+      >
+        {t('cancel')}
+      </Button>
+      <Spacing />
+      <Button
+        type="button"
+        onClick={onBack}
+        fill="outline"
+      >
+        {t('back')}
+      </Button>
+      <Spacing size="medium" />
+      <Button
+        type="submit"
+        fill="gradient"
+        onClick={onContinue}
+      >
+        {t('add_recipient')}
+      </Button>
+    </CardActions>
   </Fragment>
 )
 
@@ -262,7 +268,7 @@ const partnerDefaultTypes = {
 
 ConfirmStep.propTypes = {
   data: PropTypes.shape({
-    identification: PropTypes.shape({
+    [IDENTIFICATION]: PropTypes.shape({
       cnpj: PropTypes.string,
       cnpjEmail: PropTypes.string,
       cnpjInformation: PropTypes.bool,
@@ -283,7 +289,7 @@ ConfirmStep.propTypes = {
       partner3: partnerPropTypes,
       partner4: partnerPropTypes,
     }).isRequired,
-    configuration: PropTypes.shape({
+    [CONFIGURATION]: PropTypes.shape({
       anticipationModel: PropTypes.string,
       anticipationVolumePercentage: PropTypes.string,
       anticipationDays: PropTypes.string,
@@ -292,7 +298,7 @@ ConfirmStep.propTypes = {
       transferDay: PropTypes.string,
       transferWeekday: PropTypes.string,
     }).isRequired,
-    bankAccount: PropTypes.shape({
+    [BANK_ACCOUNT]: PropTypes.shape({
       account_name: PropTypes.string,
       account_number: PropTypes.string,
       account_type: PropTypes.string,
@@ -303,13 +309,13 @@ ConfirmStep.propTypes = {
   onBack: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 
 ConfirmStep.defaultProps = {
   data: {
-    identification: {
+    [IDENTIFICATION]: {
       cnpj: '',
       cnpjEmail: '',
       cnpjInformation: false,
@@ -330,7 +336,7 @@ ConfirmStep.defaultProps = {
       partner3: partnerDefaultTypes,
       partner4: partnerDefaultTypes,
     },
-    configuration: {
+    [CONFIGURATION]: {
       anticipationModel: '',
       anticipationVolumePercentage: '',
       anticipationDays: '',
@@ -339,7 +345,7 @@ ConfirmStep.defaultProps = {
       transferDay: '',
       transferWeekday: '',
     },
-    bankAccount: {
+    [BANK_ACCOUNT]: {
       account_name: '',
       account_number: '',
       account_type: '',
