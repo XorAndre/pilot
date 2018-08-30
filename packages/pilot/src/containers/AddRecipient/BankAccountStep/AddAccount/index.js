@@ -83,10 +83,9 @@ const AddAccount = ({
           </Row>
           <Row>
             <Col>
-              <label htmlFor="account_type">{t('accountTypeLabel')}</label>
               <FormDropdown
                 name="account_type"
-                title={t('accountTypeLabel')}
+                label={t('accountTypeLabel')}
                 options={accountTypeOptions}
               />
             </Col>
@@ -123,6 +122,7 @@ const AddAccount = ({
           </Button>
           <Button
             type="submit"
+            fill="gradient"
           >
             {t('continueText')}
           </Button>
@@ -136,7 +136,7 @@ AddAccount.propTypes = {
   data: PropTypes.shape({
     account_name: PropTypes.string,
     account_number: PropTypes.string,
-    account_type: PropTypes.string,
+    account_type: PropTypes.oneOf(accountTypes),
     agency: PropTypes.string,
     bank: PropTypes.string,
   }),

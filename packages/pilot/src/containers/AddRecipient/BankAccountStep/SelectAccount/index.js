@@ -13,36 +13,44 @@ import {
   Spacing,
 } from 'former-kit'
 
+import accountTypes from '../../../../models/accountTypes'
 import style from '../style.css'
 
-const toDropdownOptions = ({ name, id }) => ({ name, value: id })
+const toDropdownOptions = ({
+  account_name: accountName,
+  id,
+}) => ({ name: accountName, value: id })
 
 const SelectAccount = ({
   accounts,
+  data,
   onBack,
   onCancel,
   onContinue,
-  data,
   t,
 }) => {
   const options = accounts.map(toDropdownOptions)
 
+  const continueWithSelectedAccount = (formData) => {
+    const sameId = account => account.id === formData.id
+    const account = accounts.find(sameId)
+    return onContinue(account)
+  }
+
   return (
     <Form
-      onSubmit={onContinue}
+      onSubmit={continueWithSelectedAccount}
       data={{
-        account_id: options[0].value,
-        ...data,
+        id: data.id || options[0].value,
       }}
     >
       <CardContent>
         <Grid>
           <Row>
             <Col>
-              <label htmlFor="account_id">{t('selectAccountLabel')}</label>
               <FormDropdown
-                name="account_id"
-                title={t('selectAccountLabel')}
+                label={t('selectAccountLabel')}
+                name="id"
                 options={options}
               />
             </Col>
@@ -68,6 +76,7 @@ const SelectAccount = ({
             {t('backText')}
           </Button>
           <Button
+            fill="gradient"
             type="submit"
           >
             {t('continueText')}
@@ -81,12 +90,16 @@ const SelectAccount = ({
 SelectAccount.propTypes = {
   accounts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      account_name: PropTypes.string,
+      account_number: PropTypes.string,
+      account_type: PropTypes.oneOf(accountTypes),
+      agency: PropTypes.string,
+      bank: PropTypes.string,
+      id: PropTypes.string,
     })
   ),
   data: PropTypes.shape({
-    account_id: PropTypes.string.isRequired,
+    id: PropTypes.string,
   }),
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

@@ -11,20 +11,29 @@ import {
 
 import AddAccount from './AddAccount'
 import SelectAccount from './SelectAccount'
+import accountTypes from '../../../models/accountTypes'
 
 const hasItems = complement(either(isEmpty, isNil))
+
+const isNewAccount = account => (
+  !account.id &&
+  account.account_number !== ''
+)
 
 const ADD_ACCOUNT = 'addAccount'
 const SELECT_ACCOUNT = 'selectAccount'
 
-export default class BankAccountStep extends Component {
+class BankAccountStep extends Component {
   constructor (props) {
     super(props)
+    const { data } = props
+    let selectedForm = SELECT_ACCOUNT
 
-    this.state = {
-      selectedForm: SELECT_ACCOUNT,
+    if (isNewAccount(data)) {
+      selectedForm = ADD_ACCOUNT
     }
 
+    this.state = { selectedForm }
     this.handleFormSelectionChange = this.handleFormSelectionChange.bind(this)
   }
 
@@ -37,25 +46,16 @@ export default class BankAccountStep extends Component {
     const { data } = this.props
 
     if (selectedForm === ADD_ACCOUNT) {
-      return (
-        <AddAccount
-          {...this.props}
-          data={data.addAccount}
-        />
-      )
+      let addAccountData
+      if (isNewAccount(data)) addAccountData = data
+      return <AddAccount {...this.props} data={addAccountData} />
     }
 
-    return (
-      <SelectAccount
-        {...this.props}
-        data={data.selectAccount}
-      />
-    )
+    return <SelectAccount {...this.props} />
   }
 
   render () {
     const {
-      data,
       accounts,
       t,
     } = this.props
@@ -95,34 +95,24 @@ export default class BankAccountStep extends Component {
           <strong>{t('bankAccountLabel')}</strong>
           <p>{t('addNewAccount')}</p>
         </CardContent>
-        <AddAccount
-          {...this.props}
-          data={data.addAccount}
-        />
+        <AddAccount {...this.props} />
       </Fragment>
     )
   }
 }
 
+const accountShape = PropTypes.shape({
+  account_name: PropTypes.string,
+  account_number: PropTypes.string,
+  account_type: PropTypes.oneOf(accountTypes),
+  agency: PropTypes.string,
+  bank: PropTypes.string,
+  id: PropTypes.string,
+})
+
 BankAccountStep.propTypes = {
-  data: PropTypes.shape({
-    addAccount: PropTypes.shape({
-      account_name: PropTypes.string,
-      account_number: PropTypes.string,
-      account_type: PropTypes.string,
-      agency: PropTypes.string,
-      bank: PropTypes.string,
-    }),
-    selectAccount: PropTypes.shape({
-      account_id: PropTypes.string,
-    }),
-  }),
-  accounts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ),
+  accounts: PropTypes.arrayOf(accountShape),
+  data: accountShape,
   errors: PropTypes.shape({
     account_name: PropTypes.string,
     account_number: PropTypes.string,
@@ -139,14 +129,13 @@ BankAccountStep.propTypes = {
 BankAccountStep.defaultProps = {
   accounts: [],
   data: {
-    addAccount: {
-      account_name: '',
-      account_number: '',
-      account_type: 'conta_corrente',
-      agency: '',
-      bank: '',
-    },
-    selectAccount: { },
+    account_name: '',
+    account_number: '',
+    account_type: 'conta_corrente',
+    agency: '',
+    bank: '',
   },
   errors: {},
 }
+
+export default BankAccountStep
