@@ -4,7 +4,6 @@ import Form from 'react-vanilla-form'
 
 import {
   Button,
-  Card,
   CardActions,
   CardContent,
   Col,
@@ -396,86 +395,84 @@ class IdentificationStep extends Component {
         validateOn="blur"
         validation={getValidations(documentType, t)}
       >
-        <Card>
-          <CardContent>
-            <h2 className={style.title}>
-              {t('pages.recipients.identification.title')}
-            </h2>
-            <h3 className={style.subtitle}>
-              {t('pages.recipients.identification.subtitle')}
-            </h3>
-            <span className={style.label}>
-              {t('pages.recipients.identification.type_label')}
-            </span>
-            <RadioGroup
-              name="documentType"
-              options={[
-                {
-                  name: t('pages.recipients.identification.cpf_person'),
-                  value: 'cpf',
-                },
-                {
-                  name: t('pages.recipients.identification.cnpj_person'),
-                  value: 'cnpj',
-                },
-              ]}
-            />
-            <Grid>
-              <Row>
-                <Col>
-                  { this.renderDocumentInput() }
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  { this.renderInformationCheck() }
-                </Col>
-              </Row>
-              { formData[`${documentType}Information`] && (
-              <Fragment>
-                { this.renderDocumentInformationInput()}
-                { documentType === 'cnpj' && (
-                  <Fragment>
-                    <Row className={style.paddingTop}>
-                      <Col>
-                        <h2 className={style.title}>
-                          {t('pages.recipients.identification.cnpj_partners_title')}
-                        </h2>
-                        <h3 className={style.subtitle}>
-                          {t('pages.recipients.identification.cnpj_partners_subtitle')}
-                        </h3>
-                        <FormDropdown
-                          label={t('pages.recipients.identification.cnpj_partners_label')}
-                          name="partnerNumber"
-                          options={partnerOptions}
-                        />
-                      </Col>
-                    </Row>
-                    { this.renderPartnerInput() }
-                  </Fragment>
-                )}
-              </Fragment>
+        <CardContent>
+          <h2 className={style.title}>
+            {t('pages.recipients.identification.title')}
+          </h2>
+          <h3 className={style.subtitle}>
+            {t('pages.recipients.identification.subtitle')}
+          </h3>
+          <span className={style.label}>
+            {t('pages.recipients.identification.type_label')}
+          </span>
+          <RadioGroup
+            name="documentType"
+            options={[
+              {
+                name: t('pages.recipients.identification.cpf_person'),
+                value: 'cpf',
+              },
+              {
+                name: t('pages.recipients.identification.cnpj_person'),
+                value: 'cnpj',
+              },
+            ]}
+          />
+          <Grid>
+            <Row>
+              <Col>
+                { this.renderDocumentInput() }
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                { this.renderInformationCheck() }
+              </Col>
+            </Row>
+            { formData[`${documentType}Information`] && (
+            <Fragment>
+              { this.renderDocumentInformationInput()}
+              { documentType === 'cnpj' && (
+                <Fragment>
+                  <Row className={style.paddingTop}>
+                    <Col>
+                      <h2 className={style.title}>
+                        {t('pages.recipients.identification.cnpj_partners_title')}
+                      </h2>
+                      <h3 className={style.subtitle}>
+                        {t('pages.recipients.identification.cnpj_partners_subtitle')}
+                      </h3>
+                      <FormDropdown
+                        label={t('pages.recipients.identification.cnpj_partners_label')}
+                        name="partnerNumber"
+                        options={partnerOptions}
+                      />
+                    </Col>
+                  </Row>
+                  { this.renderPartnerInput() }
+                </Fragment>
               )}
-            </Grid>
-          </CardContent>
-          <div className={style.paddingTop}>
-            <CardActions>
-              <Button
-                fill="outline"
-                onClick={onCancel}
-              >
-                {t('pages.recipients.identification.button_cancel')}
-              </Button>
-              <Spacing size="medium" />
-              <Button
-                fill="gradient"
-                type="submit"
-              >
-                {t('pages.recipients.identification.button_submit')}
-              </Button>
-            </CardActions>
-          </div>
-        </Card>
+            </Fragment>
+            )}
+          </Grid>
+        </CardContent>
+        <div className={style.paddingTop}>
+          <CardActions>
+            <Button
+              fill="outline"
+              onClick={onCancel}
+            >
+              {t('pages.recipients.identification.button_cancel')}
+            </Button>
+            <Spacing size="medium" />
+            <Button
+              fill="gradient"
+              type="submit"
+            >
+              {t('pages.recipients.identification.button_submit')}
+            </Button>
+          </CardActions>
+        </div>
       </Form>
     )
   }
