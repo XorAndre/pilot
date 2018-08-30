@@ -2,11 +2,11 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 
 import Section from '../../../Section'
-import ConclusionStep from '../../../../src/containers/AddRecipient/ConclusionStep'
+import ErrorStep from '../../../../src/containers/AddRecipient/ErrorStep'
 
-const ConclusionStepExample = () => (
+const ErrorStepExample = () => (
   <Section>
-    <ConclusionStep
+    <ErrorStep
       status="error"
       onExit={action('onExit')}
       onTryAgain={action('onTryAgain')}
@@ -16,4 +16,4 @@ const ConclusionStepExample = () => (
   </Section>
 )
 
-export default ConclusionStepExample
+export default ErrorStepExample

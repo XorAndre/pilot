@@ -7,20 +7,18 @@ import {
   Spacing,
 } from 'former-kit'
 
-import SuccessIcon from './SuccessIcon.svg'
+import ErrorIcon from './ErrorIcon.svg'
 import style from '../style.css'
 
-const ConclusionStep = ({
+const ErrorStep = ({
   onExit,
-  onViewDetails,
+  onTryAgain,
   t,
 }) => (
   <CardContent className={style.flex}>
-    <SuccessIcon />
+    <ErrorIcon />
     <p className={style.centerText}>
-      {t('pages.recipients.message_success')}
-      <br />
-      {t('pages.recipients.next_step')}
+      {t('pages.recipients.message_fail')}
     </p>
     <div>
       <Button
@@ -32,18 +30,18 @@ const ConclusionStep = ({
       <Spacing size="large" />
       <Button
         fill="gradient"
-        onClick={onViewDetails}
+        onClick={onTryAgain}
       >
-        {t('pages.recipients.view_details')}
+        {t('pages.recipients.try_again')}
       </Button>
     </div>
   </CardContent>
 )
 
-ConclusionStep.propTypes = {
+ErrorStep.propTypes = {
   onExit: PropTypes.func.isRequired,
-  onViewDetails: PropTypes.func.isRequired,
+  onTryAgain: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 
-export default ConclusionStep
+export default ErrorStep
