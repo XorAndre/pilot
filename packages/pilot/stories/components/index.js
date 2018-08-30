@@ -34,6 +34,7 @@ import Loader from './Loader'
 import Message from './Message'
 import MessageActions from './MessageActions'
 import PasswordInput from './PasswordInput'
+import ConfirmModal from './ConfirmModal'
 
 storiesOf('Components|Custom components', module)
   .addDecorator(checkA11y)
@@ -69,3 +70,4 @@ storiesOf('Components|Custom components', module)
   .add('Message with actions', () => <MessageActions />)
   .add('Password Input', () => <PasswordInput />)
   .add('TotalDisplay', () => <TotalDisplay />)
+  .add('Confirm Modal', () => <ConfirmModal />)
