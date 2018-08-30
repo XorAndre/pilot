@@ -1,0 +1,5 @@
+export const IDENTIFICATION = 'identification'
+export const BANK_ACCOUNT = 'bankAccount'
+export const CONFIGURATION = 'configuration'
+export const CONFIRMATION = 'confirmation'
+export const CONCLUSION = 'conclusion'
