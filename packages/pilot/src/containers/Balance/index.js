@@ -403,22 +403,22 @@ class Balance extends Component {
               tablet={6}
               tv={4}
             >
-              <BalanceTotalDisplay
-                action={
-                  isNil(onWithdrawClick)
-                    ? null
-                    : withdrawalAction
-                }
-                amount={formatAmount(amount)}
-                detail={
-                  <span>
-                    {t('pages.balance.available_withdrawal')}
-                    <strong> {currencyFormatter(withdrawal)} </strong>
-                  </span>
-                }
-                disabled={disabled}
-                title={t('pages.balance.withdrawal_title')}
-              />
+              <Card>
+                <BalanceTotalDisplay
+                  action={isNil(onWithdrawClick)
+                      ? null
+                      : withdrawalAction}
+                  amount={formatAmount(amount)}
+                  detail={
+                    <span>
+                      {t('pages.balance.available_withdrawal')}
+                      <strong> {currencyFormatter(withdrawal)} </strong>
+                    </span>
+                  }
+                  disabled={disabled}
+                  title={t('pages.balance.withdrawal_title')}
+                />
+              </Card>
             </Col>
             <Col
               desk={4}
@@ -426,17 +426,21 @@ class Balance extends Component {
               tablet={6}
               tv={4}
             >
-              <BalanceTotalDisplay
-                action={
-                  isNil(onAnticipationClick)
-                  ? null
-                  : anticipationAction
-                }
-                amount={formatAmount(outcoming)}
-                detail={this.renderAnticipation()}
-                disabled={disabled || anticipationLoading || anticipationError}
-                title={t('pages.balance.anticipation_title')}
-              />
+              <Card>
+                <BalanceTotalDisplay
+                  action={isNil(onAnticipationClick)
+                    ? null
+                    : anticipationAction}
+                  amount={formatAmount(outcoming)}
+                  detail={this.renderAnticipation()}
+                  disabled={(
+                    disabled ||
+                    anticipationLoading ||
+                    anticipationError
+                  )}
+                  title={t('pages.balance.anticipation_title')}
+                />
+              </Card>
             </Col>
             <Col
               desk={4}

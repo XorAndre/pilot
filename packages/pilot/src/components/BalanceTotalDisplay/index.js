@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
-  Card,
   CardContent,
   CardTitle,
 } from 'former-kit'
@@ -16,7 +15,7 @@ const BalanceTotalDisplay = ({
   disabled,
   title,
 }) => (
-  <Card>
+  <Fragment>
     <CardTitle
       className={style.title}
       title={title}
@@ -38,7 +37,7 @@ const BalanceTotalDisplay = ({
         </Button>
       }
     </CardContent>
-  </Card>
+  </Fragment>
 )
 
 BalanceTotalDisplay.propTypes = {
