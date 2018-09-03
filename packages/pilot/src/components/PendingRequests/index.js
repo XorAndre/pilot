@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
-  Card,
   CardContent,
   CardTitle,
 } from 'former-kit'
@@ -47,7 +46,7 @@ const PendingRequests = ({
   requests,
   title,
 }) => (
-  <Card>
+  <Fragment>
     <CardTitle className={style.title} title={title} />
     <CardContent>
       {!isEmpty(requests) &&
@@ -61,7 +60,7 @@ const PendingRequests = ({
         <p>{emptyMessage}</p>
       }
     </CardContent>
-  </Card>
+  </Fragment>
 )
 
 PendingRequests.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card } from 'former-kit'
 import { action } from '@storybook/addon-actions'
 
 import Section from '../../Section'
@@ -23,11 +24,13 @@ const requests = [
 ]
 const PendingRequestsExample = () => (
   <Section>
-    <PendingRequests
-      title="Solicitações pendentes"
-      requests={requests}
-      onCancel={action('cancel-request')}
-    />
+    <Card>
+      <PendingRequests
+        title="Solicitações pendentes"
+        requests={requests}
+        onCancel={action('cancel-request')}
+      />
+    </Card>
   </Section>
 )
 

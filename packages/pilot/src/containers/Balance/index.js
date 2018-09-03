@@ -448,17 +448,17 @@ class Balance extends Component {
               tablet={6}
               tv={4}
             >
-              <PendingRequests
-                emptyMessage={t('pages.balance.pending_requests_empty_message')}
-                loading={disabled}
-                onCancel={
-                  isNil(onCancelRequestClick)
-                  ? null
-                  : this.handleRequestCancelClick
-                }
-                requests={this.getPendingRequests()}
-                title={t('pages.balance.pending_requests_title')}
-              />
+              <Card>
+                <PendingRequests
+                  emptyMessage={t('pages.balance.pending_requests_empty_message')}
+                  loading={disabled}
+                  onCancel={isNil(onCancelRequestClick)
+                    ? null
+                    : this.handleRequestCancelClick}
+                  requests={this.getPendingRequests()}
+                  title={t('pages.balance.pending_requests_title')}
+                />
+              </Card>
             </Col>
           </Row>
           <Row>
