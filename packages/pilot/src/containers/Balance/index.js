@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+
 import {
   complement,
   either,
@@ -14,10 +15,12 @@ import {
   take,
   when,
 } from 'ramda'
+
 import {
   Button,
   Card,
   CardContent,
+  CardSection,
   Col,
   DateInput,
   Grid,
@@ -29,6 +32,7 @@ import {
   Spacing,
   Tooltip,
 } from 'former-kit'
+
 import IconCalendar from 'emblematic-icons/svg/Calendar32.svg'
 import IconClose from 'emblematic-icons/svg/ClearClose32.svg'
 import IconInfo from 'emblematic-icons/svg/Info32.svg'
@@ -487,10 +491,14 @@ class Balance extends Component {
                   </div>
                 </CardContent>
                 <CardContent>
-                  <BalanceSummary
-                    amount={this.getSummaryTotal()}
-                    dates={dates}
-                  />
+                  <CardSection>
+                    <CardContent>
+                      <BalanceSummary
+                        amount={this.getSummaryTotal()}
+                        dates={dates}
+                      />
+                    </CardContent>
+                  </CardSection>
                 </CardContent>
               </Card>
             </Col>

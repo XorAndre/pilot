@@ -47,7 +47,6 @@ import {
 } from './Capture/Form'
 import CaptureResult from './Capture/Result'
 import IdentificationStep from './AddRecipient/IdentificationStep'
-import BankAccountStep from './AddRecipient/BankAccountStep'
 import Reprocess from './Reprocess'
 import ReprocessForm from './Reprocess/Form'
 import ReprocessResult from './Reprocess/Result'

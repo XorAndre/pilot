@@ -1,5 +1,10 @@
 import React from 'react'
 import moment from 'moment'
+import {
+  CardContent,
+  CardSection,
+} from 'former-kit'
+
 import Section from '../../Section'
 import BalanceSummary from '../../../src/components/BalanceSummary'
 
@@ -23,13 +28,17 @@ const amount = {
 
 const BalanceSummaryExample = () => (
   <Section>
-    <BalanceSummary
-      amount={amount}
-      dates={{
-        end: moment(),
-        start: moment().subtract(4, 'days'),
-      }}
-    />
+    <CardSection>
+      <CardContent>
+        <BalanceSummary
+          amount={amount}
+          dates={{
+            end: moment(),
+            start: moment().subtract(4, 'days'),
+          }}
+        />
+      </CardContent>
+    </CardSection>
   </Section>
 )
 

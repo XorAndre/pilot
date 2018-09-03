@@ -2,10 +2,6 @@ import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import { keys } from 'ramda'
-import {
-  CardContent,
-  CardSection,
-} from 'former-kit'
 import IconForward from 'emblematic-icons/svg/ArrowForward24.svg'
 
 import TotalDisplay from '../TotalDisplay'
@@ -29,33 +25,29 @@ const colors = {
 }
 
 const BalanceSummary = ({ amount, dates }) => (
-  <CardSection>
-    <CardContent>
-      <div className={style.content}>
-        <div className={style.dates}>
-          { renderDate(dates.start) }
-          <IconForward className={style.icon} />
-          { renderDate(dates.end) }
-        </div>
-        <div className={style.amount}>
-          {
-            keys(amount).map(type => (
-              <TotalDisplay
-                align="end"
-                amount={amount[type].value}
-                amountSize="large"
-                color={colors[type]}
-                key={type}
-                title={amount[type].title}
-                titleColor={colors[type]}
-                titleSize="medium"
-              />
-            ))
-          }
-        </div>
-      </div>
-    </CardContent>
-  </CardSection>
+  <div className={style.content}>
+    <div className={style.dates}>
+      { renderDate(dates.start) }
+      <IconForward className={style.icon} />
+      { renderDate(dates.end) }
+    </div>
+    <div className={style.amount}>
+      {
+        keys(amount).map(type => (
+          <TotalDisplay
+            align="end"
+            amount={amount[type].value}
+            amountSize="large"
+            color={colors[type]}
+            key={type}
+            title={amount[type].title}
+            titleColor={colors[type]}
+            titleSize="medium"
+          />
+        ))
+      }
+    </div>
+  </div>
 )
 
 const totalShape = PropTypes.shape({
