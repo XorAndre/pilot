@@ -44,50 +44,37 @@ class AddRecipients extends Component {
     this.closeExitModal = this.closeExitModal.bind(this)
     this.createNewStepStatus = this.createNewStepStatus.bind(this)
     this.createSteps = this.createSteps.bind(this)
+    this.fetchAndSetNextStepData = this.fetchAndSetNextStepData.bind(this)
+    this.handleAsyncNextStep = this.handleAsyncNextStep.bind(this)
     this.handleBackNavigation = this.handleBackNavigation.bind(this)
     this.handleContinueNavigation = this.handleContinueNavigation.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
+    this.handleNextStep = this.handleNextStep.bind(this)
     this.handleTryAgain = this.handleTryAgain.bind(this)
     this.handleViewDetails = this.handleViewDetails.bind(this)
     this.openExitModal = this.openExitModal.bind(this)
     this.renderError = this.renderError.bind(this)
     this.renderStep = this.renderStep.bind(this)
-    this.setStatePromise = this.setStatePromise.bind(this)
 
     this.steps = this.createSteps(props)
   }
 
-  setStatePromise (state) {
-    return new Promise((resolve) => {
-      this.setState(state, resolve)
-    })
-  }
-
-  async handleContinueNavigation (stepData) {
-    const { currentStepNumber, data, fetchData } = this.state
-    const currentStep = this.steps[currentStepNumber]
+  handleContinueNavigation (stepData) {
+    const { currentStepNumber } = this.state
     const nextStepNumber = currentStepNumber + 1
     const nextStep = this.steps[nextStepNumber]
 
-    let nextStepFetchData = fetchData[nextStep.id] || {}
-    let error = false
-
     if (nextStep.fetch) {
-      await this.setStatePromise({
-        isLoading: true,
-        data: {
-          ...data,
-          [currentStep.id]: stepData,
-        },
-      })
-
-      try {
-        nextStepFetchData = await nextStep.fetch()
-      } catch (fetchError) {
-        error = fetchError
-      }
+      this.handleAsyncNextStep(stepData)
+    } else {
+      this.handleNextStep(stepData)
     }
+  }
 
+  handleNextStep (stepData) {
+    const { data, currentStepNumber } = this.state
+    const nextStepNumber = currentStepNumber + 1
+    const currentStep = this.steps[currentStepNumber]
     const stepsStatus = this.createNewStepStatus(nextStepNumber)
 
     this.setState({
@@ -96,14 +83,51 @@ class AddRecipients extends Component {
         ...data,
         [currentStep.id]: stepData,
       },
-      error,
-      fetchData: {
-        ...fetchData,
-        [nextStep.id]: nextStepFetchData,
-      },
-      isLoading: false,
       stepsStatus,
     })
+  }
+
+  handleAsyncNextStep (stepData) {
+    const { data, currentStepNumber } = this.state
+    const currentStep = this.steps[currentStepNumber]
+
+    this.setState({
+      isLoading: true,
+      data: {
+        ...data,
+        [currentStep.id]: stepData,
+      },
+    }, () => {
+      this.fetchAndSetNextStepData()
+    })
+  }
+
+  fetchAndSetNextStepData () {
+    const { currentStepNumber, fetchData } = this.state
+    const nextStepNumber = currentStepNumber + 1
+    const nextStep = this.steps[nextStepNumber]
+    const stepsStatus = this.createNewStepStatus(nextStepNumber)
+
+    nextStep.fetch()
+      .then((nextStepFetchData) => {
+        this.setState({
+          currentStepNumber: nextStepNumber,
+          fetchData: {
+            ...fetchData,
+            [nextStep.id]: nextStepFetchData,
+          },
+          isLoading: false,
+          stepsStatus,
+        })
+      })
+      .catch((fetchError) => {
+        this.setState({
+          currentStepNumber: nextStepNumber,
+          error: fetchError,
+          isLoading: false,
+          stepsStatus,
+        })
+      })
   }
 
   handleBackNavigation () {
