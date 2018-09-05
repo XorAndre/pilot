@@ -354,7 +354,10 @@ class ConfigurationsStep extends Component {
           >
             {t('pages.recipients.back')}
           </Button>
-          <Button type="submit">
+          <Button
+            fill="gradient"
+            type="submit"
+          >
             {t('pages.recipients.submit')}
           </Button>
         </CardActions>
