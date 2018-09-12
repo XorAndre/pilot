@@ -8,8 +8,11 @@ import {
 import styles from '../style.css'
 
 const renderReceiverNameEmailInfo = (identification, t) => {
-  const name = t(`pages.recipients.identification.${identification.documentType}_name`)
-  const email = t(`pages.recipients.identification.${identification.documentType}_email`)
+  const name = (identification.documentType === 'cpf')
+    ? t('pages.add_recipient.name')
+    : t('pages.add_recipient.company_name')
+
+  const email = t('pages.add_recipient.optional_email')
   if (identification.cnpjInformation || identification.cpfInformation) {
     return (
       <Fragment>
@@ -28,8 +31,8 @@ const renderReceiverNameEmailInfo = (identification, t) => {
 }
 
 const renderReceiverUrlPhoneInfo = (identification, t) => {
-  const url = t(`pages.recipients.identification.${identification.documentType}_url`)
-  const phone = t(`pages.recipients.identification.${identification.documentType}_phone`)
+  const url = t('pages.add_recipient.optional_url')
+  const phone = t('pages.add_recipient.optional_phone')
   if (identification.cnpjInformation || identification.cpfInformation) {
     return (
       <Row>
@@ -54,7 +57,11 @@ const ReceiverInfo = ({
   <Row>
     <Col>
       <span className={styles.infoTitle}>
-        {t(`pages.recipients.identification.${identification.documentType}_check_label`)}
+        {
+          (identification.documentType === 'cpf')
+            ? t('pages.add_recipient.more_recipient_information')
+            : t('pages.add_recipient.more_company_information')
+        }
       </span>
       <span className={styles.info}>
         {identification[identification.documentType]}

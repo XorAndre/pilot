@@ -172,7 +172,7 @@ class AddRecipients extends Component {
     return [
       {
         id: IDENTIFICATION,
-        title: t('Dados'),
+        title: t('pages.add_recipient.data'),
       },
       {
         fetch: () => {
@@ -181,20 +181,20 @@ class AddRecipients extends Component {
           return fetchAccounts({ documentType, cnpj, cpf })
         },
         id: BANK_ACCOUNT,
-        title: t('Conta Bancaria'),
+        title: t('pages.add_recipient.bank_account'),
       },
       {
         id: CONFIGURATION,
-        title: t('Configurações'),
+        title: t('pages.add_recipient.configurations'),
       },
       {
         id: CONFIRMATION,
-        title: t('Confirmação'),
+        title: t('pages.add_recipient.confirmation'),
       },
       {
         fetch: () => submitRecipient(this.state.data),
         id: CONCLUSION,
-        title: t('Conclusão'),
+        title: t('pages.add_recipient.conclusion'),
       },
     ]
   }
@@ -311,12 +311,12 @@ class AddRecipients extends Component {
           isOpen={openModal}
           onCancel={this.closeExitModal}
           onConfirm={onExit}
-          title={t('exit_modal_title')}
-          cancelText={t('cancel')}
-          confirmText={t('confirm')}
+          title={t('pages.add_recipient.cancel_recipient_creation')}
+          cancelText={t('pages.add_recipient.no_keep')}
+          confirmText={t('pages.add_recipient.yes_cancel')}
         >
           <p style={{ textAlign: 'center' }}>
-            {t('exit_modal_message')}
+            {t('pages.add_recipient.cancel_recipient_message')}
           </p>
         </ConfirmModal>
       </Fragment>

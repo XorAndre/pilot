@@ -18,21 +18,21 @@ const ErrorStep = ({
   <CardContent className={style.flex}>
     <ErrorIcon />
     <p className={style.centerText}>
-      {t('pages.recipients.message_fail')}
+      {t('pages.add_recipient.fail_create_recipient')}
     </p>
     <div>
       <Button
         fill="outline"
         onClick={onExit}
       >
-        {t('pages.recipients.exit')}
+        {t('pages.add_recipient.exit')}
       </Button>
       <Spacing size="large" />
       <Button
         fill="gradient"
         onClick={onTryAgain}
       >
-        {t('pages.recipients.try_again')}
+        {t('pages.add_recipient.try_again')}
       </Button>
     </div>
   </CardContent>

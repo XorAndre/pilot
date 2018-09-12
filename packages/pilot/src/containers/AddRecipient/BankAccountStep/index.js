@@ -66,16 +66,16 @@ class BankAccountStep extends Component {
       return (
         <Fragment>
           <CardContent>
-            <strong>{t('bankAccountLabel')}</strong>
-            <p>{t('addOrSelectAccount')}</p>
+            <strong>{t('pages.add_recipient.bank_account')}</strong>
+            <p>{t('pages.add_recipient.select_or_add_account')}</p>
             <SegmentedSwitch
               options={[
                 {
-                  title: t('selectAccountOption'),
+                  title: t('pages.add_recipient.select_account'),
                   value: SELECT_ACCOUNT,
                 },
                 {
-                  title: t('addAccountOption'),
+                  title: t('pages.add_recipient.add_account'),
                   value: ADD_ACCOUNT,
                 },
               ]}
@@ -92,8 +92,8 @@ class BankAccountStep extends Component {
     return (
       <Fragment>
         <CardContent>
-          <strong>{t('bankAccountLabel')}</strong>
-          <p>{t('addNewAccount')}</p>
+          <strong>{t('pages.add_recipient.bank_account')}</strong>
+          <p>{t('pages.add_recipient.add_new_account')}</p>
         </CardContent>
         <AddAccount {...this.props} />
       </Fragment>

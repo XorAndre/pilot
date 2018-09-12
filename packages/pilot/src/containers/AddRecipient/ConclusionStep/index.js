@@ -18,23 +18,23 @@ const ConclusionStep = ({
   <CardContent className={style.flex}>
     <SuccessIcon />
     <p className={style.centerText}>
-      {t('pages.recipients.message_success')}
+      {t('pages.add_recipient.recipient_created_success')}
       <br />
-      {t('pages.recipients.next_step')}
+      {t('pages.add_recipient.can_see_recipient')}
     </p>
     <div>
       <Button
         fill="outline"
         onClick={onExit}
       >
-        {t('pages.recipients.exit')}
+        {t('pages.add_recipient.exit')}
       </Button>
       <Spacing size="large" />
       <Button
         fill="gradient"
         onClick={onViewDetails}
       >
-        {t('pages.recipients.view_details')}
+        {t('pages.add_recipient.see_recipient')}
       </Button>
     </div>
   </CardContent>

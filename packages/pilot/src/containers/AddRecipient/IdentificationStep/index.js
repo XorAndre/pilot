@@ -43,16 +43,16 @@ const partnerInitialization = {
 
 const getValidations = (documentType, t) => {
   const requiredMessage =
-    t('pages.recipients.identification.error_validate_required')
+    t('pages.add_recipient.field_required')
 
   const validateCpfCnpjMessage =
-    t('pages.recipients.identification.error_validate_cpf')
+    t('pages.add_recipient.field_invalid_cpf')
 
   const validateEmailMessage =
-    t('pages.recipients.identification.error_validate_email')
+    t('pages.add_recipient.field_invalid_email')
 
   const validatePhoneMessage =
-    t('pages.recipients.identification.error_validate_phone')
+    t('pages.add_recipient.field_invalid_phone')
 
   const required = createRequiredValidation(requiredMessage)
   const validateCpfCnpj = createCpfCnpjValidation(validateCpfCnpjMessage)
@@ -192,7 +192,7 @@ class IdentificationStep extends Component {
 
     const uniqueDocuments = {}
     const repeatedErrorMessage =
-      t('pages.recipients.identification.error_repeated_document')
+      t('pages.add_recipient.field_repeated_document')
 
     Object.keys(partners).forEach((partner) => {
       const { cpf } = partners[partner]
@@ -231,7 +231,7 @@ class IdentificationStep extends Component {
       return (
         <FormInput
           key="cpf"
-          label={t('pages.recipients.identification.type_label_cpf')}
+          label={t('pages.add_recipient.cpf')}
           mask={masks.cpf}
           name="cpf"
           onChange={this.onChangeWithMask}
@@ -243,7 +243,7 @@ class IdentificationStep extends Component {
     return (
       <FormInput
         key="cnpj"
-        label={t('pages.recipients.identification.type_label_cnpj')}
+        label={t('pages.add_recipient.cnpj')}
         mask={masks.cnpj}
         name="cnpj"
         onChange={this.onChangeWithMask}
@@ -256,8 +256,9 @@ class IdentificationStep extends Component {
     const { documentType } = this.state.formData
     const { t } = this.props
 
-    const info =
-      t(`pages.recipients.identification.${documentType}_check_label`)
+    const info = (documentType === 'cpf')
+      ? t('pages.add_recipient.more_recipient_information')
+      : t('pages.add_recipient.more_company_information')
 
     return (
       <FormCheckbox
@@ -284,13 +285,25 @@ class IdentificationStep extends Component {
         <Row>
           <Col>
             <h2 className={style.title}>
-              {t(`pages.recipients.identification.${documentType}_title`)}
+              {
+                (documentType === 'cpf')
+                  ? t('pages.add_recipient.recipient')
+                  : t('pages.add_recipient.company')
+              }
             </h2>
             <h3 className={style.subtitle}>
-              {t(`pages.recipients.identification.${documentType}_subtitle`)}
+              {
+                (documentType === 'cpf')
+                  ? t('pages.add_recipient.fill_recipient_info')
+                  : t('pages.add_recipient.fill_company_info')
+              }
             </h3>
             <FormInput
-              label={t(`pages.recipients.identification.${documentType}_name`)}
+              label={
+                (documentType === 'cpf')
+                  ? t('pages.add_recipient.name')
+                  : t('pages.add_recipient.company_name')
+              }
               name={`${documentType}Name`}
               size={35}
             />
@@ -299,14 +312,14 @@ class IdentificationStep extends Component {
         <Row stretch>
           <Col>
             <FormInput
-              label={t(`pages.recipients.identification.${documentType}_email`)}
+              label={t('pages.add_recipient.optional_email')}
               name={`${documentType}Email`}
               size={35}
             />
           </Col>
           <Col>
             <FormInput
-              label={t(`pages.recipients.identification.${documentType}_url`)}
+              label={t('pages.add_recipient.optional_url')}
               name={`${documentType}Url`}
               size={35}
             />
@@ -314,7 +327,7 @@ class IdentificationStep extends Component {
           <Col>
             <FormInput
               key="documentPhone"
-              label={t(`pages.recipients.identification.${documentType}_phone`)}
+              label={t('pages.add_recipient.optional_phone')}
               mask={masks.phone}
               name={`${documentType}Phone`}
               onChange={this.onChangeWithMask}
@@ -340,14 +353,14 @@ class IdentificationStep extends Component {
           <Row stretch>
             <Col>
               <FormInput
-                label={t('pages.recipients.identification.cnpj_partners_name')}
+                label={t('pages.add_recipient.name')}
                 name="name"
                 size={35}
               />
             </Col>
             <Col>
               <FormInput
-                label={t('pages.recipients.identification.cnpj_partners_cpf')}
+                label={t('pages.add_recipient.cpf')}
                 mask={masks.cpf}
                 name="cpf"
                 onChange={event =>
@@ -357,7 +370,7 @@ class IdentificationStep extends Component {
             </Col>
             <Col>
               <FormInput
-                label={t('pages.recipients.identification.cnpj_partners_phone')}
+                label={t('pages.add_recipient.phone')}
                 mask={masks.phone}
                 name="phone"
                 onChange={event =>
@@ -397,23 +410,23 @@ class IdentificationStep extends Component {
       >
         <CardContent>
           <h2 className={style.title}>
-            {t('pages.recipients.identification.title')}
+            {t('pages.add_recipient.identification')}
           </h2>
           <h3 className={style.subtitle}>
-            {t('pages.recipients.identification.subtitle')}
+            {t('pages.add_recipient.choose_recipient_type')}
           </h3>
           <span className={style.label}>
-            {t('pages.recipients.identification.type_label')}
+            {t('pages.add_recipient.recipient_type')}
           </span>
           <RadioGroup
             name="documentType"
             options={[
               {
-                name: t('pages.recipients.identification.cpf_person'),
+                name: t('pages.add_recipient.physical_person'),
                 value: 'cpf',
               },
               {
-                name: t('pages.recipients.identification.cnpj_person'),
+                name: t('pages.add_recipient.legal_person'),
                 value: 'cnpj',
               },
             ]}
@@ -437,13 +450,13 @@ class IdentificationStep extends Component {
                   <Row className={style.paddingTop}>
                     <Col>
                       <h2 className={style.title}>
-                        {t('pages.recipients.identification.cnpj_partners_title')}
+                        {t('pages.add_recipient.partners')}
                       </h2>
                       <h3 className={style.subtitle}>
-                        {t('pages.recipients.identification.cnpj_partners_subtitle')}
+                        {t('pages.add_recipient.fill_partner_info')}
                       </h3>
                       <FormDropdown
-                        label={t('pages.recipients.identification.cnpj_partners_label')}
+                        label={t('pages.add_recipient.choose_partner_amount')}
                         name="partnerNumber"
                         options={partnerOptions}
                       />
@@ -462,14 +475,14 @@ class IdentificationStep extends Component {
               fill="outline"
               onClick={onCancel}
             >
-              {t('pages.recipients.identification.button_cancel')}
+              {t('pages.add_recipient.cancel')}
             </Button>
             <Spacing size="medium" />
             <Button
               fill="gradient"
               type="submit"
             >
-              {t('pages.recipients.identification.button_submit')}
+              {t('pages.add_recipient.continue')}
             </Button>
           </CardActions>
         </div>

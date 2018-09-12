@@ -11,9 +11,13 @@ import styles from '../style.css'
 const renderPartners = (identification, t) => {
   const amountOfPartners = parseInt(identification.partnerNumber, 10)
   const partnersNumberRange = range(0, amountOfPartners)
-  const cpfLabel = t(`pages.recipients.identification.${identification.documentType}_label_cpf`)
-  const name = t(`pages.recipients.identification.${identification.documentType}_name`)
-  const phone = t(`pages.recipients.identification.${identification.documentType}_phone`)
+  const cpfLabel = t('pages.add_recipient.cpf')
+
+  const name = (identification.documentType === 'cpf')
+    ? t('pages.add_recipient.name')
+    : t('pages.add_recipient.company_name')
+
+  const phone = t('pages.add_recipient.optional_phone')
 
   const partnersRows = partnersNumberRange.map(partnerNumber => (
     <Row key={`partner${partnerNumber}`}>
@@ -36,7 +40,7 @@ const renderPartners = (identification, t) => {
     : (
       <Row>
         <Col>
-          <h3 className={styles.subtitle}>{t('no_partner')}</h3>
+          <h3 className={styles.subtitle}>{t('pages.add_recipient.no_partner')}</h3>
         </Col>
       </Row>
     )

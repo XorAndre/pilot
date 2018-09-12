@@ -49,7 +49,7 @@ const SelectAccount = ({
           <Row>
             <Col>
               <FormDropdown
-                label={t('selectAccountLabel')}
+                label={t('pages.add_recipient.select_bank_account')}
                 name="id"
                 options={options}
               />
@@ -65,7 +65,7 @@ const SelectAccount = ({
             relevance="low"
             fill="outline"
           >
-            {t('cancelText')}
+            {t('pages.add_recipient.cancel')}
           </Button>
           <Spacing />
           <Button
@@ -73,13 +73,13 @@ const SelectAccount = ({
             onClick={onBack}
             fill="outline"
           >
-            {t('backText')}
+            {t('pages.add_recipient.back')}
           </Button>
           <Button
             fill="gradient"
             type="submit"
           >
-            {t('continueText')}
+            {t('pages.add_recipient.continue')}
           </Button>
         </CardActions>
       </div>

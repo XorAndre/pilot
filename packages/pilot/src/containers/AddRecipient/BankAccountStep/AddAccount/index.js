@@ -27,8 +27,8 @@ const AddAccount = ({
   onContinue,
   t,
 }) => {
-  const required = createRequiredValidation(t('requiredMessage'))
-  const number = createNumberValidation(t('numberMessage'))
+  const required = createRequiredValidation(t('pages.add_recipient.field_required'))
+  const number = createNumberValidation(t('pages.add_recipient.field_number'))
 
   const accountTypeOptions = accountTypes.map(accountType => ({
     name: t(`models.account_type.${accountType}`),
@@ -57,9 +57,9 @@ const AddAccount = ({
             <Col tv={2} desk={2} tablet={4} palm={4}>
               <FormInput
                 type="text"
-                label={t('bankLabel')}
+                label={t('pages.add_recipient.bank')}
                 name="bank"
-                placeholder={t('bankPlaceholder')}
+                placeholder={t('pages.add_recipient.type_bank_name')}
               />
             </Col>
           </Row>
@@ -67,17 +67,17 @@ const AddAccount = ({
             <Col tv={3} desk={3} tablet={6} palm={6}>
               <FormInput
                 type="text"
-                label={t('agencyLabel')}
+                label={t('pages.add_recipient.agency_no_digit')}
                 name="agency"
-                placeholder={t('agencyPlaceholder')}
+                placeholder={t('pages.add_recipient.type_agency_number')}
               />
             </Col>
             <Col tv={3} desk={3} tablet={4} palm={4}>
               <FormInput
                 type="text"
-                label={t('accountNumberLabel')}
+                label={t('pages.add_recipient.account_with_digit')}
                 name="account_number"
-                placeholder={t('accountNumberPlaceholder')}
+                placeholder={t('pages.add_recipient.type_account_with_digit')}
               />
             </Col>
           </Row>
@@ -85,7 +85,7 @@ const AddAccount = ({
             <Col>
               <FormDropdown
                 name="account_type"
-                label={t('accountTypeLabel')}
+                label={t('pages.add_recipient.account_type')}
                 options={accountTypeOptions}
               />
             </Col>
@@ -94,9 +94,9 @@ const AddAccount = ({
             <Col tv={3} desk={3} tablet={6} palm={6}>
               <FormInput
                 type="text"
-                label={t('accountNameLabel')}
+                label={t('pages.add_recipient.account_name')}
                 name="account_name"
-                placeholder={t('accountNamePlaceholder')}
+                placeholder={t('pages.add_recipient.type_account_name')}
               />
             </Col>
           </Row>
@@ -110,7 +110,7 @@ const AddAccount = ({
             relevance="low"
             fill="outline"
           >
-            {t('cancelText')}
+            {t('pages.add_recipient.cancel')}
           </Button>
           <Spacing />
           <Button
@@ -118,13 +118,13 @@ const AddAccount = ({
             onClick={onBack}
             fill="outline"
           >
-            {t('backText')}
+            {t('pages.add_recipient.back')}
           </Button>
           <Button
             type="submit"
             fill="gradient"
           >
-            {t('continueText')}
+            {t('pages.add_recipient.continue')}
           </Button>
         </CardActions>
       </div>

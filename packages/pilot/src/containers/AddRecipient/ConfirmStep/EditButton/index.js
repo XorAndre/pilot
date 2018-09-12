@@ -9,7 +9,7 @@ const EditButton = props => (
     fill="outline"
     {...props}
   >
-    {props.t('edit')}
+    {props.t('pages.add_recipient.edit')}
   </Button>
 )
 

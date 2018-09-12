@@ -28,7 +28,7 @@ const renderPartnerInfo = (identification, action, t) => {
     <Fragment>
       <Row>
         <Col>
-          <span className={styles.title}>{t('partner_data')}</span>
+          <span className={styles.title}>{t('pages.add_recipient.partner_data')}</span>
         </Col>
         <Col className={styles.editButtonCol}>
           <EditButton
@@ -47,8 +47,8 @@ const renderPartnerInfo = (identification, action, t) => {
 }
 
 const renderReceiverInfo = (identification, action, t) => {
-  const cpfTitle = t('recipient_data')
-  const cnpjTitle = t('company_data')
+  const cpfTitle = t('pages.add_recipient.recipient_data')
+  const cnpjTitle = t('pages.add_recipient.company_data')
 
   return (
     <Fragment>
@@ -81,7 +81,7 @@ const renderBankAccount = (bankAccount, action, t) => (
   <Fragment>
     <Row>
       <Col>
-        <span className={styles.title}>{t('bank_account')}</span>
+        <span className={styles.title}>{t('pages.add_recipient.bank_account')}</span>
       </Col>
       <Col className={styles.editButtonCol}>
         <EditButton
@@ -92,23 +92,23 @@ const renderBankAccount = (bankAccount, action, t) => (
     </Row>
     <Row>
       <Col tv={1} desk={1} tablet={1} palm={1}>
-        <span className={styles.infoTitle}>{t('account_name')}</span>
-        <span className={styles.info}>{bankAccount.account_name}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.account_name')}</span>
+        <span className={styles.info}>{bankAccount.name}</span>
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
-        <span className={styles.infoTitle}>{t('bank')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.bank')}</span>
         <span className={styles.info}>{bankAccount.bank}</span>
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
-        <span className={styles.infoTitle}>{t('agency')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.agency')}</span>
         <span className={styles.info}>{bankAccount.agency}</span>
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
-        <span className={styles.infoTitle}>{t('account')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.account')}</span>
         <span className={styles.info}>{bankAccount.account_number}</span>
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
-        <span className={styles.infoTitle}>{t('account_type')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.account_type')}</span>
         <span className={styles.info}>{bankAccount.account_type}</span>
       </Col>
     </Row>
@@ -120,7 +120,7 @@ const renderAnticipationConfig = (configuration, action, t) => (
   <Fragment>
     <Row>
       <Col>
-        <span className={styles.title}>{t('anticipation_config')}</span>
+        <span className={styles.title}>{t('pages.add_recipient.anticipation_configuration')}</span>
       </Col>
       <Col className={styles.editButtonCol}>
         <EditButton
@@ -131,11 +131,11 @@ const renderAnticipationConfig = (configuration, action, t) => (
     </Row>
     <Row>
       <Col tv={2} desk={2} tablet={2} palm={2}>
-        <span className={styles.infoTitle}>{t('anticipation_model')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_model')}</span>
         <span className={styles.info}>{configuration.anticipationModel}</span>
       </Col>
       <Col tv={2} desk={2} tablet={2} palm={2}>
-        <span className={styles.infoTitle}>{t('anticipation_volume')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
         <span className={styles.info}>{configuration.anticipationVolumePercentage}</span>
       </Col>
     </Row>
@@ -150,7 +150,7 @@ const renderTransferInterval = (configuration, t) => {
   const render = (interval === 'Mensal')
     ? (
       <Col tv={2} desk={2} tablet={2} palm={2}>
-        <span className={styles.infoTitle}>{t('transfer_day')}</span>
+        <span className={styles.infoTitle}>{t('pages.add_recipient.transfer_day')}</span>
         {interval === 'Semanal' &&
         <span className={styles.info}>{daily}</span>
         }
@@ -163,7 +163,7 @@ const renderTransferInterval = (configuration, t) => {
     return (
       <Fragment>
         <Col tv={2} desk={2} tablet={2} palm={2}>
-          <span className={styles.infoTitle}>{t('automatic_transfer_interval')}</span>
+          <span className={styles.infoTitle}>{t('pages.add_recipient.automatic_transfer_interval')}</span>
           <span className={styles.info}>{interval}</span>
         </Col>
         {render}
@@ -181,7 +181,7 @@ const renderTransferConfig = (configuration, action, t) => {
     <Fragment>
       <Row>
         <Col>
-          <span className={styles.title}>{t('transfer_configuration')}</span>
+          <span className={styles.title}>{t('pages.add_recipient.transfer_configuration')}</span>
         </Col>
         <Col className={styles.editButtonCol}>
           <EditButton
@@ -192,7 +192,7 @@ const renderTransferConfig = (configuration, action, t) => {
       </Row>
       <Row>
         <Col tv={2} desk={2} tablet={2} palm={2}>
-          <span className={styles.infoTitle}>{t('automatic_transfer')}</span>
+          <span className={styles.infoTitle}>{t('pages.add_recipient.automatic_transfer')}</span>
           <span className={styles.info}>{enableTransfer}</span>
         </Col>
         {renderTransferInterval(configuration, t)}
@@ -212,9 +212,9 @@ const ConfirmStep = ({
 }) => (
   <Fragment>
     <CardContent className={styles.paddingBottom}>
-      <h3 className={styles.title}>{t('add_recipient_confirm')}</h3>
+      <h3 className={styles.title}>{t('pages.add_recipient.confirm_recipient_registration')}</h3>
       <h4 className={styles.subtitle}>
-        {t('confirm_recipient_message')}
+        {t('pages.add_recipient.confirm_and_finish')}
       </h4>
       <Grid className={styles.paddingBottom}>
         <hr className={styles.line} />
@@ -232,7 +232,7 @@ const ConfirmStep = ({
         onClick={onCancel}
         fill="outline"
       >
-        {t('cancel')}
+        {t('pages.add_recipient.cancel')}
       </Button>
       <Spacing />
       <Button
@@ -240,7 +240,7 @@ const ConfirmStep = ({
         onClick={onBack}
         fill="outline"
       >
-        {t('back')}
+        {t('pages.add_recipient.back')}
       </Button>
       <Spacing size="medium" />
       <Button
@@ -248,7 +248,7 @@ const ConfirmStep = ({
         fill="gradient"
         onClick={onContinue}
       >
-        {t('add_recipient')}
+        {t('pages.add_recipient.create_recipient')}
       </Button>
     </CardActions>
   </Fragment>

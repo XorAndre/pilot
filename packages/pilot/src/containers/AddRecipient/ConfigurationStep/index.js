@@ -31,19 +31,19 @@ import createNumberValidation from '../../../validation/number'
 const anticipationModelOptions = t => (
   [
     {
-      name: t('pages.recipients.anticipation_model_by.manual'),
+      name: t('pages.add_recipient.manual_volume'),
       value: 'manual',
     },
     {
-      name: t('pages.recipients.anticipation_model_by.automatic_volume'),
+      name: t('pages.add_recipient.automatic_volume'),
       value: 'automatic_volume',
     },
     {
-      name: t('pages.recipients.anticipation_model_by.automatic_1025'),
+      name: t('pages.add_recipient.automatic_1025'),
       value: 'automatic_1025',
     },
     {
-      name: t('pages.recipients.anticipation_model_by.automatic_dx'),
+      name: t('pages.add_recipient.automatic_dx'),
       value: 'automatic_dx',
     },
   ]
@@ -52,15 +52,15 @@ const anticipationModelOptions = t => (
 const transferIntervalOptions = t => (
   [
     {
-      name: t('pages.recipients.transfer_interval_by.daily'),
+      name: t('pages.add_recipient.daily'),
       value: 'daily',
     },
     {
-      name: t('pages.recipients.transfer_interval_by.weekly'),
+      name: t('pages.add_recipient.weekly'),
       value: 'weekly',
     },
     {
-      name: t('pages.recipients.transfer_interval_by.monthly'),
+      name: t('pages.add_recipient.monthly'),
       value: 'monthly',
     },
   ]
@@ -69,30 +69,30 @@ const transferIntervalOptions = t => (
 const transferWeekdayOptions = t => (
   [
     {
-      name: t('pages.recipients.transfer_weekday_on.monday'),
+      name: t('pages.add_recipient.monday'),
       value: 'monday',
     },
     {
-      name: t('pages.recipients.transfer_weekday_on.tuesday'),
+      name: t('pages.add_recipient.tuesday'),
       value: 'tuesday',
     },
     {
-      name: t('pages.recipients.transfer_weekday_on.wednesday'),
+      name: t('pages.add_recipient.wednesday'),
       value: 'wednesday',
     },
     {
-      name: t('pages.recipients.transfer_weekday_on.thursday'),
+      name: t('pages.add_recipient.thursday'),
       value: 'thursday',
     },
     {
-      name: t('pages.recipients.transfer_weekday_on.friday'),
+      name: t('pages.add_recipient.friday'),
       value: 'friday',
     },
   ]
 )
 
-const number = t => createNumberValidation(t('pages.recipients.number'))
-const required = t => createRequiredValidation(t('pages.recipients.required'))
+const number = t => createNumberValidation(t('pages.add_recipient.field_number'))
+const required = t => createRequiredValidation(t('pages.add_recipient.field_required'))
 
 class ConfigurationsStep extends Component {
   constructor (props) {
@@ -155,7 +155,7 @@ class ConfigurationsStep extends Component {
       return (
         <Col tv={2} desk={2} tablet={4} palm={4}>
           <FormInput
-            label={t('pages.recipients.anticipation_volume_percentage')}
+            label={t('pages.add_recipient.anticipation_volume_percentage')}
             max="100"
             min="1"
             name="anticipationVolumePercentage"
@@ -170,7 +170,7 @@ class ConfigurationsStep extends Component {
       return (
         <Col tv={2} desk={2} tablet={4} palm={4}>
           <FormInput
-            label={t('pages.recipients.anticipation_days')}
+            label={t('pages.add_recipient.anticipation_days')}
             min="1"
             name="anticipationDays"
             type="number"
@@ -200,10 +200,10 @@ class ConfigurationsStep extends Component {
       return (
         <Fragment>
           <span className={style.label}>
-            {t('pages.recipients.transfer_day')}
+            {t('pages.add_recipient.transfer_day')}
             <div className={style.tooltip}>
               <Tooltip
-                content={t('pages.recipients.transfer_tooltip')}
+                content={t('pages.add_recipient.effective_transfer_day')}
                 placement="rightMiddle"
               >
                 <IconInfo
@@ -232,11 +232,11 @@ class ConfigurationsStep extends Component {
     return (
       <Fragment>
         <span className={style.label}>
-          {t('pages.recipients.transfer_day')}
+          {t('pages.add_recipient.transfer_day')}
           {!shouldDisable &&
             <div className={style.tooltip}>
               <Tooltip
-                content={t('pages.recipients.transfer_tooltip')}
+                content={t('pages.add_recipient.effective_transfer_day')}
                 placement="rightMiddle"
               >
                 <IconInfo
@@ -291,15 +291,15 @@ class ConfigurationsStep extends Component {
             <Row>
               <Col tv={12} desk={12} tablet={12} palm={12}>
                 <h2 className={style.title}>
-                  {t('pages.recipients.configuration.title')}
+                  {t('pages.add_recipient.anticipation_configuration')}
                 </h2>
                 <h3 className={style.subtitle}>
-                  {t('pages.recipients.configuration.subtitle')}
+                  {t('pages.add_recipient.choose_anticipation_model')}
                 </h3>
               </Col>
               <Col tv={12} desk={12} tablet={12} palm={12}>
                 <span className={style.label}>
-                  {t('pages.recipients.configuration.anticipation_model')}
+                  {t('pages.add_recipient.anticipation_model')}
                 </span>
                 <RadioGroup
                   name="anticipationModel"
@@ -310,12 +310,12 @@ class ConfigurationsStep extends Component {
             </Row>
             <Row>
               <h2 className={style.title}>
-                {t('pages.recipients.configuration.title')}
+                {t('pages.add_recipient.anticipation_configuration')}
               </h2>
               <Col tv={12} desk={12} tablet={12} palm={12}>
                 <FormCheckbox
                   checked={formData.transferEnabled}
-                  label={t('pages.recipients.transfer_enabled')}
+                  label={t('pages.add_recipient.transfer_enabled')}
                   name="transferEnabled"
                   onChange={this.transferHandler}
                   value="false"
@@ -325,7 +325,7 @@ class ConfigurationsStep extends Component {
             <Row>
               <Col tv={12} desk={12} tablet={12} palm={12}>
                 <span className={style.label}>
-                  {t('pages.recipients.configuration.transfer_interval')}
+                  {t('pages.add_recipient.transfer_interval')}
                 </span>
                 <RadioGroup
                   disabled={!formData.transferEnabled}
@@ -345,20 +345,20 @@ class ConfigurationsStep extends Component {
             onClick={onCancel}
             relevance="low"
           >
-            {t('pages.recipients.cancel')}
+            {t('pages.add_recipient.cancel')}
           </Button>
           <Spacing />
           <Button
             fill="outline"
             onClick={onBack}
           >
-            {t('pages.recipients.back')}
+            {t('pages.add_recipient.back')}
           </Button>
           <Button
             fill="gradient"
             type="submit"
           >
-            {t('pages.recipients.submit')}
+            {t('pages.add_recipient.continue')}
           </Button>
         </CardActions>
       </Form>
