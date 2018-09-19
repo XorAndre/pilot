@@ -270,127 +270,129 @@ class RecipientBalance extends Component {
     const filterDatesEqualCurrent = datesEqual(this.state.dates, dates)
 
     return (
-      <Grid>
-        <Row stretch>
-          <Col
-            desk={4}
-            palm={12}
-            tablet={6}
-            tv={4}
-          >
-            <CardSection>
-              <BalanceTotalDisplay
-                action={isNil(onWithdrawClick) ? null : withdrawalAction}
-                amount={formatAmount(amount)}
-                detail={
-                  <span>
-                    {t('pages.balance.available_withdrawal')}
-                    <strong> {currencyFormatter(withdrawal)} </strong>
-                  </span>
-                }
-                disabled={disabled}
-                title={t('pages.balance.withdrawal_title')}
-              />
-            </CardSection>
-          </Col>
-          <Col
-            desk={4}
-            palm={12}
-            tablet={6}
-            tv={4}
-          >
-            <CardSection>
-              <BalanceTotalDisplay
-                action={isNil(onAnticipationClick) ? null : anticipationAction}
-                amount={formatAmount(outcoming)}
-                detail={this.renderAnticipation()}
-                disabled={disabled || anticipationLoading || anticipationError}
-                title={t('pages.balance.anticipation_title')}
-              />
-            </CardSection>
-          </Col>
-          <Col
-            desk={4}
-            palm={12}
-            tablet={6}
-            tv={4}
-          >
-            <CardSection>
-              <PendingRequests
-                emptyMessage={t('pages.balance.pending_requests_empty_message')}
-                loading={disabled}
-                onCancel={isNil(onCancelRequestClick) ? null : this.handleRequestCancelClick}
-                requests={this.getPendingRequests()}
-                title={t('pages.balance.pending_requests_title')}
-              />
-            </CardSection>
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            desk={12}
-            palm={12}
-            tablet={12}
-            tv={12}
-          >
-            <CardSection>
-              <CardContent>
-                <div className={style.filter}>
-                  <DateInput
-                    active={filterDatesEqualCurrent}
-                    value={this.state.dates}
-                    disabled={disabled}
-                    icon={<IconCalendar width={16} height={16} />}
-                    limits={dateLimits}
-                    onChange={this.handleDatesChange}
-                    presets={datePresets}
-                    strings={getDateLabels(this.props.t)}
-                  />
-                  <Button
-                    disabled={filterDatesEqualCurrent}
-                    fill="gradient"
-                    onClick={this.handleFilterClick}
-                    size="default"
-                  >
-                    {t('filter_action')}
-                  </Button>
-                </div>
-              </CardContent>
-              <CardContent>
-                <Card>
-                  <CardContent>
-                    <BalanceSummary
-                      amount={this.getSummaryTotal()}
-                      dates={dates}
+      <CardContent>
+        <Grid>
+          <Row stretch>
+            <Col
+              desk={4}
+              palm={12}
+              tablet={6}
+              tv={4}
+            >
+              <CardSection>
+                <BalanceTotalDisplay
+                  action={isNil(onWithdrawClick) ? null : withdrawalAction}
+                  amount={formatAmount(amount)}
+                  detail={
+                    <span>
+                      {t('pages.balance.available_withdrawal')}
+                      <strong> {currencyFormatter(withdrawal)} </strong>
+                    </span>
+                  }
+                  disabled={disabled}
+                  title={t('pages.balance.withdrawal_title')}
+                />
+              </CardSection>
+            </Col>
+            <Col
+              desk={4}
+              palm={12}
+              tablet={6}
+              tv={4}
+            >
+              <CardSection>
+                <BalanceTotalDisplay
+                  action={isNil(onAnticipationClick) ? null : anticipationAction}
+                  amount={formatAmount(outcoming)}
+                  detail={this.renderAnticipation()}
+                  disabled={disabled || anticipationLoading || anticipationError}
+                  title={t('pages.balance.anticipation_title')}
+                />
+              </CardSection>
+            </Col>
+            <Col
+              desk={4}
+              palm={12}
+              tablet={6}
+              tv={4}
+            >
+              <CardSection>
+                <PendingRequests
+                  emptyMessage={t('pages.balance.pending_requests_empty_message')}
+                  loading={disabled}
+                  onCancel={isNil(onCancelRequestClick) ? null : this.handleRequestCancelClick}
+                  requests={this.getPendingRequests()}
+                  title={t('pages.balance.pending_requests_title')}
+                />
+              </CardSection>
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              desk={12}
+              palm={12}
+              tablet={12}
+              tv={12}
+            >
+              <CardSection>
+                <CardContent>
+                  <div className={style.filter}>
+                    <DateInput
+                      active={filterDatesEqualCurrent}
+                      value={this.state.dates}
+                      disabled={disabled}
+                      icon={<IconCalendar width={16} height={16} />}
+                      limits={dateLimits}
+                      onChange={this.handleDatesChange}
+                      presets={datePresets}
+                      strings={getDateLabels(this.props.t)}
                     />
-                  </CardContent>
-                </Card>
-              </CardContent>
-              <Operations
-                columns={translateColumns(getColumns(typesLabels))}
-                currentPage={currentPage}
-                disabled={disabled}
-                emptyMessage={t('models.operations.empty_message')}
-                exportLabel={t('models.operations.export')}
-                loading={disabled}
-                ofLabel={t('of')}
-                onExport={() => null}
-                onPageChange={this.handleOperationsPageChange}
-                rows={operations.rows}
-                subtitle={
-                  <span>
-                    {t('pages.balance.total.of')}
-                    <strong> {operations.total} </strong>
-                    {t('pages.balance.releases')}
-                  </span>
-                }
-                title={t('pages.balance.operations_title')}
-                totalPages={operations.count}
-              />
-            </CardSection>
-          </Col>
-        </Row>
-      </Grid>
+                    <Button
+                      disabled={filterDatesEqualCurrent}
+                      fill="gradient"
+                      onClick={this.handleFilterClick}
+                      size="default"
+                    >
+                      {t('filter_action')}
+                    </Button>
+                  </div>
+                </CardContent>
+                <CardContent>
+                  <Card>
+                    <CardContent>
+                      <BalanceSummary
+                        amount={this.getSummaryTotal()}
+                        dates={dates}
+                      />
+                    </CardContent>
+                  </Card>
+                </CardContent>
+                <Operations
+                  columns={translateColumns(getColumns(typesLabels))}
+                  currentPage={currentPage}
+                  disabled={disabled}
+                  emptyMessage={t('models.operations.empty_message')}
+                  exportLabel={t('models.operations.export')}
+                  loading={disabled}
+                  ofLabel={t('of')}
+                  onExport={() => null}
+                  onPageChange={this.handleOperationsPageChange}
+                  rows={operations.rows}
+                  subtitle={
+                    <span>
+                      {t('pages.balance.total.of')}
+                      <strong> {operations.total} </strong>
+                      {t('pages.balance.releases')}
+                    </span>
+                  }
+                  title={t('pages.balance.operations_title')}
+                  totalPages={operations.count}
+                />
+              </CardSection>
+            </Col>
+          </Row>
+        </Grid>
+      </CardContent>
     )
   }
 }

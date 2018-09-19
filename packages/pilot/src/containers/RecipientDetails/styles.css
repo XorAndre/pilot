@@ -1,0 +1,71 @@
+@import "former-kit-skin-pagarme/dist/styles/spacing.css";
+@import "former-kit-skin-pagarme/dist/styles/colors.css";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+
+  & > *:first-child {
+    margin-left: unset;
+  }
+
+  & > * {
+    margin-left: 40px;
+  }
+}
+
+.right {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.bankAccount,
+.status {
+  display: flex;
+  flex-direction: column;
+}
+
+.companyName {
+  color: var(--color-light-steel-100);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: var(--spacing-tiny);
+  padding: 0;
+}
+
+.label {
+  color: var(--color-light-steel-100);
+  font-size: 12px;
+  font-style: normal;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.labelBottom {
+  color: var(--color-light-steel-100);
+  font-size: 12px;
+  font-style: normal;
+  margin-top: var(--spacing-tiny);
+}
+
+.statusLegend {
+  margin-top: var(--spacing-small);
+}
+
+.hash {
+  color: var(--color-light-steel-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  margin-top: var(--spacing-tiny);
+}

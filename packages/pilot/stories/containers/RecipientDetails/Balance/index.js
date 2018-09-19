@@ -3,10 +3,7 @@ import { action } from '@storybook/addon-actions'
 import moment from 'moment'
 import { merge } from 'ramda'
 
-import {
-  Card,
-  CardContent,
-} from 'former-kit'
+import { Card } from 'former-kit'
 
 import RecipientBalance from '../../../../src/containers/RecipientDetails/Balance'
 import Section from '../../../Section'
@@ -69,24 +66,22 @@ class RecipientBalanceState extends Component {
     return (
       <Section>
         <Card>
-          <CardContent>
-            <RecipientBalance
-              anticipation={anticipation}
-              balance={balance}
-              currentPage={query.page}
-              dates={dates}
-              disabled={false}
-              onAnticipationClick={action('anticipation')}
-              onCancelRequestClick={action('cancel request')}
-              onFilterClick={action('filter click')}
-              onPageChange={action('page click')}
-              onWithdrawClick={action('withdraw')}
-              requests={requests}
-              search={search}
-              t={t => t}
-              total={total}
-            />
-          </CardContent>
+          <RecipientBalance
+            anticipation={anticipation}
+            balance={balance}
+            currentPage={query.page}
+            dates={dates}
+            disabled={false}
+            onAnticipationClick={action('anticipation')}
+            onCancelRequestClick={action('cancel request')}
+            onFilterClick={action('filter click')}
+            onPageChange={action('page click')}
+            onWithdrawClick={action('withdraw')}
+            requests={requests}
+            search={search}
+            t={t => t}
+            total={total}
+          />
         </Card>
       </Section>
     )
