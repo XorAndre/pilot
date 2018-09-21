@@ -175,11 +175,7 @@ class AddRecipients extends Component {
         title: t('pages.add_recipient.data'),
       },
       {
-        fetch: () => {
-          const { data } = this.state
-          const { documentType, cnpj, cpf } = data[IDENTIFICATION]
-          return fetchAccounts({ documentType, cnpj, cpf })
-        },
+        fetch: () => fetchAccounts(this.state.data[IDENTIFICATION]),
         id: BANK_ACCOUNT,
         title: t('pages.add_recipient.bank_account'),
       },
