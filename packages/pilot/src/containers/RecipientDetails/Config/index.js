@@ -136,7 +136,7 @@ class RecipientDetailConfig extends Component {
     ))
 
     return (
-      `${selectedAccount.account_name} - ${selectedAccount.bank} - ${selectedAccount.agency} - ${selectedAccount.account_number}`
+      `${selectedAccount.name} - ${selectedAccount.bank} - ${selectedAccount.agency} - ${selectedAccount.number}`
     )
   }
 
@@ -222,16 +222,12 @@ RecipientDetailConfig.propTypes = {
     transferWeekday: PropTypes.string,
   }),
   bankAccount: PropTypes.shape({
-    addAccount: PropTypes.shape({
-      account_name: PropTypes.string,
-      account_number: PropTypes.string,
-      account_type: PropTypes.string,
-      agency: PropTypes.string,
-      bank: PropTypes.string,
-    }),
-    selectAccount: PropTypes.shape({
-      account_id: PropTypes.string,
-    }),
+    name: PropTypes.string,
+    number: PropTypes.string,
+    type: PropTypes.string,
+    agency: PropTypes.string,
+    bank: PropTypes.string,
+    id: PropTypes.string,
   }),
   accounts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -257,16 +253,12 @@ RecipientDetailConfig.defaultProps = {
     transferWeekday: '',
   },
   bankAccount: {
-    addAccount: {
-      account_name: '',
-      account_number: '',
-      account_type: 'conta_corrente',
-      agency: '',
-      bank: '',
-    },
-    selectAccount: {
-      id: '1',
-    },
+    name: '',
+    number: '',
+    type: 'conta_corrente',
+    agency: '',
+    bank: '001',
+    id: '',
   },
 }
 

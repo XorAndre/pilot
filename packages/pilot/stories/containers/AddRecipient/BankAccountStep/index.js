@@ -7,17 +7,17 @@ import BankAccountStep from '../../../../src/containers/AddRecipient/BankAccount
 
 const exampleAccounts = [
   {
-    account_name: 'First account',
-    account_number: '0001',
-    account_type: 'conta_corrente',
+    name: 'First account',
+    number: '0001',
+    type: 'conta_corrente',
     agency: '7',
-    bank: '340',
+    bank: '001',
     id: '1',
   },
   {
-    account_name: 'Second account',
-    account_number: '0002',
-    account_type: 'conta_corrente',
+    name: 'Second account',
+    number: '0002',
+    type: 'conta_corrente',
     agency: '8',
     bank: '340',
     id: '2',

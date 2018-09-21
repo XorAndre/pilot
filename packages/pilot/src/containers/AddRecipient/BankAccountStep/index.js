@@ -17,7 +17,7 @@ const hasItems = complement(either(isEmpty, isNil))
 
 const isNewAccount = account => (
   !account.id &&
-  account.account_number !== ''
+  account.number !== ''
 )
 
 const ADD_ACCOUNT = 'addAccount'
@@ -102,9 +102,9 @@ class BankAccountStep extends Component {
 }
 
 const accountShape = PropTypes.shape({
-  account_name: PropTypes.string,
-  account_number: PropTypes.string,
-  account_type: PropTypes.oneOf(accountTypes),
+  name: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.oneOf(accountTypes),
   agency: PropTypes.string,
   bank: PropTypes.string,
   id: PropTypes.string,
@@ -114,9 +114,9 @@ BankAccountStep.propTypes = {
   accounts: PropTypes.arrayOf(accountShape),
   data: accountShape,
   errors: PropTypes.shape({
-    account_name: PropTypes.string,
-    account_number: PropTypes.string,
-    account_type: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string,
+    type: PropTypes.string,
     agency: PropTypes.string,
     bank: PropTypes.string,
   }),
@@ -129,9 +129,9 @@ BankAccountStep.propTypes = {
 BankAccountStep.defaultProps = {
   accounts: [],
   data: {
-    account_name: '',
-    account_number: '',
-    account_type: 'conta_corrente',
+    name: '',
+    number: '',
+    type: 'conta_corrente',
     agency: '',
     bank: '',
   },

@@ -25,14 +25,14 @@ import { BANK_ACCOUNT } from '../contentIds'
 const hasItems = complement(either(isEmpty, isNil))
 
 const toDropdownOptions = account => ({
-  name: `${account.account_name} - ${account.bank} - ${account.agency} - ${account.account_number}`,
+  name: `${account.name} - ${account.bank} - ${account.agency} - ${account.number}`,
   value: account.id,
 })
 
 const ADD_ACCOUNT = 'addAccount'
 const SELECT_ACCOUNT = 'selectAccount'
 
-class BanckAccountContent extends Component {
+class BankAccountContent extends Component {
   constructor (props) {
     super(props)
 
@@ -112,18 +112,18 @@ class BanckAccountContent extends Component {
           />
           <Form
             data={{
-              account_type: accountTypes[0],
-              account_name: '',
-              account_number: '',
+              type: accountTypes[0],
+              name: '',
+              number: '',
               bank: '',
               agency: '',
               id: accounts[0].id,
             }}
             validateOn="blur"
             validation={{
-              account_name: [required],
-              account_number: [required, number],
-              account_type: [required],
+              name: [required],
+              number: [required, number],
+              type: [required],
               agency: [required, number],
               bank: [required],
             }}
@@ -159,19 +159,15 @@ class BanckAccountContent extends Component {
   }
 }
 
-BanckAccountContent.propTypes = {
+BankAccountContent.propTypes = {
   data: PropTypes.shape({
     [BANK_ACCOUNT]: PropTypes.shape({
-      addAccount: PropTypes.shape({
-        account_name: PropTypes.string,
-        account_number: PropTypes.string,
-        account_type: PropTypes.string,
-        agency: PropTypes.string,
-        bank: PropTypes.string,
-      }),
-      selectAccount: PropTypes.shape({
-        account_id: PropTypes.string,
-      }),
+      name: PropTypes.string,
+      number: PropTypes.string,
+      type: PropTypes.string,
+      agency: PropTypes.string,
+      bank: PropTypes.string,
+      id: PropTypes.string,
     }),
   }),
   accounts: PropTypes.arrayOf(
@@ -185,9 +181,9 @@ BanckAccountContent.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-BanckAccountContent.defaultProps = {
+BankAccountContent.defaultProps = {
   accounts: [],
   data: {},
 }
 
-export default BanckAccountContent
+export default BankAccountContent

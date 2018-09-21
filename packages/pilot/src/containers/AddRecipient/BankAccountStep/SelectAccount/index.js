@@ -80,9 +80,9 @@ const SelectAccount = ({
 SelectAccount.propTypes = {
   accounts: PropTypes.arrayOf(
     PropTypes.shape({
-      account_name: PropTypes.string,
-      account_number: PropTypes.string,
-      account_type: PropTypes.oneOf(accountTypes),
+      name: PropTypes.string,
+      number: PropTypes.string,
+      type: PropTypes.oneOf(accountTypes),
       agency: PropTypes.string,
       bank: PropTypes.string,
       id: PropTypes.string,

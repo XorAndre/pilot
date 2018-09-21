@@ -105,11 +105,11 @@ const renderBankAccount = (bankAccount, action, t) => (
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
         <span className={styles.infoTitle}>{t('pages.add_recipient.account')}</span>
-        <span className={styles.info}>{bankAccount.account_number}</span>
+        <span className={styles.info}>{bankAccount.number}</span>
       </Col>
       <Col tv={1} desk={1} tablet={1} palm={1}>
         <span className={styles.infoTitle}>{t('pages.add_recipient.account_type')}</span>
-        <span className={styles.info}>{bankAccount.account_type}</span>
+        <span className={styles.info}>{bankAccount.type}</span>
       </Col>
     </Row>
     <hr className={styles.line} />
@@ -299,9 +299,9 @@ ConfirmStep.propTypes = {
       transferWeekday: PropTypes.string,
     }).isRequired,
     [BANK_ACCOUNT]: PropTypes.shape({
-      account_name: PropTypes.string,
-      account_number: PropTypes.string,
-      account_type: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+      type: PropTypes.string,
       agency: PropTypes.string,
       bank: PropTypes.string,
     }),
@@ -346,9 +346,9 @@ ConfirmStep.defaultProps = {
       transferWeekday: '',
     },
     [BANK_ACCOUNT]: {
-      account_name: '',
-      account_number: '',
-      account_type: '',
+      name: '',
+      number: '',
+      type: 'conta_corrente',
       agency: '',
       bank: '',
     },

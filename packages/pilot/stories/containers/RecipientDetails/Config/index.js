@@ -6,17 +6,17 @@ import RecipientDetailConfig from '../../../../src/containers/RecipientDetails/C
 
 const mockAccounts = [
   {
-    account_name: 'First account',
-    account_number: '0001',
-    account_type: 'conta_corrente',
+    name: 'First account',
+    number: '0001',
+    type: 'conta_corrente',
     agency: '7',
     bank: '340',
     id: '1',
   },
   {
-    account_name: 'Second account',
-    account_number: '0002',
-    account_type: 'conta_corrente',
+    name: 'Second account',
+    number: '0002',
+    type: 'conta_corrente',
     agency: '8',
     bank: '340',
     id: '2',
@@ -37,16 +37,12 @@ const mockTransfer = {
 }
 
 const mockBankAccount = {
-  addAccount: {
-    account_name: '',
-    account_number: '',
-    account_type: '',
-    agency: '',
-    bank: '',
-  },
-  selectAccount: {
-    account_id: '',
-  },
+  name: '',
+  number: '',
+  type: '',
+  agency: '',
+  bank: '',
+  id: '',
 }
 
 const RecipientDetailConfigExample = () => (

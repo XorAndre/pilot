@@ -99,9 +99,9 @@ const partnerDefaultTypes = {
 
 RecipientDetailInfo.propTypes = {
   bankAccount: PropTypes.shape({
-    account_name: PropTypes.string,
-    account_number: PropTypes.string,
-    account_type: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string,
+    type: PropTypes.string,
     agency: PropTypes.string,
     bank: PropTypes.string,
   }),
@@ -170,9 +170,9 @@ RecipientDetailInfo.defaultProps = {
     transferWeekday: '',
   },
   bankAccount: {
-    account_name: '',
-    account_number: '',
-    account_type: '',
+    name: '',
+    number: '',
+    type: 'conta_corrente',
     agency: '',
     bank: '',
   },

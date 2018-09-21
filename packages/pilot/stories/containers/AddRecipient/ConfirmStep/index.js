@@ -57,9 +57,9 @@ const mockData = {
     transferWeekday: 'Terça-feira',
   },
   bankAccount: {
-    account_name: 'Conta Bancária',
-    account_number: '11111-1',
-    account_type: 'Conta-corrente',
+    name: 'Conta Bancária',
+    number: '11111-1',
+    type: 'Conta-corrente',
     agency: '1111',
     bank: '351 - Itaú Unibanco SA',
   },

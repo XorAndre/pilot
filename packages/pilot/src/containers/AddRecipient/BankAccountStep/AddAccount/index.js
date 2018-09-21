@@ -31,9 +31,9 @@ const AddAccount = ({
       data={data}
       validateOn="blur"
       validation={{
-        account_name: [required],
-        account_number: [required, number],
-        account_type: [required],
+        name: [required],
+        number: [required, number],
+        type: [required],
         agency: [required, number],
         bank: [required],
       }}
@@ -78,16 +78,16 @@ const AddAccount = ({
 
 AddAccount.propTypes = {
   data: PropTypes.shape({
-    account_name: PropTypes.string,
-    account_number: PropTypes.string,
-    account_type: PropTypes.oneOf(accountTypes),
+    name: PropTypes.string,
+    number: PropTypes.string,
+    type: PropTypes.oneOf(accountTypes),
     agency: PropTypes.string,
     bank: PropTypes.string,
   }),
   errors: PropTypes.shape({
-    account_name: PropTypes.string,
-    account_number: PropTypes.string,
-    account_type: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string,
+    type: PropTypes.string,
     agency: PropTypes.string,
     bank: PropTypes.string,
   }),
@@ -99,9 +99,9 @@ AddAccount.propTypes = {
 
 AddAccount.defaultProps = {
   data: {
-    account_name: '',
-    account_number: '',
-    account_type: 'conta_corrente',
+    name: '',
+    number: '',
+    type: 'conta_corrente',
     agency: '',
     bank: '',
   },

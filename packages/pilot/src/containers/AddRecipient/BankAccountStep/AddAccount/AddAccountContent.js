@@ -43,7 +43,7 @@ const AddAccountContent = ({
             <FormInput
               type="text"
               label={t('pages.add_recipient.account_with_digit')}
-              name="account_number"
+              name="number"
               placeholder={t('pages.add_recipient.type_account_with_digit')}
             />
           </Col>
@@ -51,7 +51,7 @@ const AddAccountContent = ({
         <Row>
           <Col>
             <FormDropdown
-              name="account_type"
+              name="type"
               label={t('pages.add_recipient.account_type')}
               options={accountTypeOptions}
             />
@@ -62,7 +62,7 @@ const AddAccountContent = ({
             <FormInput
               type="text"
               label={t('pages.add_recipient.account_name')}
-              name="account_name"
+              name="name"
               placeholder={t('pages.add_recipient.type_account_name')}
             />
           </Col>
