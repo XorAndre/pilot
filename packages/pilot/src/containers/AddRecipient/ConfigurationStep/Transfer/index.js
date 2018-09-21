@@ -72,7 +72,7 @@ const renderTransferInput = (data, t) => {
           {t('pages.add_recipient.transfer_day')}
           <div className={style.tooltip}>
             <Tooltip
-              content={t('pages.add_recipient.transfer_tooltip')}
+              content={t('pages.add_recipient.effective_transfer_day')}
               placement="rightMiddle"
             >
               <IconInfo
@@ -105,7 +105,7 @@ const renderTransferInput = (data, t) => {
         {!shouldDisable &&
           <div className={style.tooltip}>
             <Tooltip
-              content={t('pages.add_recipient.transfer_tooltip')}
+              content={t('pages.add_recipient.effective_transfer_day')}
               placement="rightMiddle"
             >
               <IconInfo
