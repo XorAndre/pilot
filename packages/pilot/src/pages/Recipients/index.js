@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 
 import search, { RecipientsSearch } from './Search'
+import RecipientsAdd from './Add'
 
 export const reducers = {
   search,
@@ -12,6 +13,10 @@ export const reducers = {
 
 const RecipientsRouter = () => (
   <Switch>
+    <Route
+      path="/recipients/add"
+      component={RecipientsAdd}
+    />
     <Route
       path="/recipients"
       component={RecipientsSearch}

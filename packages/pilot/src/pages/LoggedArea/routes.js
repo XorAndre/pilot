@@ -71,6 +71,11 @@ export default {
     icon: Store32,
     exact: true,
   },
+  recipientsAdd: {
+    hidden: true,
+    path: '/recipients/add',
+    title: 'pages.add_recipient.title',
+  },
 }
 
 /* eslint-enable sort-keys */
