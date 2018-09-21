@@ -60,43 +60,37 @@ class AddRecipients extends Component {
   }
 
   handleContinueNavigation (stepData) {
-    const { currentStepNumber } = this.state
+    const { data, currentStepNumber } = this.state
+    const currentStep = this.steps[currentStepNumber]
     const nextStepNumber = currentStepNumber + 1
     const nextStep = this.steps[nextStepNumber]
 
+    const newData = { ...data }
+    if (stepData) newData[currentStep.id] = stepData
+
     if (nextStep.fetch) {
-      this.handleAsyncNextStep(stepData)
+      this.handleAsyncNextStep(newData)
     } else {
-      this.handleNextStep(stepData)
+      this.handleNextStep(newData)
     }
   }
 
-  handleNextStep (stepData) {
-    const { data, currentStepNumber } = this.state
+  handleNextStep (newData) {
+    const { currentStepNumber } = this.state
     const nextStepNumber = currentStepNumber + 1
-    const currentStep = this.steps[currentStepNumber]
     const stepsStatus = this.createNewStepStatus(nextStepNumber)
 
     this.setState({
       currentStepNumber: nextStepNumber,
-      data: {
-        ...data,
-        [currentStep.id]: stepData,
-      },
+      data: newData,
       stepsStatus,
     })
   }
 
-  handleAsyncNextStep (stepData) {
-    const { data, currentStepNumber } = this.state
-    const currentStep = this.steps[currentStepNumber]
-
+  handleAsyncNextStep (newData) {
     this.setState({
       isLoading: true,
-      data: {
-        ...data,
-        [currentStep.id]: stepData,
-      },
+      data: newData,
     }, () => {
       this.fetchAndSetNextStepData()
     })
