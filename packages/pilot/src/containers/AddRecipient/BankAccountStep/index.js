@@ -133,7 +133,7 @@ BankAccountStep.defaultProps = {
     number: '',
     type: 'conta_corrente',
     agency: '',
-    bank: '',
+    bank: '001',
   },
   errors: {},
 }
