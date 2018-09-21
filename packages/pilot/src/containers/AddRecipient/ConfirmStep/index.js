@@ -246,7 +246,7 @@ const ConfirmStep = ({
       <Button
         type="submit"
         fill="gradient"
-        onClick={onContinue}
+        onClick={() => onContinue()}
       >
         {t('pages.add_recipient.create_recipient')}
       </Button>
