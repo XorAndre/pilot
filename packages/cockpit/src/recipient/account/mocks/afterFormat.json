@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "agency": "888",
+      "bank": "036",
+      "id": "17902429",
+      "name": "Bradesco",
+      "number": "99996",
+      "type": "conta_corrente"
+    },
+    {
+      "agency": "777",
+      "bank": "001",
+      "id": "17902428",
+      "name": "Conta",
+      "number": "000009",
+      "type": "conta_corrente"
+    },
+    {
+      "agency": "0000",
+      "bank": "001",
+      "id": "17690435",
+      "name": "Teste",
+      "number": "000000",
+      "type": "conta_corrente"
+    }
+  ]
+}

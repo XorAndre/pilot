@@ -1,0 +1,60 @@
+{
+  "identification": {
+    "cnpj": "",
+    "cnpjEmail": "",
+    "cnpjInformation": false,
+    "cnpjName": "",
+    "cnpjPhone": "",
+    "cnpjUrl": "",
+    "cpf": "426.872.198-35",
+    "cpfEmail": "",
+    "cpfInformation": false,
+    "cpfName": "",
+    "cpfPhone": "",
+    "cpfUrl": "",
+    "documentType": "cpf",
+    "partner0": {
+      "cpf": "",
+      "name": "",
+      "phone": ""
+    },
+    "partner1": {
+      "cpf": "",
+      "name": "",
+      "phone": ""
+    },
+    "partner2": {
+      "cpf": "",
+      "name": "",
+      "phone": ""
+    },
+    "partner3": {
+      "cpf": "",
+      "name": "",
+      "phone": ""
+    },
+    "partner4": {
+      "cpf": "",
+      "name": "",
+      "phone": ""
+    },
+    "partnerNumber": "0"
+  },
+  "bankAccount": {
+    "name": "Bradesco",
+    "number": "99996",
+    "type": "conta_corrente",
+    "agency": "888",
+    "bank": "036",
+    "id": "17902429"
+  },
+  "configuration": {
+    "anticipationDays": "15",
+    "anticipationModel": "manual",
+    "anticipationVolumePercentage": "100",
+    "transferDay": "10",
+    "transferEnabled": true,
+    "transferInterval": "weekly",
+    "transferWeekday": "tuesday"
+  }
+}

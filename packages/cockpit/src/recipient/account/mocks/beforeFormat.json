@@ -1,0 +1,45 @@
+[{
+  "object": "bank_account",
+  "id": 17902429,
+  "bank_code": "036",
+  "agencia": "888",
+  "agencia_dv": null,
+  "conta": "9999",
+  "conta_dv": "6",
+  "type": "conta_corrente",
+  "document_type": "cpf",
+  "document_number": "42687219835",
+  "legal_name": "Bradesco",
+  "charge_transfer_fees": true,
+  "date_created": "2018-09-\"21T13\":\"34\":44.546Z"
+}, {
+  "object": "bank_account",
+  "id": 17902428,
+  "bank_code": "001",
+  "agencia": "777",
+  "agencia_dv": null,
+  "conta": "00000",
+  "conta_dv": "9",
+  "type": "conta_corrente",
+  "document_type": "cpf",
+  "document_number": "42687219835",
+  "legal_name": "Conta",
+  "charge_transfer_fees": true,
+  "date_created": "2018-09-\"21T13\":\"30\":18.988Z"
+}, {
+  "object": "bank_account",
+  "id": 17690435,
+  "bank_code": "001",
+  "agencia": "0000",
+  "agencia_dv": "0",
+  "conta": "00000",
+  "conta_dv": "0",
+  "type": "conta_corrente",
+  "document_type": "cpf",
+  "document_number": "42687219835",
+  "legal_name": "Teste",
+  "charge_transfer_fees": true,
+  "date_created": "2018-01-\"29T17\":\"45\":59.780Z"
+}]
+
+

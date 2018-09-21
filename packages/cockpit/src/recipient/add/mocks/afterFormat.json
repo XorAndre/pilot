@@ -1,0 +1,8 @@
+{
+  "bank_account_id": "17902429",
+  "transfer_interval": "weekly",
+  "transfer_enabled": true,
+  "transfer_day": "2",
+  "anticipatable_volume_percentage": "100",
+  "automatic_anticipation_enabled": false
+}
