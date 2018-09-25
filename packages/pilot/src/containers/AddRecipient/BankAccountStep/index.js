@@ -12,6 +12,7 @@ import {
 import AddAccount from './AddAccount'
 import SelectAccount from './SelectAccount'
 import accountTypes from '../../../models/accountTypes'
+import style from './style.css'
 
 const hasItems = complement(either(isEmpty, isNil))
 
@@ -66,8 +67,8 @@ class BankAccountStep extends Component {
       return (
         <Fragment>
           <CardContent>
-            <strong>{t('pages.add_recipient.bank_account')}</strong>
-            <p>{t('pages.add_recipient.select_or_add_account')}</p>
+            <h2 className={style.title}>{t('pages.add_recipient.bank_account')}</h2>
+            <h3 className={style.subtitle}>{t('pages.add_recipient.select_or_add_account')}</h3>
             <SegmentedSwitch
               options={[
                 {
@@ -92,8 +93,8 @@ class BankAccountStep extends Component {
     return (
       <Fragment>
         <CardContent>
-          <strong>{t('pages.add_recipient.bank_account')}</strong>
-          <p>{t('pages.add_recipient.add_new_account')}</p>
+          <h2 className={style.title}>{t('pages.add_recipient.bank_account')}</h2>
+          <h3 className={style.subtitle}>{t('pages.add_recipient.add_new_account')}</h3>
         </CardContent>
         <AddAccount {...this.props} />
       </Fragment>
