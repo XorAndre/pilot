@@ -151,7 +151,7 @@ const Transfer = ({ data, t, transferHandler }) => (
           options={transferIntervalOptions(t)}
         />
       </Col>
-      <Col tv={3} desk={3} tablet={4} palm={4}>
+      <Col>
         {renderTransferInput(data, t)}
       </Col>
     </Row>
