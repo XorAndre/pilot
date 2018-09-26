@@ -435,10 +435,10 @@
     "add_recipient": {
       "account_name": "Nome da conta",
       "account_type": "Tipo de conta bancária",
-      "account_with_digit": "Conta (com o dígito em sem '/' ou '-')",
+      "account_with_digit": "Conta (com o dígito e sem '/' ou '-')",
       "account": "Conta",
       "add_account": "Adicionar uma conta",
-      "add_new_account": "Adicione uma nova conta",
+      "add_new_account": "Adicione uma conta bancária para esse recebedor",
       "agency_no_digit": "Agência sem o dígito",
       "agency": "Agência",
       "anticipation_configuration": "Configurações de antecipação",

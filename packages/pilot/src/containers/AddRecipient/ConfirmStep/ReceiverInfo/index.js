@@ -59,8 +59,8 @@ const ReceiverInfo = ({
       <span className={styles.infoTitle}>
         {
           (identification.documentType === 'cpf')
-            ? t('pages.add_recipient.more_recipient_information')
-            : t('pages.add_recipient.more_company_information')
+            ? t('pages.add_recipient.cpf')
+            : t('pages.add_recipient.cnpj')
         }
       </span>
       <span className={styles.info}>
