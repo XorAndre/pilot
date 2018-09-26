@@ -18,18 +18,11 @@ function formatToRecipient (data) {
 
     recipientData.bank_account = {
       bank_code: data.bankAccount.bank,
-      // TODO: limite de 5 caracteres
       agencia: data.bankAccount.agency,
-      // TODO: coletar?
-      // agencia_dv: '',
-      // TODO: limite de 13 caracteres
       conta: removeLastDigit(number),
-      // TODO: limite de 2 caracteres
       conta_dv: getLastDigit(number),
       type: data.bankAccount.type,
       document_number: getOnlyNumbers(document),
-
-      // TODO: limite de 30 caracteres
       legal_name: data.bankAccount.name,
     }
   }

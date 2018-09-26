@@ -11,8 +11,11 @@ import {
 
 import accountTypes from '../../../../models/accountTypes'
 import AddAccountContent from './AddAccountContent'
+
 import createNumberValidation from '../../../../validation/number'
 import createRequiredValidation from '../../../../validation/required'
+import createMaxLengthValidation from '../../../../validation/maxLength'
+
 import style from '../style.css'
 
 const AddAccount = ({
@@ -23,19 +26,28 @@ const AddAccount = ({
   onContinue,
   t,
 }) => {
-  const required = createRequiredValidation(t('pages.add_recipient.field_required'))
-  const number = createNumberValidation(t('pages.add_recipient.field_number'))
+  const max13Message = t('pages.add_recipient.field_max', { number: 13 })
+  const max30Message = t('pages.add_recipient.field_max', { number: 30 })
+  const max5Message = t('pages.add_recipient.field_max', { number: 5 })
+  const numberMessage = t('pages.add_recipient.field_number')
+  const requiredMessage = t('pages.add_recipient.field_required')
+
+  const isNumber = createNumberValidation(numberMessage)
+  const max13Characters = createMaxLengthValidation(13, max13Message)
+  const max30Characters = createMaxLengthValidation(30, max30Message)
+  const max5Characters = createMaxLengthValidation(5, max5Message)
+  const required = createRequiredValidation(requiredMessage)
 
   return (
     <Form
       data={data}
       validateOn="blur"
       validation={{
-        name: [required],
-        number: [required, number],
-        type: [required],
-        agency: [required, number],
+        agency: [required, isNumber, max5Characters],
         bank: [required],
+        name: [required, max30Characters],
+        number: [required, isNumber, max13Characters],
+        type: [required],
       }}
       onSubmit={(formData, formErrors) => {
         if (!formErrors) onContinue(formData)

@@ -483,6 +483,7 @@
       "field_invalid_cpf": "O CPF digitado não é válido",
       "field_invalid_email": "O email digitado não é válido",
       "field_invalid_phone": "O telefone digitado não é válido",
+      "field_max" : "Este campo só pode ter até {{number}} caracteres",
       "field_number": "Este campo precisa ser um número",
       "field_repeated_document": "Não é permitido utilizar um número de documento mais de uma vez",
       "field_required": "Este campo é obrigatório",
