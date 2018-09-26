@@ -12,14 +12,14 @@ import {
   Spacing,
 } from 'former-kit'
 
-import style from './style.css'
-import createRequiredValidation from '../../../validation/required'
-import createNumberValidation from '../../../validation/number'
 import Anticipation from './Anticipation'
 import Transfer from './Transfer'
 
-const number = t => createNumberValidation(t('pages.add_recipient.field_number'))
-const required = t => createRequiredValidation(t('pages.add_recipient.field_required'))
+import createNumberValidation from '../../../validation/number'
+import createRequiredValidation from '../../../validation/required'
+import createBetweenValidation from '../../../validation/between'
+
+import style from './style.css'
 
 class ConfigurationsStep extends Component {
   constructor (props) {
@@ -50,15 +50,11 @@ class ConfigurationsStep extends Component {
   }
 
   onFormChange (formData) {
-    this.setState({
-      formData,
-    })
+    this.setState({ formData })
   }
 
   transferHandler () {
-    const {
-      formData,
-    } = this.state
+    const { formData } = this.state
 
     this.setState({
       formData: {
@@ -75,9 +71,30 @@ class ConfigurationsStep extends Component {
       onCancel,
       t,
     } = this.props
-    const {
-      formData,
-    } = this.state
+
+    const { formData } = this.state
+
+    const anticipationProps = {
+      data: formData,
+      t,
+    }
+
+    const transferProps = {
+      data: formData,
+      t,
+      transferHandler: this.transferHandler,
+    }
+
+    const numberMessage = t('pages.add_recipient.field_number')
+    const isNumber = createNumberValidation(numberMessage)
+
+    const requiredMessage = t('pages.add_recipient.field_required')
+    const required = createRequiredValidation(requiredMessage)
+
+    const start = 1
+    const end = 100
+    const betweenMessage = t('pages.add_recipient.field_between', { start, end })
+    const between1and100 = createBetweenValidation(start, end, betweenMessage)
 
     return (
       <Form
@@ -87,13 +104,13 @@ class ConfigurationsStep extends Component {
         onSubmit={this.onFormSubmit}
         validateOn="blur"
         validation={{
-          anticipationDays: [required(t), number(t)],
-          anticipationModel: [required(t)],
-          anticipationVolumePercentage: [required(t), number(t)],
-          transferDay: [required(t), number(t)],
-          transferEnabled: [required(t)],
-          transferInterval: [required(t)],
-          transferWeekday: [required(t)],
+          anticipationDays: [required, isNumber],
+          anticipationModel: [required],
+          anticipationVolumePercentage: [required, isNumber, between1and100],
+          transferDay: [required, isNumber],
+          transferEnabled: [required],
+          transferInterval: [required],
+          transferWeekday: [required],
         }}
       >
         <CardContent>
@@ -107,16 +124,12 @@ class ConfigurationsStep extends Component {
                   {t('pages.add_recipient.choose_anticipation_model')}
                 </h3>
               </Col>
-              {Anticipation({ data: formData, t })}
+              {Anticipation(anticipationProps)}
             </Row>
             <h2 className={style.title}>
               {t('pages.add_recipient.transfer_configuration')}
             </h2>
-            {Transfer({
-              data: formData,
-              t,
-              transferHandler: this.transferHandler,
-            })}
+            {Transfer(transferProps)}
           </Grid>
         </CardContent>
         <CardActions>

@@ -479,6 +479,7 @@
       "effective_transfer_day": "Dia em que a transferência ocorrerá",
       "exit": "Sair",
       "fail_create_recipient": "Falha na criação do Recebedor",
+      "field_between": "O número precisa ser entre {{start}} e {{end}}",
       "field_invalid_cpf": "O CPF digitado não é válido",
       "field_invalid_email": "O email digitado não é válido",
       "field_invalid_phone": "O telefone digitado não é válido",

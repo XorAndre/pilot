@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+
 import {
   Col,
   FormInput,
@@ -43,11 +44,9 @@ const renderAnticipationInput = (data, t) => {
 
   if (volumePercentage(anticipationModel)) {
     return (
-      <Col tv={2} desk={2} tablet={4} palm={4}>
+      <Col tv={3} desk={3} tablet={5} palm={5}>
         <FormInput
           label={t('pages.add_recipient.anticipation_volume_percentage')}
-          max="100"
-          min="1"
           name="anticipationVolumePercentage"
           type="number"
         />
@@ -58,10 +57,9 @@ const renderAnticipationInput = (data, t) => {
 
   if (anticipationModel === 'automatic_dx') {
     return (
-      <Col tv={2} desk={2} tablet={4} palm={4}>
+      <Col tv={3} desk={3} tablet={5} palm={5}>
         <FormInput
           label={t('pages.add_recipient.anticipation_days')}
-          min="1"
           name="anticipationDays"
           type="number"
         />
@@ -72,7 +70,6 @@ const renderAnticipationInput = (data, t) => {
 
   return null
 }
-
 
 const Anticipation = ({ data, t }) => (
   <Fragment>
@@ -103,4 +100,3 @@ Anticipation.defaultProps = {
 }
 
 export default Anticipation
-
