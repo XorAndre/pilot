@@ -164,10 +164,19 @@ const renderTransferInterval = (configuration, t) => {
   const interval = configuration.transferInterval
   const monthly = configuration.transferDay
   const daily = configuration.transferWeekday
+
+  const transferTypes = {
+    daily: t('pages.add_recipient.daily'),
+    weekly: t('pages.add_recipient.weekly'),
+    monthly: t('pages.add_recipient.monthly'),
+  }
+
   const render = (interval === 'Mensal')
     ? (
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.transfer_day')}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.transfer_day')}
+        </span>
         {interval === 'Semanal' &&
         <span className={styles.info}>{daily}</span>
         }
@@ -180,13 +189,18 @@ const renderTransferInterval = (configuration, t) => {
     return (
       <Fragment>
         <Col>
-          <span className={styles.infoTitle}>{t('pages.add_recipient.automatic_transfer_interval')}</span>
-          <span className={styles.info}>{interval}</span>
+          <span className={styles.infoTitle}>
+            {t('pages.add_recipient.automatic_transfer_interval')}
+          </span>
+          <span className={styles.info}>
+            {transferTypes[interval]}
+          </span>
         </Col>
         {render}
       </Fragment>
     )
   }
+
   return null
 }
 
