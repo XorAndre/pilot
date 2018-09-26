@@ -161,9 +161,12 @@ const renderAnticipationConfig = (configuration, action, t) => {
 }
 
 const renderTransferInterval = (configuration, t) => {
-  const interval = configuration.transferInterval
-  const monthly = configuration.transferDay
-  const daily = configuration.transferWeekday
+  const {
+    transferInterval,
+    transferEnabled,
+    transferDay,
+    transferWeekday,
+  } = configuration
 
   const transferTypes = {
     daily: t('pages.add_recipient.daily'),
@@ -171,21 +174,7 @@ const renderTransferInterval = (configuration, t) => {
     monthly: t('pages.add_recipient.monthly'),
   }
 
-  const render = (interval === 'Mensal')
-    ? (
-      <Col>
-        <span className={styles.infoTitle}>
-          {t('pages.add_recipient.transfer_day')}
-        </span>
-        {interval === 'Semanal' &&
-        <span className={styles.info}>{daily}</span>
-        }
-        <span className={styles.info}>{monthly}</span>
-      </Col>
-    )
-    : null
-
-  if (configuration.transferEnabled) {
+  if (transferEnabled) {
     return (
       <Fragment>
         <Col>
@@ -193,10 +182,23 @@ const renderTransferInterval = (configuration, t) => {
             {t('pages.add_recipient.automatic_transfer_interval')}
           </span>
           <span className={styles.info}>
-            {transferTypes[interval]}
+            {transferTypes[transferInterval]}
           </span>
         </Col>
-        {render}
+        { transferInterval !== 'daily' &&
+          <Col>
+            <span className={styles.infoTitle}>
+              {t('pages.add_recipient.transfer_day')}
+            </span>
+            <span className={styles.info}>
+              {
+                (transferInterval === 'weekly')
+                  ? t(`pages.add_recipient.${transferWeekday}`)
+                  : transferDay
+              }
+            </span>
+          </Col>
+        }
       </Fragment>
     )
   }
