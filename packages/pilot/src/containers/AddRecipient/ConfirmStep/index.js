@@ -118,32 +118,47 @@ const renderBankAccount = (bankAccount, action, t) => (
   </Fragment>
 )
 
-const renderAnticipationConfig = (configuration, action, t) => (
-  <Fragment>
-    <Row>
-      <Col>
-        <span className={styles.title}>{t('pages.add_recipient.anticipation_configuration')}</span>
-      </Col>
-      <Col className={styles.editButtonCol}>
-        <EditButton
-          onClick={() => action(CONFIGURATION)}
-          t={t}
-        />
-      </Col>
-    </Row>
-    <Row>
-      <Col tv={2} desk={2} tablet={2} palm={2}>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_model')}</span>
-        <span className={styles.info}>{configuration.anticipationModel}</span>
-      </Col>
-      <Col tv={2} desk={2} tablet={2} palm={2}>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
-        <span className={styles.info}>{configuration.anticipationVolumePercentage}</span>
-      </Col>
-    </Row>
-    <hr className={styles.line} />
-  </Fragment>
-)
+const renderAnticipationConfig = (configuration, action, t) => {
+  const { anticipationModel } = configuration
+  const anticipationTranslations = {
+    manual: t('pages.add_recipient.manual_volume'),
+    automatic_volume: t('pages.add_recipient.automatic_volume'),
+    automatic_1025: t('pages.add_recipient.automatic_1025'),
+    automatic_dx: t('pages.add_recipient.automatic_dx'),
+  }
+  const anticipationType = anticipationTranslations[anticipationModel]
+
+  return (
+    <Fragment>
+      <Row>
+        <Col>
+          <span className={styles.title}>{t('pages.add_recipient.anticipation_configuration')}</span>
+        </Col>
+        <Col className={styles.editButtonCol}>
+          <EditButton
+            onClick={() => action(CONFIGURATION)}
+            t={t}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col tv={3} desk={3} tablet={3} palm={3}>
+          <span className={styles.infoTitle}>
+            {t('pages.add_recipient.anticipation_model')}
+          </span>
+          <span className={styles.info}>
+            {anticipationType}
+          </span>
+        </Col>
+        <Col tv={2} desk={2} tablet={2} palm={2}>
+          <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
+          <span className={styles.info}>{configuration.anticipationVolumePercentage}</span>
+        </Col>
+      </Row>
+      <hr className={styles.line} />
+    </Fragment>
+  )
+}
 
 const renderTransferInterval = (configuration, t) => {
   const interval = configuration.transferInterval
