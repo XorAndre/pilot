@@ -91,25 +91,25 @@ const renderBankAccount = (bankAccount, action, t) => (
       </Col>
     </Row>
     <Row>
-      <Col tv={1} desk={1} tablet={1} palm={1}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.account_name')}</span>
         <span className={styles.info}>{bankAccount.name}</span>
       </Col>
-      <Col tv={1} desk={1} tablet={1} palm={1}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.bank')}</span>
         <span className={styles.info}>
           { t(`models.bank_code.${bankAccount.bank}`) }
         </span>
       </Col>
-      <Col tv={1} desk={1} tablet={1} palm={1}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.agency')}</span>
         <span className={styles.info}>{bankAccount.agency}</span>
       </Col>
-      <Col tv={1} desk={1} tablet={1} palm={1}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.account')}</span>
         <span className={styles.info}>{bankAccount.number}</span>
       </Col>
-      <Col tv={1} desk={1} tablet={1} palm={1}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.account_type')}</span>
         <span className={styles.info}>{bankAccount.type}</span>
       </Col>
@@ -142,7 +142,7 @@ const renderAnticipationConfig = (configuration, action, t) => {
         </Col>
       </Row>
       <Row>
-        <Col tv={3} desk={3} tablet={3} palm={3}>
+        <Col>
           <span className={styles.infoTitle}>
             {t('pages.add_recipient.anticipation_model')}
           </span>
@@ -150,7 +150,7 @@ const renderAnticipationConfig = (configuration, action, t) => {
             {anticipationType}
           </span>
         </Col>
-        <Col tv={2} desk={2} tablet={2} palm={2}>
+        <Col>
           <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
           <span className={styles.info}>{configuration.anticipationVolumePercentage}</span>
         </Col>
@@ -166,7 +166,7 @@ const renderTransferInterval = (configuration, t) => {
   const daily = configuration.transferWeekday
   const render = (interval === 'Mensal')
     ? (
-      <Col tv={2} desk={2} tablet={2} palm={2}>
+      <Col>
         <span className={styles.infoTitle}>{t('pages.add_recipient.transfer_day')}</span>
         {interval === 'Semanal' &&
         <span className={styles.info}>{daily}</span>
@@ -179,7 +179,7 @@ const renderTransferInterval = (configuration, t) => {
   if (configuration.transferEnabled) {
     return (
       <Fragment>
-        <Col tv={2} desk={2} tablet={2} palm={2}>
+        <Col>
           <span className={styles.infoTitle}>{t('pages.add_recipient.automatic_transfer_interval')}</span>
           <span className={styles.info}>{interval}</span>
         </Col>
