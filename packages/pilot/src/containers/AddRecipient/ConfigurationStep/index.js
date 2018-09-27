@@ -18,6 +18,7 @@ import Transfer from './Transfer'
 import createNumberValidation from '../../../validation/number'
 import createRequiredValidation from '../../../validation/required'
 import createBetweenValidation from '../../../validation/between'
+import createLessThanValidation from '../../../validation/lessThan'
 
 import style from './style.css'
 
@@ -66,24 +67,16 @@ class ConfigurationsStep extends Component {
 
   render () {
     const {
+      canConfigureAnticipation,
+      minimumAnticipationDays,
       errors,
       onBack,
       onCancel,
       t,
     } = this.props
 
-    const { formData } = this.state
-
-    const anticipationProps = {
-      data: formData,
-      t,
-    }
-
-    const transferProps = {
-      data: formData,
-      t,
-      transferHandler: this.transferHandler,
-    }
+    const { formData: data } = this.state
+    const { transferHandler } = this
 
     const numberMessage = t('pages.add_recipient.field_number')
     const isNumber = createNumberValidation(numberMessage)
@@ -93,18 +86,25 @@ class ConfigurationsStep extends Component {
 
     const start = 1
     const end = 100
-    const betweenMessage = t('pages.add_recipient.field_between', { start, end })
-    const between1and100 = createBetweenValidation(start, end, betweenMessage)
+    const betweenMessage =
+      t('pages.add_recipient.field_between', { start, end })
+    const between1and100 =
+      createBetweenValidation(start, end, betweenMessage)
+
+    const atLeastMessage =
+      t('pages.add_recipient.field_minimum', { number: minimumAnticipationDays })
+    const atLeastMinimumDays =
+      createLessThanValidation(minimumAnticipationDays, atLeastMessage)
 
     return (
       <Form
-        data={formData}
+        data={data}
         errors={errors}
         onChange={this.onFormChange}
         onSubmit={this.onFormSubmit}
         validateOn="blur"
         validation={{
-          anticipationDays: [required, isNumber],
+          anticipationDays: [required, isNumber, atLeastMinimumDays],
           anticipationModel: [required],
           anticipationVolumePercentage: [required, isNumber, between1and100],
           transferDay: [required, isNumber],
@@ -124,12 +124,12 @@ class ConfigurationsStep extends Component {
                   {t('pages.add_recipient.choose_anticipation_model')}
                 </h3>
               </Col>
-              {Anticipation(anticipationProps)}
+              { Anticipation({ data, t, canConfigureAnticipation }) }
             </Row>
             <h2 className={style.title}>
               {t('pages.add_recipient.transfer_configuration')}
             </h2>
-            {Transfer(transferProps)}
+            { Transfer({ data, t, transferHandler }) }
           </Grid>
         </CardContent>
         <CardActions>
@@ -160,6 +160,7 @@ class ConfigurationsStep extends Component {
 }
 
 ConfigurationsStep.propTypes = {
+  canConfigureAnticipation: PropTypes.bool,
   data: PropTypes.shape({
     anticipationModel: PropTypes.string,
     anticipationVolumePercentage: PropTypes.string,
@@ -178,6 +179,7 @@ ConfigurationsStep.propTypes = {
     transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
+  minimumAnticipationDays: PropTypes.number,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
@@ -185,8 +187,10 @@ ConfigurationsStep.propTypes = {
 }
 
 ConfigurationsStep.defaultProps = {
+  canConfigureAnticipation: true,
   data: {},
   errors: {},
+  minimumAnticipationDays: 15,
 }
 
 export default ConfigurationsStep

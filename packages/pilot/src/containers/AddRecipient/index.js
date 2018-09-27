@@ -225,6 +225,7 @@ class AddRecipients extends Component {
 
     const {
       onExit,
+      options,
       t,
     } = this.props
 
@@ -233,6 +234,7 @@ class AddRecipients extends Component {
 
     const stepProps = {
       ...currentFetchData,
+      ...options,
       data: data[currentStep.id],
       onBack: this.handleBackNavigation,
       onCancel: this.openExitModal,
@@ -318,8 +320,19 @@ AddRecipients.propTypes = {
   fetchAccounts: PropTypes.func.isRequired,
   onExit: PropTypes.func.isRequired,
   onViewDetails: PropTypes.func.isRequired,
+  options: PropTypes.shape({
+    canConfigureAnticipation: PropTypes.bool,
+    minimumAnticipationDays: PropTypes.number,
+  }),
   submitRecipient: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+}
+
+AddRecipients.defaultProps = {
+  options: {
+    canConfigureAnticipation: true,
+    minimumAnticipationDays: 15,
+  },
 }
 
 export default AddRecipients
