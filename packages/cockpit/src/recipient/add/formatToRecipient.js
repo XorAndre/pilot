@@ -28,7 +28,6 @@ function formatToRecipient (data) {
   }
 
   // Transfer
-  // TODO: transfer interval quando !transferEnabled deve ser zero
   recipientData.transfer_interval = data.configuration.transferInterval
   recipientData.transfer_enabled = data.configuration.transferEnabled
 
@@ -43,6 +42,10 @@ function formatToRecipient (data) {
     const weekDay = data.configuration.transferWeekday
     const transferDay = weekDayNumberMap[weekDay]
     recipientData.transfer_day = transferDay
+  }
+
+  if (data.configuration.transferInterval === 'daily') {
+    recipientData.transfer_day = '0'
   } else {
     recipientData.transfer_day = data.configuration.transferDay
   }
