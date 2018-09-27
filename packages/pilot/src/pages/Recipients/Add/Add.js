@@ -56,7 +56,8 @@ class AddRecipientPage extends Component {
   }
 
   submitRecipient (recipient) {
-    return this.props.client.recipient.add(recipient)
+    const { client, options } = this.props
+    return client.recipient.add(recipient, options)
   }
 
   fetchAccounts (document) {

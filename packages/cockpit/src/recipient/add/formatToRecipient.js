@@ -5,7 +5,8 @@ const getLastDigit = number => number.slice(-1)
 const getOnlyNumbers = string => string.replace(/\D/g, '')
 
 // TODO: break into smaller functions
-function formatToRecipient (data) {
+function formatToRecipient (data, options = {}) {
+  const { canConfigureAnticipation } = options
   const recipientData = {}
   const { documentType } = data.identification
 
@@ -51,37 +52,46 @@ function formatToRecipient (data) {
   }
 
   // Anticipation
-
-  // TODO: "automatic_anticipation_type" só pode existir se
-  // "config_anticipation_params" nos dados da company for true
   switch (data.configuration.anticipationModel) {
     case 'automatic_dx':
       recipientData.anticipatable_volume_percentage = 100
       recipientData.automatic_anticipation_enabled = true
-      // recipientData.automatic_anticipation_type = '1025'
       recipientData.automatic_anticipation_days = range(1, 32)
       recipientData.automatic_anticipation_1025_delay =
         data.configuration.anticipationDays
+
+      if (canConfigureAnticipation) {
+        recipientData.automatic_anticipation_type = '1025'
+      }
       break
     case 'automatic_volume':
       recipientData.anticipatable_volume_percentage =
         data.configuration.anticipationVolumePercentage
       recipientData.automatic_anticipation_enabled = true
-      // recipientData.automatic_anticipation_type = 'full'
+
+      if (canConfigureAnticipation) {
+        recipientData.automatic_anticipation_type = 'full'
+      }
       break
     case 'automatic_1025':
       recipientData.anticipatable_volume_percentage = 100
       recipientData.automatic_anticipation_enabled = true
-      // recipientData.automatic_anticipation_type = '1025'
       recipientData.automatic_anticipation_days = [10, 25]
       recipientData.automatic_anticipation_1025_delay = 15
+
+      if (canConfigureAnticipation) {
+        recipientData.automatic_anticipation_type = '1025'
+      }
       break
     case 'manual':
     default:
       recipientData.anticipatable_volume_percentage =
         data.configuration.anticipationVolumePercentage
       recipientData.automatic_anticipation_enabled = false
-      // recipientData.automatic_anticipation_type = 'full'
+
+      if (canConfigureAnticipation) {
+        recipientData.automatic_anticipation_type = 'full'
+      }
       break
   }
 
