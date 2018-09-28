@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -24,56 +24,72 @@ const AddAccountContent = ({ t }) => {
   }))
 
   return (
-    <Fragment>
-      <Grid>
-        <Row>
-          <Col tv={5} desk={7} tablet={9} palm={8}>
-            <FormDropdown
-              name="bank"
-              label={t('pages.add_recipient.bank')}
-              options={bankOptions}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col tv={2} desk={3} tablet={4} palm={8}>
-            <FormInput
-              type="text"
-              label={t('pages.add_recipient.agency_no_digit')}
-              name="agency"
-              placeholder={t('pages.add_recipient.type_agency_number')}
-            />
-          </Col>
-          <Col tv={3} desk={4} tablet={5} palm={8}>
-            <FormInput
-              type="text"
-              label={t('pages.add_recipient.account_with_digit')}
-              name="number"
-              placeholder={t('pages.add_recipient.type_account_with_digit')}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col tv={2} desk={3} tablet={4} palm={8}>
-            <FormDropdown
-              name="type"
-              label={t('pages.add_recipient.account_type')}
-              options={accountTypeOptions}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col tv={5} desk={7} tablet={9} palm={8}>
-            <FormInput
-              type="text"
-              label={t('pages.add_recipient.account_name')}
-              name="name"
-              placeholder={t('pages.add_recipient.type_account_name')}
-            />
-          </Col>
-        </Row>
-      </Grid>
-    </Fragment>
+    <Grid>
+      <Row>
+        <Col tv={5} desk={7} tablet={9} palm={8}>
+          <FormDropdown
+            name="bank"
+            label={t('pages.add_recipient.bank')}
+            options={bankOptions}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col tv={3} desk={4} tablet={5} palm={8}>
+          <FormInput
+            type="text"
+            label={t('pages.add_recipient.agency')}
+            name="agency"
+            placeholder={t('pages.add_recipient.type_agency_number')}
+          />
+        </Col>
+        <Col tv={2} desk={3} tablet={4} palm={8}>
+          <FormInput
+            type="text"
+            label={t('pages.add_recipient.agency_digit')}
+            name="agency_digit"
+            placeholder={t('pages.add_recipient.type_agency_digit')}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col tv={3} desk={4} tablet={5} palm={8}>
+          <FormInput
+            type="text"
+            label={t('pages.add_recipient.account')}
+            name="number"
+            placeholder={t('pages.add_recipient.type_account')}
+          />
+        </Col>
+        <Col tv={2} desk={3} tablet={4} palm={8}>
+          <FormInput
+            type="text"
+            label={t('pages.add_recipient.account_digit')}
+            name="number_digit"
+            placeholder={t('pages.add_recipient.type_account_digit')}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col tv={4} desk={5} tablet={6} palm={8}>
+          <FormDropdown
+            name="type"
+            label={t('pages.add_recipient.account_type')}
+            options={accountTypeOptions}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col tv={5} desk={7} tablet={9} palm={8}>
+          <FormInput
+            type="text"
+            label={t('pages.add_recipient.account_name')}
+            name="name"
+            placeholder={t('pages.add_recipient.type_account_name')}
+          />
+        </Col>
+      </Row>
+    </Grid>
   )
 }
 

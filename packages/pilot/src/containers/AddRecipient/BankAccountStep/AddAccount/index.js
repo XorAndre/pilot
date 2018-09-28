@@ -89,35 +89,41 @@ const AddAccount = ({
 }
 
 export const accountProps = PropTypes.shape({
-  name: PropTypes.string,
-  number: PropTypes.string,
-  type: PropTypes.oneOf(accountTypes),
+  agency_digit: PropTypes.string,
   agency: PropTypes.string,
   bank: PropTypes.string,
+  name: PropTypes.string,
+  number_digit: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.oneOf(accountTypes),
 })
 
 export const accountErrorProps = PropTypes.shape({
-  name: PropTypes.string,
-  number: PropTypes.string,
-  type: PropTypes.string,
+  agency_digit: PropTypes.string,
   agency: PropTypes.string,
   bank: PropTypes.string,
+  name: PropTypes.string,
+  number_digit: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.string,
 })
 
 export const accountDefaultProps = {
-  name: '',
-  number: '',
-  type: 'conta_corrente',
+  agency_digit: '',
   agency: '',
   bank: '001',
+  name: '',
+  number_digit: '',
+  number: '',
+  type: 'conta_corrente',
 }
 
 AddAccount.propTypes = {
   data: accountProps,
   errors: accountErrorProps,
-  onContinue: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 
