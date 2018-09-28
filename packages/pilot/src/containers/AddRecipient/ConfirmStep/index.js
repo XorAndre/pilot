@@ -81,7 +81,9 @@ const renderBankAccount = (bankAccount, action, t) => (
   <Fragment>
     <Row>
       <Col>
-        <span className={styles.title}>{t('pages.add_recipient.bank_account')}</span>
+        <span className={styles.title}>
+          {t('pages.add_recipient.bank_account')}
+        </span>
       </Col>
       <Col className={styles.editButtonCol}>
         <EditButton
@@ -92,26 +94,44 @@ const renderBankAccount = (bankAccount, action, t) => (
     </Row>
     <Row>
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.account_name')}</span>
-        <span className={styles.info}>{bankAccount.name}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.account_name')}
+        </span>
+        <span className={styles.info}>
+          {bankAccount.name}
+        </span>
       </Col>
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.bank')}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.bank')}
+        </span>
         <span className={styles.info}>
           { t(`models.bank_code.${bankAccount.bank}`) }
         </span>
       </Col>
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.agency')}</span>
-        <span className={styles.info}>{bankAccount.agency}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.agency')}
+        </span>
+        <span className={styles.info}>
+          {bankAccount.agency}
+        </span>
       </Col>
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.account')}</span>
-        <span className={styles.info}>{bankAccount.number}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.account')}
+        </span>
+        <span className={styles.info}>
+          {bankAccount.number}
+        </span>
       </Col>
       <Col>
-        <span className={styles.infoTitle}>{t('pages.add_recipient.account_type')}</span>
-        <span className={styles.info}>{bankAccount.type}</span>
+        <span className={styles.infoTitle}>
+          {t('pages.add_recipient.account_type')}
+        </span>
+        <span className={styles.info}>
+          {t(`models.account_type.${bankAccount.type}`)}
+        </span>
       </Col>
     </Row>
     <hr className={styles.line} />
