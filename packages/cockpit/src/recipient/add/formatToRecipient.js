@@ -1,7 +1,5 @@
 import { range } from 'ramda'
 
-const removeLastDigit = number => number.slice(0, -1)
-const getLastDigit = number => number.slice(-1)
 const getOnlyNumbers = string => string.replace(/\D/g, '')
 
 // TODO: break into smaller functions
@@ -14,17 +12,20 @@ function formatToRecipient (data, options = {}) {
   if (data.bankAccount.id) {
     recipientData.bank_account_id = data.bankAccount.id
   } else {
-    const { number } = data.bankAccount
     const document = data.identification[documentType]
 
     recipientData.bank_account = {
       bank_code: data.bankAccount.bank,
       agencia: data.bankAccount.agency,
-      conta: removeLastDigit(number),
-      conta_dv: getLastDigit(number),
+      conta: data.bankAccount.number,
+      conta_dv: data.bankAccount.number_digit,
       type: data.bankAccount.type,
       document_number: getOnlyNumbers(document),
       legal_name: data.bankAccount.name,
+    }
+
+    if (data.bankAccount.agency_digit) {
+      recipientData.agencia_dv = data.bankAccount.agency_digit
     }
   }
 
