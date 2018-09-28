@@ -88,21 +88,33 @@ const AddAccount = ({
   )
 }
 
+export const accountProps = PropTypes.shape({
+  name: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.oneOf(accountTypes),
+  agency: PropTypes.string,
+  bank: PropTypes.string,
+})
+
+export const accountErrorProps = PropTypes.shape({
+  name: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.string,
+  agency: PropTypes.string,
+  bank: PropTypes.string,
+})
+
+export const accountDefaultProps = {
+  name: '',
+  number: '',
+  type: 'conta_corrente',
+  agency: '',
+  bank: '001',
+}
+
 AddAccount.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    type: PropTypes.oneOf(accountTypes),
-    agency: PropTypes.string,
-    bank: PropTypes.string,
-  }),
-  errors: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    type: PropTypes.string,
-    agency: PropTypes.string,
-    bank: PropTypes.string,
-  }),
+  data: accountProps,
+  errors: accountErrorProps,
   onContinue: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -110,13 +122,7 @@ AddAccount.propTypes = {
 }
 
 AddAccount.defaultProps = {
-  data: {
-    name: '',
-    number: '',
-    type: 'conta_corrente',
-    agency: '',
-    bank: '001',
-  },
+  data: accountDefaultProps,
   errors: {},
 }
 

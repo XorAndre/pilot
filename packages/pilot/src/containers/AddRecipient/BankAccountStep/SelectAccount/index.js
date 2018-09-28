@@ -92,17 +92,17 @@ const SelectAccount = ({
   )
 }
 
+export const userAccountProps = PropTypes.shape({
+  name: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.oneOf(accountTypes),
+  agency: PropTypes.string,
+  bank: PropTypes.string,
+  id: PropTypes.string,
+})
+
 SelectAccount.propTypes = {
-  accounts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      number: PropTypes.string,
-      type: PropTypes.oneOf(accountTypes),
-      agency: PropTypes.string,
-      bank: PropTypes.string,
-      id: PropTypes.string,
-    })
-  ),
+  accounts: PropTypes.arrayOf(userAccountProps),
   data: PropTypes.shape({
     id: PropTypes.string,
   }),

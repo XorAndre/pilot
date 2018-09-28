@@ -1,13 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Spacing } from 'former-kit'
+
 import AnticipationIcon from 'emblematic-icons/svg/Undo32.svg'
 import TransferIcon from 'emblematic-icons/svg/Transaction32.svg'
 import BackAccountIcon from './BankAccount32.svg'
+
 import AnticipationContent from './AnticipationContent'
 import TransferContent from './TransferContent'
 import BankAccountContent from './BankAccountContent'
 import RecipientItem from './RecipientItem'
+
+import {
+  userAccountProps,
+  userAccountDefaultProps,
+} from '../../AddRecipient/BankAccountStep'
+
 import {
   TRANSFER,
   ANTICIPATION,
@@ -221,14 +229,7 @@ RecipientDetailConfig.propTypes = {
     transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
-  bankAccount: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    type: PropTypes.string,
-    agency: PropTypes.string,
-    bank: PropTypes.string,
-    id: PropTypes.string,
-  }),
+  bankAccount: userAccountProps,
   accounts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -252,14 +253,7 @@ RecipientDetailConfig.defaultProps = {
     transferDay: '',
     transferWeekday: '',
   },
-  bankAccount: {
-    name: '',
-    number: '',
-    type: 'conta_corrente',
-    agency: '',
-    bank: '001',
-    id: '',
-  },
+  bankAccount: userAccountDefaultProps,
 }
 
 export default RecipientDetailConfig

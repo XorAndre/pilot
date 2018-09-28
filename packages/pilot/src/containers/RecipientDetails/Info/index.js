@@ -1,14 +1,23 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Tree from 'react-json-tree'
+
 import {
   CardContent,
   CardSection,
   CardTitle,
 } from 'former-kit'
+
 import { pick } from 'ramda'
+
 import PartnerInfo from '../../AddRecipient/ConfirmStep/PartnerInfo'
 import ReceiverInfo from '../../AddRecipient/ConfirmStep/ReceiverInfo'
+
+import {
+  accountProps,
+  accountDefaultProps,
+} from '../../AddRecipient/BankAccountStep'
+
 import styles from './style.css'
 
 const RecipientDetailInfo = ({
@@ -98,13 +107,7 @@ const partnerDefaultTypes = {
 }
 
 RecipientDetailInfo.propTypes = {
-  bankAccount: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    type: PropTypes.string,
-    agency: PropTypes.string,
-    bank: PropTypes.string,
-  }),
+  bankAccount: accountProps,
   configuration: PropTypes.shape({
     anticipationDays: PropTypes.string,
     anticipationModel: PropTypes.string,
@@ -169,13 +172,7 @@ RecipientDetailInfo.defaultProps = {
     transferDay: '',
     transferWeekday: '',
   },
-  bankAccount: {
-    name: '',
-    number: '',
-    type: 'conta_corrente',
-    agency: '',
-    bank: '001',
-  },
+  bankAccount: accountDefaultProps,
 }
 
 export default RecipientDetailInfo

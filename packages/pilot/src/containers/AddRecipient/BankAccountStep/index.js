@@ -9,9 +9,13 @@ import {
   isNil,
 } from 'ramda'
 
-import AddAccount from './AddAccount'
-import SelectAccount from './SelectAccount'
-import accountTypes from '../../../models/accountTypes'
+import AddAccount, {
+  accountProps,
+  accountDefaultProps,
+  accountErrorProps,
+} from './AddAccount'
+
+import SelectAccount, { userAccountProps } from './SelectAccount'
 import style from './style.css'
 
 const hasItems = complement(either(isEmpty, isNil))
@@ -102,25 +106,10 @@ class BankAccountStep extends Component {
   }
 }
 
-const accountShape = PropTypes.shape({
-  name: PropTypes.string,
-  number: PropTypes.string,
-  type: PropTypes.oneOf(accountTypes),
-  agency: PropTypes.string,
-  bank: PropTypes.string,
-  id: PropTypes.string,
-})
-
 BankAccountStep.propTypes = {
-  accounts: PropTypes.arrayOf(accountShape),
-  data: accountShape,
-  errors: PropTypes.shape({
-    name: PropTypes.string,
-    number: PropTypes.string,
-    type: PropTypes.string,
-    agency: PropTypes.string,
-    bank: PropTypes.string,
-  }),
+  accounts: PropTypes.arrayOf(userAccountProps),
+  data: userAccountProps,
+  errors: accountErrorProps,
   onContinue: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -129,14 +118,21 @@ BankAccountStep.propTypes = {
 
 BankAccountStep.defaultProps = {
   accounts: [],
-  data: {
-    name: '',
-    number: '',
-    type: 'conta_corrente',
-    agency: '',
-    bank: '001',
-  },
+  data: accountDefaultProps,
   errors: {},
+}
+
+const userAccountDefaultProps = {
+  ...accountDefaultProps,
+  id: '',
+}
+
+export {
+  accountProps,
+  accountDefaultProps,
+  accountErrorProps,
+  userAccountProps,
+  userAccountDefaultProps,
 }
 
 export default BankAccountStep
