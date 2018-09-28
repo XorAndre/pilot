@@ -116,7 +116,7 @@ const renderBankAccount = (bankAccount, action, t) => (
           {t('pages.add_recipient.agency')}
         </span>
         <span className={styles.info}>
-          {bankAccount.agency}
+          {bankAccount.agency + bankAccount.agency_digit}
         </span>
       </Col>
       <Col>
@@ -124,7 +124,7 @@ const renderBankAccount = (bankAccount, action, t) => (
           {t('pages.add_recipient.account')}
         </span>
         <span className={styles.info}>
-          {bankAccount.number}
+          {`${bankAccount.number}-${bankAccount.number_digit}`}
         </span>
       </Col>
       <Col>
