@@ -10,13 +10,26 @@
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: var(--spacing-tiny);
+  padding-bottom: 0;
+}
+
+.receiverTitle,
+.partnerTitle {
+  color: var(--color-light-steel-100);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: var(--title-font-weight);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: var(--spacing-tiny);
+  padding-bottom: 0;
 }
 
 .subtitle {
   color: var(--color-light-steel-100);
   font-size: 14px;
   font-weight: var(--title-font-style);
-  margin-top: 0;
+  margin: 0;
 }
 
 .label {

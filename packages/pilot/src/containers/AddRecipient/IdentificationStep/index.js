@@ -100,7 +100,7 @@ const getValidations = (data, t) => {
 
     return {
       cnpj: [required, validateCpfCnpj],
-      cnpjEmail: [validateEmailIfExists],
+      cnpjEmail: [required, validateEmailIfExists],
       cnpjName: [required],
       cnpjUrl: [validateUrlIfExists],
       cnpjPhone: [validatePhoneIfExists],
@@ -116,7 +116,7 @@ const getValidations = (data, t) => {
 
   return {
     cpf: [required, validateCpfCnpj],
-    cpfEmail: [validateEmailIfExists],
+    cpfEmail: [required, validateEmailIfExists],
     cpfName: [required],
     cpfUrl: [validateUrlIfExists],
     cpfPhone: [validatePhoneIfExists],
@@ -317,21 +317,25 @@ class IdentificationStep extends Component {
     return (
       <Fragment>
         <Row>
+          <h2 className={style.receiverTitle}>
+            {
+              (documentType === 'cpf')
+                ? t('pages.add_recipient.recipient')
+                : t('pages.add_recipient.company')
+            }
+          </h2>
+        </Row>
+        <Row>
+          <span className={style.subtitle}>
+            {
+              (documentType === 'cpf')
+                ? t('pages.add_recipient.fill_recipient_info')
+                : t('pages.add_recipient.fill_company_info')
+            }
+          </span>
+        </Row>
+        <Row>
           <Col>
-            <h2 className={style.title}>
-              {
-                (documentType === 'cpf')
-                  ? t('pages.add_recipient.recipient')
-                  : t('pages.add_recipient.company')
-              }
-            </h2>
-            <h3 className={style.subtitle}>
-              {
-                (documentType === 'cpf')
-                  ? t('pages.add_recipient.fill_recipient_info')
-                  : t('pages.add_recipient.fill_company_info')
-              }
-            </h3>
             <FormInput
               label={
                 (documentType === 'cpf')
@@ -342,8 +346,6 @@ class IdentificationStep extends Component {
               size={35}
             />
           </Col>
-        </Row>
-        <Row stretch>
           <Col>
             <FormInput
               label={t('pages.add_recipient.optional_email')}
@@ -351,6 +353,8 @@ class IdentificationStep extends Component {
               size={35}
             />
           </Col>
+        </Row>
+        <Row stretch>
           <Col>
             <FormInput
               label={t('pages.add_recipient.optional_url')}
@@ -442,12 +446,16 @@ class IdentificationStep extends Component {
         validation={getValidations(formData, t)}
       >
         <CardContent>
-          <h2 className={style.title}>
-            {t('pages.add_recipient.identification')}
-          </h2>
-          <h3 className={style.subtitle}>
-            {t('pages.add_recipient.choose_recipient_type')}
-          </h3>
+          <Row>
+            <h2 className={style.title}>
+              {t('pages.add_recipient.identification')}
+            </h2>
+          </Row>
+          <Row>
+            <h3 className={style.subtitle}>
+              {t('pages.add_recipient.choose_recipient_type')}
+            </h3>
+          </Row>
           <span className={style.label}>
             {t('pages.add_recipient.recipient_type')}
           </span>
@@ -480,14 +488,18 @@ class IdentificationStep extends Component {
               { this.renderDocumentInformationInput()}
               { documentType === 'cnpj' && (
                 <Fragment>
-                  <Row className={style.paddingTop}>
+                  <Row>
+                    <h2 className={style.partnerTitle}>
+                      {t('pages.add_recipient.partners')}
+                    </h2>
+                  </Row>
+                  <Row>
+                    <h3 className={style.subtitle}>
+                      {t('pages.add_recipient.fill_partner_info')}
+                    </h3>
+                  </Row>
+                  <Row>
                     <Col>
-                      <h2 className={style.title}>
-                        {t('pages.add_recipient.partners')}
-                      </h2>
-                      <h3 className={style.subtitle}>
-                        {t('pages.add_recipient.fill_partner_info')}
-                      </h3>
                       <FormDropdown
                         label={t('pages.add_recipient.choose_partner_amount')}
                         name="partnerNumber"

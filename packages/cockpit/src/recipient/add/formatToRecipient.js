@@ -106,19 +106,23 @@ function formatToRecipient (data, options = {}) {
     const ddd = phoneDigits.slice(0, 2)
     const number = phoneDigits.slice(2)
     const url = data.identification[`${documentType}Url`]
+    const email = data.identification[`${documentType}Email`]
 
     recipientData.register_information = {
       document_number: data.identification[documentType]
         .replace(/\D/g, ''),
-      // TODO: validar http(s) no formulário
-      site_url: `http://${url}`,
-      email: data.identification[`${documentType}Email`],
-      phone_numbers: [{
+      site_url: (url !== '')
+        ? url
+        : undefined,
+      email,
+    }
+
+    if (phone !== '') {
+      recipientData.register_information.phone_numbers = [{
         ddd,
         number,
-        // TODO: recuperar tipo de telefone do formulário
-        type: 'mobile',
-      }],
+        type: 'not defined',
+      }]
     }
 
     const name = data.identification[`${documentType}Name`]
@@ -143,7 +147,7 @@ function formatToRecipient (data, options = {}) {
           type: 'individual',
           document_number: getOnlyNumbers(partner.cpf),
           name: partner.name,
-          email: 'some@email.com',
+          email: partner.email,
         }))
 
       recipientData.register_information.managing_partners = partners
