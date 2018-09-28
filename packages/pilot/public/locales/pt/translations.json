@@ -481,6 +481,7 @@
       "fail_create_recipient": "Falha na criação do Recebedor",
       "field_between": "O número precisa ser entre {{start}} e {{end}}",
       "field_invalid_cpf": "O CPF digitado não é válido",
+      "field_invalid_digit": "Dígito verificador inválido",
       "field_invalid_email": "O email digitado não é válido",
       "field_invalid_phone": "O telefone digitado não é válido",
       "field_max" : "Este campo só pode ter até {{number}} caracteres",
