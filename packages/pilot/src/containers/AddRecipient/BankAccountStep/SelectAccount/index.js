@@ -37,8 +37,11 @@ const SelectAccount = ({
       bankName = bankCode
     }
 
+    const agency = account.agency + account.agency_digit
+    const number = `${account.number}-${account.number_digit}`
+
     return {
-      name: `${account.name} - ${bankName} - ${account.agency} - ${account.number}`,
+      name: `${account.name} - ${bankName} - ${agency} - ${number}`,
       value: account.id,
     }
   })
