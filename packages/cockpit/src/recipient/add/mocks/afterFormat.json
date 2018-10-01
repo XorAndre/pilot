@@ -1,8 +1,16 @@
 {
-  "bank_account_id": "17902429",
-  "transfer_interval": "weekly",
-  "transfer_enabled": true,
-  "transfer_day": "10",
   "anticipatable_volume_percentage": "100",
-  "automatic_anticipation_enabled": false
+  "automatic_anticipation_enabled": false,
+  "bank_account": {
+    "agencia": "888",
+    "bank_code": "036",
+    "conta": "9999",
+    "conta_dv": "6",
+    "document_number": "42687219835",
+    "legal_name": "Default",
+    "type": "conta_corrente"
+  },
+  "transfer_day": "10",
+  "transfer_enabled": true,
+  "transfer_interval": "weekly"
 }

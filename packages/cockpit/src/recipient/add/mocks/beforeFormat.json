@@ -1,4 +1,22 @@
 {
+  "bankAccount": {
+    "agency": "888",
+    "agency_digit": "",
+    "bank": "036",
+    "name": "Default",
+    "number": "9999",
+    "number_digit": "6",
+    "type": "conta_corrente"
+  },
+  "configuration": {
+    "anticipationDays": "15",
+    "anticipationModel": "manual",
+    "anticipationVolumePercentage": "100",
+    "transferDay": "10",
+    "transferEnabled": true,
+    "transferInterval": "weekly",
+    "transferWeekday": "tuesday"
+  },
   "identification": {
     "cnpj": "",
     "cnpjEmail": "",
@@ -39,22 +57,5 @@
       "phone": ""
     },
     "partnerNumber": "0"
-  },
-  "bankAccount": {
-    "name": "Bradesco",
-    "number": "99996",
-    "type": "conta_corrente",
-    "agency": "888",
-    "bank": "036",
-    "id": "17902429"
-  },
-  "configuration": {
-    "anticipationDays": "15",
-    "anticipationModel": "manual",
-    "anticipationVolumePercentage": "100",
-    "transferDay": "10",
-    "transferEnabled": true,
-    "transferInterval": "weekly",
-    "transferWeekday": "tuesday"
   }
 }
