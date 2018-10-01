@@ -57,11 +57,13 @@ const configuration = {
 }
 
 const bankAccount = {
-  name: 'Conta Bancária',
-  number: '11111-1',
-  type: 'Conta-corrente',
+  agency_digit: '',
   agency: '1111',
-  bank: '351 - Itaú Unibanco SA',
+  bank: '001',
+  name: 'Conta Bancária',
+  number_digit: '1',
+  number: '11111',
+  type: 'conta_corrente',
 }
 
 const RecipientDetailInfoExample = () => (

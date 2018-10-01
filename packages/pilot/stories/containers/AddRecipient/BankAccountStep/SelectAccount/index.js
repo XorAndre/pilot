@@ -7,20 +7,24 @@ import SelectAccount from '../../../../../src/containers/AddRecipient/BankAccoun
 
 const exampleAccounts = [
   {
-    name: 'First account',
-    number: '0001',
-    type: 'conta_corrente',
     agency: '7',
+    agency_digit: '',
     bank: '001',
     id: '1',
+    name: 'First account',
+    number: '000',
+    number_digit: '1',
+    type: 'conta_corrente',
   },
   {
-    name: 'Second account',
-    number: '0002',
-    type: 'conta_corrente',
     agency: '8',
+    agency_digit: '',
     bank: '340',
     id: '2',
+    name: 'Second account',
+    number: '000',
+    number_digit: '2',
+    type: 'conta_corrente',
   },
 ]
 

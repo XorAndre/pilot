@@ -37,12 +37,14 @@ const mockTransfer = {
 }
 
 const mockBankAccount = {
-  name: '',
-  number: '',
-  type: '',
-  agency: '',
-  bank: '',
-  id: '',
+  agency_digit: '',
+  agency: '1111',
+  bank: '001',
+  id: '1',
+  name: 'Conta Bancária',
+  number_digit: '1',
+  number: '11111',
+  type: 'conta_corrente',
 }
 
 const RecipientDetailConfigExample = () => (
