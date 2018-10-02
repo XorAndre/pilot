@@ -535,6 +535,7 @@
       "type_agency_digit": "Digite o dígito verificador da agência",
       "type_agency_number": "Digite o número da agência",
       "type_bank_name": "Digite o nome do banco",
+      "url": "URL do Site",
       "wednesday": "Quarta-feira",
       "weekly": "Semanal",
       "yes_cancel": "Sim, quero cancelar"

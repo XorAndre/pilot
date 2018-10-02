@@ -31,19 +31,26 @@ const renderReceiverNameEmailInfo = (identification, t) => {
 }
 
 const renderReceiverUrlPhoneInfo = (identification, t) => {
-  const url = t('pages.add_recipient.optional_url')
-  const phone = t('pages.add_recipient.optional_phone')
+  const url = t('pages.add_recipient.url')
+  const phone = t('pages.add_recipient.phone')
+  const urlType = identification[`${identification.documentType}Url`]
+  const phoneType = identification[`${identification.documentType}Phone`]
+
   if (identification.cnpjInformation || identification.cpfInformation) {
     return (
       <Row>
-        <Col>
-          <span className={styles.infoTitle}>{url}</span>
-          <span className={styles.info}>{identification[`${identification.documentType}Url`]}</span>
-        </Col>
-        <Col>
-          <span className={styles.infoTitle}>{phone}</span>
-          <span className={styles.info}>{identification[`${identification.documentType}Phone`]}</span>
-        </Col>
+        {urlType &&
+          <Col>
+            <span className={styles.infoTitle}>{url}</span>
+            <span className={styles.info}>{urlType}</span>
+          </Col>
+        }
+        {phoneType &&
+          <Col>
+            <span className={styles.infoTitle}>{phone}</span>
+            <span className={styles.info}>{phoneType}</span>
+          </Col>
+        }
       </Row>
     )
   }
