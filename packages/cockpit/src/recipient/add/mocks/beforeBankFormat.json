@@ -1,0 +1,15 @@
+{
+  "identification": {
+    "cnpj": "01.109.184/0001-95",
+    "documentType": "cnpj"
+  },
+  "bankAccount": {
+    "agency": "888",
+    "agency_digit": "",
+    "bank": "036",
+    "name": "Default",
+    "number": "9999",
+    "number_digit": "6",
+    "type": "conta_corrente"
+  }
+}

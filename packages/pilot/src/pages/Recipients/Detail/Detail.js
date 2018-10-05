@@ -215,9 +215,7 @@ class DetailRecipientPage extends Component {
   }
 
   render () {
-    console.log('depois do render', this.state)
     if (this.state.recipientData) {
-      console.log('formatado', this.state.recipientData)
       return (
         <DetailRecipient
           informationProps={this.state.recipientData.informationData}

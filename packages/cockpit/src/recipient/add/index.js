@@ -1,4 +1,4 @@
-import formatToRecipient from './formatToRecipient'
+import { formatToRecipient } from './recipientBuilders'
 
 const AddRecipient = client => (data, options) => {
   const recipient = formatToRecipient(data, options)

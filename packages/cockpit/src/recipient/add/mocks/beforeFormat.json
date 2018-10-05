@@ -12,7 +12,7 @@
     "anticipationDays": "15",
     "anticipationModel": "manual",
     "anticipationVolumePercentage": "100",
-    "transferDay": "10",
+    "transferDay": "5",
     "transferEnabled": true,
     "transferInterval": "weekly",
     "transferWeekday": "tuesday"

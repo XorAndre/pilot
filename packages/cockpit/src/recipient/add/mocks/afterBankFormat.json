@@ -1,0 +1,11 @@
+{
+  "bank_account": {
+    "agencia": "888",
+    "bank_code": "036",
+    "conta": "9999",
+    "conta_dv": "6",
+    "document_number": "01109184000195",
+    "legal_name": "Default",
+    "type": "conta_corrente"
+  }
+}

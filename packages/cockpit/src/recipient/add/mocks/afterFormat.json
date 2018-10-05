@@ -10,7 +10,7 @@
     "legal_name": "Default",
     "type": "conta_corrente"
   },
-  "transfer_day": "10",
+  "transfer_day": "5",
   "transfer_enabled": true,
   "transfer_interval": "weekly"
 }
