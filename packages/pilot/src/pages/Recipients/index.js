@@ -6,6 +6,7 @@ import {
 
 import search, { RecipientsSearch } from './Search'
 import RecipientsAdd from './Add'
+import RecipientDetail from './Detail'
 
 export const reducers = {
   search,
@@ -13,6 +14,10 @@ export const reducers = {
 
 const RecipientsRouter = () => (
   <Switch>
+    <Route
+      path="/recipients/detail"
+      component={RecipientDetail}
+    />
     <Route
       path="/recipients/add"
       component={RecipientsAdd}

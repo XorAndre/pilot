@@ -21,9 +21,9 @@ import {
 import styles from './style.css'
 
 const RecipientDetailInfo = ({
-  identification,
   bankAccount,
   configuration,
+  identification,
   t,
 }) => (
   <Fragment>
@@ -76,9 +76,9 @@ const RecipientDetailInfo = ({
         <CardContent>
           <Tree
             data={{
-              identification,
               bankAccount,
               configuration,
+              identification,
             }}
             theme={{
               arrowSign: () => ({ className: styles.arrow }),
@@ -142,6 +142,16 @@ RecipientDetailInfo.propTypes = {
 }
 
 RecipientDetailInfo.defaultProps = {
+  bankAccount: accountDefaultProps,
+  configuration: {
+    anticipationDays: '',
+    anticipationModel: '',
+    anticipationVolumePercentage: '',
+    transferDay: '',
+    transferEnabled: false,
+    transferInterval: '',
+    transferWeekday: '',
+  },
   identification: {
     cnpj: '',
     cnpjEmail: '',
@@ -156,23 +166,13 @@ RecipientDetailInfo.defaultProps = {
     cpfPhone: '',
     cpfUrl: '',
     documentType: '',
-    partnerNumber: '',
     partner0: partnerDefaultTypes,
     partner1: partnerDefaultTypes,
     partner2: partnerDefaultTypes,
     partner3: partnerDefaultTypes,
     partner4: partnerDefaultTypes,
+    partnerNumber: '',
   },
-  configuration: {
-    anticipationModel: '',
-    anticipationVolumePercentage: '',
-    anticipationDays: '',
-    transferEnabled: false,
-    transferInterval: '',
-    transferDay: '',
-    transferWeekday: '',
-  },
-  bankAccount: accountDefaultProps,
 }
 
 export default RecipientDetailInfo

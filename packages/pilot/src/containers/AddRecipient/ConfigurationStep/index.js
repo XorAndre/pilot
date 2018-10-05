@@ -31,7 +31,7 @@ class ConfigurationsStep extends Component {
         anticipationDays: '15',
         anticipationModel: 'manual',
         anticipationVolumePercentage: '100',
-        transferDay: '10',
+        transferDay: '5',
         transferEnabled: false,
         transferInterval: 'daily',
         transferWeekday: 'monday',

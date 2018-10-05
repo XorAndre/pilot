@@ -18,8 +18,8 @@ import { ANTICIPATION } from '../contentIds'
 const AnticipationContent = ({
   data,
   onCancel,
-  onSave,
   onChange,
+  onSave,
   t,
 }) => {
   const required = createRequiredValidation(t('requiredMessage'))
@@ -70,14 +70,14 @@ const AnticipationContent = ({
 AnticipationContent.propTypes = {
   data: PropTypes.shape({
     [ANTICIPATION]: PropTypes.shape({
+      anticipationDays: PropTypes.string,
       anticipationModel: PropTypes.string,
       anticipationVolumePercentage: PropTypes.string,
-      anticipationDays: PropTypes.string,
     }),
   }),
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

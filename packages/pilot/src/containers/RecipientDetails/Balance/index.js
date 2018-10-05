@@ -133,28 +133,36 @@ class RecipientBalance extends Component {
   getSummaryTotal () {
     const {
       disabled,
-      total,
       t,
+      total,
     } = this.props
 
     if (!isEmpty(total)) {
+      /* eslint-disable sort-keys */
       return {
         outcoming: {
           title: t('pages.balance.total.outcoming'),
           unit: t('currency'),
-          value: disabled ? 0 : total.outcoming,
+          value: disabled
+            ? 0
+            : total.outcoming,
         },
         outgoing: {
           title: t('pages.balance.total.outgoing'),
           unit: t('currency'),
-          value: disabled ? 0 : -total.outgoing,
+          value: disabled
+            ? 0
+            : -total.outgoing,
         },
         net: {
           title: t('pages.balance.total.net'),
           unit: t('currency'),
-          value: disabled ? 0 : total.net,
+          value: disabled
+            ? 0
+            : total.net,
         },
       }
+      /* eslint-enable sort-keys */
     }
 
     return null
@@ -281,7 +289,9 @@ class RecipientBalance extends Component {
             >
               <CardSection>
                 <BalanceTotalDisplay
-                  action={isNil(onWithdrawClick) ? null : withdrawalAction}
+                  action={isNil(onWithdrawClick)
+                    ? null
+                    : withdrawalAction}
                   amount={formatAmount(amount)}
                   detail={
                     <span>
@@ -302,10 +312,16 @@ class RecipientBalance extends Component {
             >
               <CardSection>
                 <BalanceTotalDisplay
-                  action={isNil(onAnticipationClick) ? null : anticipationAction}
+                  action={isNil(onAnticipationClick)
+                    ? null
+                    : anticipationAction}
                   amount={formatAmount(outcoming)}
                   detail={this.renderAnticipation()}
-                  disabled={disabled || anticipationLoading || anticipationError}
+                  disabled={(
+                    disabled ||
+                    anticipationLoading ||
+                    anticipationError
+                  )}
                   title={t('pages.balance.anticipation_title')}
                 />
               </CardSection>
@@ -320,7 +336,9 @@ class RecipientBalance extends Component {
                 <PendingRequests
                   emptyMessage={t('pages.balance.pending_requests_empty_message')}
                   loading={disabled}
-                  onCancel={isNil(onCancelRequestClick) ? null : this.handleRequestCancelClick}
+                  onCancel={isNil(onCancelRequestClick)
+                    ? null
+                    : this.handleRequestCancelClick}
                   requests={this.getPendingRequests()}
                   title={t('pages.balance.pending_requests_title')}
                 />
@@ -397,12 +415,10 @@ class RecipientBalance extends Component {
   }
 }
 
-const cashFlowShape = PropTypes.arrayOf(
-  PropTypes.shape({
-    amount: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-  })
-).isRequired
+const cashFlowShape = PropTypes.arrayOf(PropTypes.shape({
+  amount: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+})).isRequired
 
 const numberOrStringShape = PropTypes.oneOfType([
   PropTypes.string.isRequired,
@@ -411,9 +427,9 @@ const numberOrStringShape = PropTypes.oneOfType([
 
 RecipientBalance.propTypes = {
   anticipation: PropTypes.shape({
+    available: PropTypes.number,
     error: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
-    available: PropTypes.number,
   }).isRequired,
   balance: PropTypes.shape({
     amount: PropTypes.number.isRequired,
@@ -443,19 +459,17 @@ RecipientBalance.propTypes = {
     operations: PropTypes.shape({
       count: PropTypes.number.isRequired,
       offset: PropTypes.number.isRequired,
-      rows: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: numberOrStringShape,
-          net: PropTypes.number.isRequired,
-          outcoming: cashFlowShape,
-          outgoing: cashFlowShape,
-          payment_date: PropTypes.shape({
-            original: PropTypes.string,
-            actual: PropTypes.string.isRequired,
-          }),
-          type: PropTypes.string.isRequired,
-        })
-      ),
+      rows: PropTypes.arrayOf(PropTypes.shape({
+        id: numberOrStringShape,
+        net: PropTypes.number.isRequired,
+        outcoming: cashFlowShape,
+        outgoing: cashFlowShape,
+        payment_date: PropTypes.shape({
+          actual: PropTypes.string.isRequired,
+          original: PropTypes.string,
+        }),
+        type: PropTypes.string.isRequired,
+      })),
       total: PropTypes.number.isRequired,
     }),
   }).isRequired,

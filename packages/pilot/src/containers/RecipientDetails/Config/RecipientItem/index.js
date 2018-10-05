@@ -7,13 +7,13 @@ import {
 } from 'former-kit'
 
 const RecipientItem = ({
-  title,
-  subtitle,
-  icon,
-  collapsed,
-  onClick,
   children,
+  collapsed,
+  icon,
   id,
+  onClick,
+  subtitle,
+  title,
 }) => (
   <CardContent>
     <CardSection>
@@ -34,20 +34,20 @@ const RecipientItem = ({
 )
 
 RecipientItem.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.node,
-  icon: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   collapsed: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  icon: PropTypes.node.isRequired,
   id: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  subtitle: PropTypes.node,
+  title: PropTypes.string,
 }
 
 RecipientItem.defaultProps = {
-  title: '',
-  subtitle: '',
   collapsed: false,
   id: '',
+  subtitle: '',
+  title: '',
 }
 
 export default RecipientItem

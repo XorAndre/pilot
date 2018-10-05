@@ -170,7 +170,11 @@ class RecipientsSearch extends React.Component {
   requestData (query) {
     this.props.onRequestSearch({ query })
 
-    const findByQuery = ({ search, count, offset }) => {
+    const findByQuery = ({
+      count,
+      offset,
+      search,
+    }) => {
       let key = 'name'
 
       if (search) {
@@ -184,8 +188,8 @@ class RecipientsSearch extends React.Component {
       return this.props.client
         .recipients
         .find({
-          [key]: search,
           count,
+          [key]: search,
           page: offset,
         })
         .then(recipients => [recipients])
@@ -194,7 +198,11 @@ class RecipientsSearch extends React.Component {
         })
     }
 
-    const findByExternalId = ({ search, offset, count }) => {
+    const findByExternalId = ({
+      count,
+      offset,
+      search,
+    }) => {
       if (search &&
           !isRecipientId(search)) {
         return this.props.client
@@ -337,13 +345,15 @@ class RecipientsSearch extends React.Component {
     } = this.state
 
     const {
+      history: {
+        push,
+      },
       loading,
       query,
       query: {
         count,
         offset,
       },
-      history: { push },
       t,
     } = this.props
 

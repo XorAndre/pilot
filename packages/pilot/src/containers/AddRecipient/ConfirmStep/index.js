@@ -173,7 +173,9 @@ const renderAnticipationConfig = (configuration, action, t) => {
           </span>
         </Col>
         <Col>
-          <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
+          <span className={styles.infoTitle}>
+            {t('pages.add_recipient.anticipation_volume_percentage')}
+          </span>
           <span className={styles.info}>
             {configuration.anticipationVolumePercentage}
           </span>

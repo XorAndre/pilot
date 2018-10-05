@@ -18,8 +18,8 @@ import { TRANSFER } from '../contentIds'
 const TransferContent = ({
   data,
   onCancel,
-  onSave,
   onChange,
+  onSave,
   onToggle,
   t,
 }) => {
@@ -72,14 +72,14 @@ const TransferContent = ({
 
 TransferContent.propTypes = {
   data: PropTypes.shape({
+    transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }

@@ -4,8 +4,7 @@ import { Spacing } from 'former-kit'
 
 import AnticipationIcon from 'emblematic-icons/svg/Undo32.svg'
 import TransferIcon from 'emblematic-icons/svg/Transaction32.svg'
-import BackAccountIcon from './BankAccount32.svg'
-
+import BackAccountIcon from 'emblematic-icons/svg/BankAccount32.svg'
 import AnticipationContent from './AnticipationContent'
 import TransferContent from './TransferContent'
 import BankAccountContent from './BankAccountContent'
@@ -16,55 +15,89 @@ import {
   userAccountDefaultProps,
 } from '../../AddRecipient/BankAccountStep'
 
-import {
-  TRANSFER,
-  ANTICIPATION,
-  BANK_ACCOUNT,
-} from './contentIds'
-
 class RecipientDetailConfig extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      anticipation: this.props.anticipation,
+      bankAccount: this.props.bankAccount,
       expanded: {},
-      anticipation: props.anticipation,
-      transfer: props.transfer,
-      bankAccount: props.bankAccount,
+      transfer: this.props.transfer,
     }
 
     this.handleCollapse = this.handleCollapse.bind(this)
-    this.onChangeAnticipationHandler = this.onChangeAnticipationHandler.bind(this)
-    this.onChangeBankAccountHandler = this.onChangeBankAccountHandler.bind(this)
-    this.onChangeTransferHandler = this.onChangeTransferHandler.bind(this)
-    this.onChangeTransferToggle = this.onChangeTransferToggle.bind(this)
+    this.handleChangeAnticipation = this.handleChangeAnticipation.bind(this)
+    this.handleChangeBankAccount = this.handleChangeBankAccount.bind(this)
+    this.handleChangeTransfer = this.handleChangeTransfer.bind(this)
+    this.toggleChangeTransfer = this.toggleChangeTransfer.bind(this)
     this.renderAnticipationSub = this.renderAnticipationSub.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
+    this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
+    this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
   }
 
-  onChangeAnticipationHandler (anticipation) {
+  handleChangeAnticipation (anticipation) {
     this.setState({
       anticipation,
     })
   }
 
-  onChangeBankAccountHandler (bankAccount) {
+  handleChangeBankAccount (bankAccount) {
     this.setState({
       bankAccount,
     })
   }
 
-  onChangeTransferHandler (transfer) {
+  handleChangeTransfer (transfer) {
     this.setState({
       transfer,
     })
   }
 
-  onChangeTransferToggle () {
+  toggleChangeTransfer () {
     this.setState({
       transfer: {
         ...this.state.transfer,
         transferEnabled: !this.state.transfer.transferEnabled,
       },
     })
+  }
+
+  handleCancel () {
+    this.setState({
+      anticipation: this.props.anticipation,
+      bankAccount: this.props.bankAccount,
+      expanded: {},
+      transfer: this.props.transfer,
+    })
+  }
+
+  handleSaveAnticipation (data) {
+    this.props.handleSaveAnticipation(
+      data,
+      this.setState({
+        expanded: {},
+      })
+    )
+  }
+
+  handleSaveTransfer (data) {
+    this.props.handleSaveTransfer(
+      data,
+      this.setState({
+        expanded: {},
+      })
+    )
+  }
+
+  handleSaveBankAccount (data) {
+    this.props.handleSaveBankAccount(
+      data,
+      this.setState({
+        expanded: {},
+      })
+    )
   }
 
   handleCollapse (id) {
@@ -83,7 +116,7 @@ class RecipientDetailConfig extends Component {
     const model = t('pages.add_recipient.anticipation_model')
     const volume = t('pages.add_recipient.anticipation_volume')
     const anticipationManual = t('pages.add_recipient.manual_volume')
-    const anticipationVolume = t('pages.add_recipient.anticipation_volume')
+    const anticipationVolume = t('pages.add_recipient.automatic_volume')
     const anticipation1025 = t('pages.add_recipient.automatic_1025')
     const anticipationDx = t('pages.add_recipient.automatic_dx')
 
@@ -116,8 +149,8 @@ class RecipientDetailConfig extends Component {
 
   renderTransferSub () {
     const {
-      transfer,
       t,
+      transfer,
     } = this.props
     const transferSub = t('pages.add_recipient.automatic_transfer')
     if (transfer.transferEnabled === true) {
@@ -139,9 +172,10 @@ class RecipientDetailConfig extends Component {
     if (!bankAccount.id) {
       bankAccount.id = accounts[0].id
     }
+
     const selectedAccount = accounts.find(account => (
       account.id === bankAccount.id
-    ))
+    )) || {}
 
     return (
       `${selectedAccount.name} - ${selectedAccount.bank} - ${selectedAccount.agency} - ${selectedAccount.number}`
@@ -151,14 +185,12 @@ class RecipientDetailConfig extends Component {
   render () {
     const {
       accounts,
-      onCancel,
-      onSave,
       t,
     } = this.props
     const {
       anticipation,
-      transfer,
       bankAccount,
+      transfer,
     } = this.state
     return (
       <Fragment>
@@ -173,9 +205,9 @@ class RecipientDetailConfig extends Component {
           <AnticipationContent
             data={anticipation}
             t={t}
-            onCancel={onCancel}
-            onSave={ainticipationData => onSave(ainticipationData, ANTICIPATION)}
-            onChange={this.onChangeAnticipationHandler}
+            onSave={this.handleSaveAnticipation}
+            onChange={this.handleChangeAnticipation}
+            onCancel={this.handleCancel}
           />
         </RecipientItem>
         <RecipientItem
@@ -189,10 +221,10 @@ class RecipientDetailConfig extends Component {
           <TransferContent
             data={transfer}
             t={t}
-            onCancel={onCancel}
-            onSave={transferData => onSave(transferData, TRANSFER)}
-            onChange={this.onChangeTransferHandler}
-            onToggle={this.onChangeTransferToggle}
+            onCancel={this.handleCancel}
+            onSave={this.handleSaveTransfer}
+            onChange={this.handleChangeTransfer}
+            onToggle={this.toggleChangeTransfer}
           />
         </RecipientItem>
         <RecipientItem
@@ -206,9 +238,9 @@ class RecipientDetailConfig extends Component {
           <BankAccountContent
             accounts={accounts}
             data={bankAccount}
-            onChange={this.onChangeBankAccountHandler}
-            onCancel={onCancel}
-            onSave={bankAccountData => onSave(bankAccountData, BANK_ACCOUNT)}
+            onChange={this.handleChangeBankAccount}
+            onCancel={this.handleCancel}
+            onSave={this.handleSaveBankAccount}
             t={t}
           />
         </RecipientItem>
@@ -218,42 +250,41 @@ class RecipientDetailConfig extends Component {
 }
 
 RecipientDetailConfig.propTypes = {
+  accounts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  })),
   anticipation: PropTypes.shape({
+    anticipationDays: PropTypes.string,
     anticipationModel: PropTypes.string,
     anticipationVolumePercentage: PropTypes.string,
-    anticipationDays: PropTypes.string,
-  }),
-  transfer: PropTypes.shape({
-    transferEnabled: PropTypes.bool,
-    transferInterval: PropTypes.string,
-    transferDay: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   bankAccount: userAccountProps,
-  accounts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    })
-  ),
-  onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  handleSaveAnticipation: PropTypes.func.isRequired,
+  handleSaveBankAccount: PropTypes.func.isRequired,
+  handleSaveTransfer: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  transfer: PropTypes.shape({
+    transferDay: PropTypes.string,
+    transferEnabled: PropTypes.bool,
+    transferInterval: PropTypes.string,
+    transferWeekday: PropTypes.string,
+  }),
 }
 
 RecipientDetailConfig.defaultProps = {
   accounts: [],
   anticipation: {
+    anticipationDays: '',
     anticipationModel: '',
     anticipationVolumePercentage: '',
-    anticipationDays: '',
-  },
-  transfer: {
-    transferEnabled: true,
-    transferInterval: '',
-    transferDay: '',
-    transferWeekday: '',
   },
   bankAccount: userAccountDefaultProps,
+  transfer: {
+    transferDay: '',
+    transferEnabled: true,
+    transferInterval: '',
+    transferWeekday: '',
+  },
 }
 
 export default RecipientDetailConfig

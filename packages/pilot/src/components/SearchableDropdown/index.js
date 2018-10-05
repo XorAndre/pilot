@@ -7,8 +7,8 @@ import getSelectCustomStyle from './getSelectCustomStyle'
 import style from './style.css'
 
 const toSelectOption = option => ({
-  name: option.value,
   label: option.name,
+  name: option.value,
 })
 
 class SearchableDropdown extends Component {
@@ -18,9 +18,9 @@ class SearchableDropdown extends Component {
     const selectedOption = options.find(option => option.name === props.value)
 
     this.state = {
-      selectedOption,
       menuIsOpen: false,
       options,
+      selectedOption,
     }
 
     this.getNoOptionsMessage = this.getNoOptionsMessage.bind(this)

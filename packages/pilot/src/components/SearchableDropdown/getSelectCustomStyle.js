@@ -5,7 +5,10 @@ const getSelectCustomStyle = error => ({
     width: '100%',
   }),
   control: (base, state) => {
-    const { isFocused, isDisabled } = state
+    const {
+      isDisabled,
+      isFocused,
+    } = state
 
     const style = {
       ...base,
@@ -64,23 +67,27 @@ const getSelectCustomStyle = error => ({
     const { isFocused } = state
     return {
       ...base,
-      backgroundColor: (isFocused) ? '#c3f0e0' : 'transparent',
+      backgroundColor: (isFocused)
+        ? '#c3f0e0'
+        : 'transparent',
     }
   },
   singleValue: (base, state) => {
     const { isDisabled } = state
     return {
       ...base,
+      color: (isDisabled)
+        ? '#d1d5d8'
+        : '#757575',
       margin: '0',
-      color: (isDisabled) ? '#d1d5d8' : '#757575',
     }
   },
   valueContainer: base => ({
     ...base,
     padding: '0',
-    paddingTop: '6px',
     paddingBottom: '2px',
     paddingLeft: '3px',
+    paddingTop: '6px',
   }),
 })
 

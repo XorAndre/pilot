@@ -37,9 +37,9 @@ const RecipientsList = ({
   onRowClick,
   onSelectRow,
   pagination,
+  push,
   query,
   rows,
-  push,
   selectedRows,
   t,
 }) => {
@@ -179,6 +179,7 @@ RecipientsList.propTypes = {
     offset: PropTypes.number,
     total: PropTypes.number,
   }).isRequired,
+  push: PropTypes.func.isRequired,
   query: PropTypes.shape({
     search: PropTypes.string,
   }),
@@ -202,7 +203,6 @@ RecipientsList.propTypes = {
   })).isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   t: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
 }
 
 RecipientsList.defaultProps = {
