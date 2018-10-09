@@ -14,38 +14,45 @@ import {
 
 import style from '../style.css'
 
-const anticipationModelOptions = (t, canConfigureAnticipation) => {
-  if (canConfigureAnticipation) {
-    return [
-      {
-        name: t('pages.add_recipient.manual_volume'),
-        value: 'manual',
-      },
-      {
-        name: t('pages.add_recipient.automatic_volume'),
-        value: 'automatic_volume',
-      },
-      {
-        name: t('pages.add_recipient.automatic_1025'),
-        value: 'automatic_1025',
-      },
-      {
-        name: t('pages.add_recipient.automatic_dx'),
-        value: 'automatic_dx',
-      },
-    ]
+const anticipationModelOptions = ({
+  canConfigureAnticipation,
+  maximumAnticipationDays,
+  t,
+}) => {
+  const manualByVolume = {
+    name: t('pages.add_recipient.manual_volume'),
+    value: 'manual',
   }
 
-  return [
-    {
-      name: t('pages.add_recipient.manual_volume'),
-      value: 'manual',
-    },
-    {
-      name: t('pages.add_recipient.automatic_volume'),
-      value: 'automatic_volume',
-    },
+  const automaticByVolume = {
+    name: t('pages.add_recipient.automatic_volume'),
+    value: 'automatic_volume',
+  }
+
+  const automaticAtDays10And25 = {
+    name: t('pages.add_recipient.automatic_1025'),
+    value: 'automatic_1025',
+  }
+
+  const automaticDX = {
+    name: t('pages.add_recipient.automatic_dx'),
+    value: 'automatic_dx',
+  }
+
+  const availableOptions = [
+    manualByVolume,
+    automaticByVolume,
   ]
+
+  if (canConfigureAnticipation) {
+    availableOptions.push(automaticAtDays10And25)
+  }
+
+  if (canConfigureAnticipation && maximumAnticipationDays >= 31) {
+    availableOptions.push(automaticDX)
+  }
+
+  return availableOptions
 }
 
 const renderAnticipationInput = (data, t) => {
@@ -84,7 +91,12 @@ const renderAnticipationInput = (data, t) => {
   return null
 }
 
-const Anticipation = ({ data, t, canConfigureAnticipation }) => (
+const Anticipation = ({
+  canConfigureAnticipation,
+  data,
+  maximumAnticipationDays,
+  t,
+}) => (
   <Fragment>
     <Col tv={12} desk={12} tablet={12} palm={12}>
       <span className={style.label}>
@@ -92,7 +104,11 @@ const Anticipation = ({ data, t, canConfigureAnticipation }) => (
       </span>
       <RadioGroup
         name="anticipationModel"
-        options={anticipationModelOptions(t, canConfigureAnticipation)}
+        options={anticipationModelOptions({
+          canConfigureAnticipation,
+          maximumAnticipationDays,
+          t,
+        })}
       />
     </Col>
     {renderAnticipationInput(data, t)}
@@ -106,10 +122,12 @@ Anticipation.propTypes = {
     anticipationVolumePercentage: PropTypes.string,
     anticipationDays: PropTypes.string,
   }),
+  maximumAnticipationDays: PropTypes.number,
   t: PropTypes.func.isRequired,
 }
 
 Anticipation.defaultProps = {
+  maximumAnticipationDays: 31,
   canConfigureAnticipation: true,
   data: {},
 }

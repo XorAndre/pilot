@@ -68,8 +68,9 @@ class ConfigurationsStep extends Component {
   render () {
     const {
       canConfigureAnticipation,
-      minimumAnticipationDelay,
       errors,
+      maximumAnticipationDays,
+      minimumAnticipationDelay,
       onBack,
       onCancel,
       t,
@@ -124,7 +125,14 @@ class ConfigurationsStep extends Component {
                   {t('pages.add_recipient.choose_anticipation_model')}
                 </h3>
               </Col>
-              { Anticipation({ data, t, canConfigureAnticipation }) }
+              {
+                Anticipation({
+                  canConfigureAnticipation,
+                  data,
+                  maximumAnticipationDays,
+                  t,
+                })
+              }
             </Row>
             <h2 className={style.title}>
               {t('pages.add_recipient.transfer_configuration')}
@@ -179,6 +187,7 @@ ConfigurationsStep.propTypes = {
     transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
+  maximumAnticipationDays: PropTypes.number,
   minimumAnticipationDelay: PropTypes.number,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -190,6 +199,7 @@ ConfigurationsStep.defaultProps = {
   canConfigureAnticipation: true,
   data: {},
   errors: {},
+  maximumAnticipationDays: 31,
   minimumAnticipationDelay: 15,
 }
 

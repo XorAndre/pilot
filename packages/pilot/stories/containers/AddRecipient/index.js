@@ -19,7 +19,7 @@ const props = {
   onViewDetails: action('Recipient Details'),
   options: {
     canConfigureAnticipation: true,
-    maximumAnticipationDays: 32,
+    maximumAnticipationDays: 31,
     minimumAnticipationDelay: 15,
     userPermission: 'admin',
   },

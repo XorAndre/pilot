@@ -11,7 +11,11 @@ import ErrorStep from './ErrorStep'
 import ConfirmModal from '../../components/ConfirmModal'
 import Loader from '../../components/Loader'
 import style from './style.css'
-import { errorType } from '../../formatters/errorType'
+
+import {
+  errorType,
+  PERMISSION_ERROR,
+} from '../../formatters/errorType'
 
 import {
   BANK_ACCOUNT,
@@ -32,11 +36,16 @@ const initialStepStatus = [
 class AddRecipients extends Component {
   constructor (props) {
     super(props)
+    const { userPermission } = props.options
+
+    const error = (userPermission === 'read_only')
+      ? PERMISSION_ERROR
+      : null
 
     this.state = {
       currentStepNumber: 0,
       data: {},
-      error: null,
+      error,
       fetchData: {},
       isLoading: false,
       openModal: false,
