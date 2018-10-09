@@ -68,7 +68,7 @@ class ConfigurationsStep extends Component {
   render () {
     const {
       canConfigureAnticipation,
-      minimumAnticipationDays,
+      minimumAnticipationDelay,
       errors,
       onBack,
       onCancel,
@@ -92,9 +92,9 @@ class ConfigurationsStep extends Component {
       createBetweenValidation(start, end, betweenMessage)
 
     const atLeastMessage =
-      t('pages.add_recipient.field_minimum', { number: minimumAnticipationDays })
+      t('pages.add_recipient.field_minimum', { number: minimumAnticipationDelay })
     const atLeastMinimumDays =
-      createLessThanValidation(minimumAnticipationDays, atLeastMessage)
+      createLessThanValidation(minimumAnticipationDelay, atLeastMessage)
 
     return (
       <Form
@@ -179,7 +179,7 @@ ConfigurationsStep.propTypes = {
     transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
-  minimumAnticipationDays: PropTypes.number,
+  minimumAnticipationDelay: PropTypes.number,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
@@ -190,7 +190,7 @@ ConfigurationsStep.defaultProps = {
   canConfigureAnticipation: true,
   data: {},
   errors: {},
-  minimumAnticipationDays: 15,
+  minimumAnticipationDelay: 15,
 }
 
 export default ConfigurationsStep

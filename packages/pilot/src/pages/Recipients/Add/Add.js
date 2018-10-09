@@ -3,26 +3,37 @@ import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { compose } from 'ramda'
+import { compose, pathOr } from 'ramda'
 
+import { requestLogout } from '../../Account/actions'
 import AddRecipient from '../../../../src/containers/AddRecipient'
+
+const getUserPermission =
+  pathOr('admin', ['permission'])
+
+const getAnticipationParams =
+  pathOr(true, ['anticipation_config', 'config_anticipation_params'])
+
+const getMinimumDelay =
+  pathOr(15, ['anticipation_config', 'minimum_delay'])
+
+const getMaximumAnticipationDays =
+  pathOr(31, ['anticipation_config', 'max_anticipation_days'])
 
 const mapStateToProps = (state) => {
   const { account } = state
-  const { client, company } = account
-  const { anticipation_config: anticipationConfig } = company || {}
+  const { client, company, user } = account || {}
 
-  let {
-    config_anticipation_params: anticipation,
-    minimum_delay: delay,
-  } = anticipationConfig || {}
-
-  if (anticipation === undefined) anticipation = true
-  if (delay === undefined) delay = 15
+  const userPermission = getUserPermission(user)
+  const canConfigureAnticipation = getAnticipationParams(company)
+  const minimumAnticipationDelay = getMinimumDelay(company)
+  const maximumAnticipationDays = getMaximumAnticipationDays(company)
 
   const options = {
-    canConfigureAnticipation: anticipation,
-    minimumAnticipationDays: delay,
+    canConfigureAnticipation,
+    maximumAnticipationDays,
+    minimumAnticipationDelay,
+    userPermission,
   }
 
   return {
@@ -31,8 +42,12 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProp = ({
+  redirectToLoginPage: requestLogout,
+})
+
 const enhanced = compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProp),
   translate(),
   withRouter
 )
@@ -43,12 +58,17 @@ class AddRecipientPage extends Component {
 
     this.fetchAccounts = this.fetchAccounts.bind(this)
     this.onExit = this.onExit.bind(this)
+    this.onLoginAgain = this.onLoginAgain.bind(this)
     this.onViewDetails = this.onViewDetails.bind(this)
     this.submitRecipient = this.submitRecipient.bind(this)
   }
 
   onExit () {
     this.props.history.replace('/recipients')
+  }
+
+  onLoginAgain () {
+    this.props.redirectToLoginPage()
   }
 
   onViewDetails (recipientId) {
@@ -69,6 +89,7 @@ class AddRecipientPage extends Component {
       <AddRecipient
         fetchAccounts={this.fetchAccounts}
         onExit={this.onExit}
+        onLoginAgain={this.onLoginAgain}
         onViewDetails={this.onViewDetails}
         options={this.props.options}
         submitRecipient={this.submitRecipient}
@@ -87,8 +108,11 @@ AddRecipientPage.propTypes = {
   }).isRequired,
   options: PropTypes.shape({
     canConfigureAnticipation: PropTypes.bool,
-    minimumAnticipationDays: PropTypes.number,
+    maximumAnticipationDays: PropTypes.number,
+    minimumAnticipationDelay: PropTypes.number,
+    userPermission: PropTypes.string,
   }).isRequired,
+  redirectToLoginPage: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   history: PropTypes.shape({
     replace: PropTypes.func,

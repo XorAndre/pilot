@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Steps } from 'former-kit'
+
 import IdentificationStep from './IdentificationStep'
 import BankAccountStep from './BankAccountStep'
 import ConfigurationStep from './ConfigurationStep'
@@ -10,6 +11,7 @@ import ErrorStep from './ErrorStep'
 import ConfirmModal from '../../components/ConfirmModal'
 import Loader from '../../components/Loader'
 import style from './style.css'
+import { errorType } from '../../formatters/errorType'
 
 import {
   BANK_ACCOUNT,
@@ -34,7 +36,7 @@ class AddRecipients extends Component {
     this.state = {
       currentStepNumber: 0,
       data: {},
-      error: false,
+      error: null,
       fetchData: {},
       isLoading: false,
       openModal: false,
@@ -117,7 +119,7 @@ class AddRecipients extends Component {
       .catch((fetchError) => {
         this.setState({
           currentStepNumber: nextStepNumber,
-          error: fetchError,
+          error: errorType(fetchError),
           isLoading: false,
           stepsStatus,
         })
@@ -139,7 +141,7 @@ class AddRecipients extends Component {
     this.setState({
       currentStepNumber: 0,
       data: {},
-      error: false,
+      error: null,
       fetchData: {},
       stepsStatus: [...initialStepStatus],
     })
@@ -266,10 +268,21 @@ class AddRecipients extends Component {
     }
   }
 
-  renderError () {
-    const { onExit, t } = this.props
+  renderError (error) {
+    const {
+      onExit,
+      onLoginAgain,
+      t,
+    } = this.props
+
     return (
-      <ErrorStep onExit={onExit} onTryAgain={this.handleTryAgain} t={t} />
+      <ErrorStep
+        error={error}
+        onExit={onExit}
+        onLoginAgain={onLoginAgain}
+        onTryAgain={this.handleTryAgain}
+        t={t}
+      />
     )
   }
 
@@ -295,7 +308,7 @@ class AddRecipients extends Component {
         <Card className={style.marginTop}>
           {
             (error)
-              ? this.renderError()
+              ? this.renderError(error)
               : this.renderStep()
           }
         </Card>
@@ -319,10 +332,13 @@ class AddRecipients extends Component {
 AddRecipients.propTypes = {
   fetchAccounts: PropTypes.func.isRequired,
   onExit: PropTypes.func.isRequired,
+  onLoginAgain: PropTypes.func.isRequired,
   onViewDetails: PropTypes.func.isRequired,
   options: PropTypes.shape({
     canConfigureAnticipation: PropTypes.bool,
-    minimumAnticipationDays: PropTypes.number,
+    maximumAnticipationDays: PropTypes.number,
+    minimumAnticipationDelay: PropTypes.number,
+    userPermission: PropTypes.string,
   }),
   submitRecipient: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
@@ -331,7 +347,9 @@ AddRecipients.propTypes = {
 AddRecipients.defaultProps = {
   options: {
     canConfigureAnticipation: true,
-    minimumAnticipationDays: 15,
+    maximumAnticipationDays: 31,
+    minimumAnticipationDelay: 15,
+    userPermission: 'admin',
   },
 }
 

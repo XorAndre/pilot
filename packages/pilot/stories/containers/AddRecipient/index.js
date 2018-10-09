@@ -15,7 +15,14 @@ import {
 const props = {
   fetchAccounts,
   onExit: action('Exit'),
+  onLoginAgain: action('Login Again'),
   onViewDetails: action('Recipient Details'),
+  options: {
+    canConfigureAnticipation: true,
+    maximumAnticipationDays: 32,
+    minimumAnticipationDelay: 15,
+    userPermission: 'admin',
+  },
   submitRecipient,
   t: t => t,
 }
