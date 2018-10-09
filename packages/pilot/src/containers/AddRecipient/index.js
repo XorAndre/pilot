@@ -307,7 +307,7 @@ class AddRecipients extends Component {
           cancelText={t('pages.add_recipient.no_keep')}
           confirmText={t('pages.add_recipient.yes_cancel')}
         >
-          <p style={{ textAlign: 'center' }}>
+          <p className={style.centerText}>
             {t('pages.add_recipient.cancel_recipient_message')}
           </p>
         </ConfirmModal>
