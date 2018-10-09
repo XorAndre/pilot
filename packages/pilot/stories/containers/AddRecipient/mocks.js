@@ -23,7 +23,14 @@ const mockAddRecipientResponse = {
   id: 10,
 }
 
-const mockError = new Error('Server timeout')
+const mockError = {
+  response: {
+    errors: [],
+    method: 'post',
+    status: 400,
+    url: '/recipients',
+  },
+}
 
 export function fetchAccounts () {
   return new Promise((resolve) => {

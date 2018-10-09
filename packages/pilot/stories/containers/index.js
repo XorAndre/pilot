@@ -77,7 +77,15 @@ import Anticipation from './Anticipation'
 import BoletoConfigurationForm from './Settings/Boleto/Form'
 import BankAccount from './Settings/BankAccount'
 import ConclusionStep from './AddRecipient/ConclusionStep'
-import ErrorStep from './AddRecipient/ErrorStep'
+
+import {
+  ErrorStepSubmit,
+  ErrorStepLogin,
+  ErrorStepPermission,
+  ErrorStepServer,
+  ErrorStepDefault,
+} from './AddRecipient/ErrorStep'
+
 import ConfigurationStep from './AddRecipient/ConfigurationsStep'
 import RecipientBalance from './RecipientDetails/Balance'
 
@@ -128,11 +136,23 @@ storiesOf('Containers|Page containers', module)
   .add('Add Recipient submit error', () => (
     <AddRecipientSubmitError />
   ))
-  .add('Recipient Conclusion Success', () => (
+  .add('Recipient Conclusion Step', () => (
     <ConclusionStep />
   ))
-  .add('Recipient Conclusion Fail', () => (
-    <ErrorStep />
+  .add('Recipient Error Step default', () => (
+    <ErrorStepDefault />
+  ))
+  .add('Recipient Error Step submit', () => (
+    <ErrorStepSubmit />
+  ))
+  .add('Recipient Error Step login', () => (
+    <ErrorStepLogin />
+  ))
+  .add('Recipient Error Step permission', () => (
+    <ErrorStepPermission />
+  ))
+  .add('Recipient Error Step server', () => (
+    <ErrorStepServer />
   ))
   .add('Recipient Configuration Step', () => (
     <ConfigurationStep />
