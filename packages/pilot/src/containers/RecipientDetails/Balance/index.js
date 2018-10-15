@@ -94,12 +94,16 @@ class RecipientBalance extends Component {
     this.handleOperationsPageChange = this.handleOperationsPageChange.bind(this)
     this.handleRequestCancelClick = this.handleRequestCancelClick.bind(this)
     this.renderAnticipation = this.renderAnticipation.bind(this)
+    this.handlePresetChange = this.handlePresetChange.bind(this)
+
+    this.localizedPresets = datePresets(props.t)
 
     this.state = {
       dates: {
         end: props.dates.end,
         start: props.dates.start,
       },
+      showDateInputCalendar: false,
     }
   }
 
@@ -192,6 +196,12 @@ class RecipientBalance extends Component {
     } = this.props
 
     onCancelRequestClick(requests[requestIndex].id)
+  }
+
+  handlePresetChange () {
+    this.setState({
+      showDateInputCalendar: true,
+    })
   }
 
   renderAnticipation () {
@@ -357,13 +367,16 @@ class RecipientBalance extends Component {
                   <div className={style.filter}>
                     <DateInput
                       active={filterDatesEqualCurrent}
-                      value={this.state.dates}
                       disabled={disabled}
                       icon={<IconCalendar width={16} height={16} />}
                       limits={dateLimits}
                       onChange={this.handleDatesChange}
-                      presets={datePresets}
+                      onPresetChange={this.handlePresetChange}
+                      presets={this.localizedPresets}
+                      selectedPreset="last-7"
                       strings={getDateLabels(this.props.t)}
+                      showCalendar={this.state.showDateInputCalendar}
+                      dates={this.state.dates}
                     />
                     <Button
                       disabled={filterDatesEqualCurrent}

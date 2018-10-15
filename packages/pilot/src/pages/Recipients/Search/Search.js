@@ -300,9 +300,9 @@ class RecipientsSearch extends React.Component {
   }
 
   handleRowDetailsClick (row) {
+    const recipient = this.state.result.list.rows[row]
     const { history } = this.props
-    const { id } = row
-    history.push(`/recipients/${id}`)
+    history.push(`/recipients/detail/${recipient.id}`)
   }
 
   handleRowClick (index) {

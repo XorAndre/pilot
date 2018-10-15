@@ -9,7 +9,6 @@ import RecipientBalance from '../../../../src/containers/RecipientDetails/Balanc
 import Section from '../../../Section'
 import mock from '../../../../src/containers/Balance/mock.json'
 
-
 class RecipientBalanceState extends Component {
   constructor () {
     super()
@@ -49,17 +48,16 @@ class RecipientBalanceState extends Component {
     })
   }
 
-
   render () {
     const {
       anticipation,
       dates,
+      query,
       result: {
-        requests,
         balance,
+        requests,
         search,
       },
-      query,
       total,
     } = this.state
 

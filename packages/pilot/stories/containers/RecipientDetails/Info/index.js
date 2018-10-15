@@ -18,7 +18,6 @@ const identification = {
   cpfPhone: '21 99999-9999',
   cpfUrl: 'www.cpfUrl.com.br',
   documentType: 'cnpj',
-  partnerNumber: '4',
   partner0: {
     cpf: '222.222.222-22',
     name: 'Luke Skywalker',
@@ -44,25 +43,26 @@ const identification = {
     name: '',
     phone: '',
   },
+  partnerNumber: '4',
 }
 
 const configuration = {
+  anticipationDays: '',
   anticipationModel: 'Automática por volume',
   anticipationVolumePercentage: '50',
-  anticipationDays: '',
+  transferDay: '15',
   transferEnabled: true,
   transferInterval: 'Mensal',
-  transferDay: '15',
   transferWeekday: 'Terça-feira',
 }
 
 const bankAccount = {
-  agency_digit: '',
   agency: '1111',
+  agency_digit: '',
   bank: '001',
   name: 'Conta Bancária',
-  number_digit: '1',
   number: '11111',
+  number_digit: '1',
   type: 'conta_corrente',
 }
 

@@ -14,8 +14,7 @@ const options = Object.entries(bankCodes)
     value: key,
   }))
   .sort((a, b) =>
-    parseInt(a.value, 10) - parseInt(b.value, 10)
-  )
+    parseInt(a.value, 10) - parseInt(b.value, 10))
 
 const mustChooseBank = value => value === '000' && 'Você precisa escolher um banco!'
 

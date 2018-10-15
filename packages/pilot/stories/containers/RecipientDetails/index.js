@@ -7,14 +7,32 @@ import RecipientDetails from '../../../src/containers/RecipientDetails'
 import mock from '../../../src/containers/Balance/mock.json'
 
 const mockRecipient = {
-  name: 'Nome da Company LTDA',
-  id: '12345678',
-  status: 'Ativo',
   createDate: '31/12/1999',
   hash: 'rj_qwedaefsdfwerasfgwtwetwe',
+  id: '12345678',
+  name: 'Nome da Company LTDA',
+  status: 'Ativo',
 }
 
 const mockInformation = {
+  bankAccount: {
+    agency: '1111',
+    agency_digit: '',
+    bank: '001',
+    name: 'Conta Bancária',
+    number: '11111',
+    number_digit: '1',
+    type: 'conta_corrente',
+  },
+  configuration: {
+    anticipationDays: '',
+    anticipationModel: 'Automática por volume',
+    anticipationVolumePercentage: '50',
+    transferDay: '15',
+    transferEnabled: true,
+    transferInterval: 'Mensal',
+    transferWeekday: 'Terça-feira',
+  },
   identification: {
     cnpj: '11.111.111/1111-11',
     cnpjEmail: 'star@wars.com',
@@ -29,7 +47,6 @@ const mockInformation = {
     cpfPhone: '21 99999-9999',
     cpfUrl: 'www.cpfUrl.com.br',
     documentType: 'cnpj',
-    partnerNumber: '4',
     partner0: {
       cpf: '222.222.222-22',
       name: 'Luke Skywalker',
@@ -55,72 +72,61 @@ const mockInformation = {
       name: '',
       phone: '',
     },
-  },
-  configuration: {
-    anticipationModel: 'Automática por volume',
-    anticipationVolumePercentage: '50',
-    anticipationDays: '',
-    transferEnabled: true,
-    transferInterval: 'Mensal',
-    transferDay: '15',
-    transferWeekday: 'Terça-feira',
-  },
-  bankAccount: {
-    agency_digit: '',
-    agency: '1111',
-    bank: '001',
-    name: 'Conta Bancária',
-    number_digit: '1',
-    number: '11111',
-    type: 'conta_corrente',
+    partnerNumber: '4',
   },
 }
 
 const mockConfiguration = {
+  accounts: [{
+    agency: '7',
+    bank: '340',
+    id: '1',
+    name: 'First account',
+    number: '0001',
+    type: 'conta_corrente',
+  }, {
+    agency: '8',
+    bank: '340',
+    id: '2',
+    name: 'Second account',
+    number: '0002',
+    type: 'conta_corrente',
+  }],
   anticipation: {
     anticipationDays: '25',
     anticipationModel: 'automatic_volume',
     anticipationVolumePercentage: '85',
   },
+  onCancel: action('Cancel'),
+  onSave: action('Saved'),
   transfer: {
     transferDay: '5',
     transferEnabled: true,
     transferInterval: 'weekly',
     transferWeekday: 'wednesday',
   },
-  accounts: [
-    {
-      name: 'First account',
-      number: '0001',
-      type: 'conta_corrente',
-      agency: '7',
-      bank: '340',
-      id: '1',
-    },
-    {
-      name: 'Second account',
-      number: '0002',
-      type: 'conta_corrente',
-      agency: '8',
-      bank: '340',
-      id: '2',
-    },
-  ],
-  onSave: action('Saved'),
-  onCancel: action('Cancel'),
 }
 
 const mockBalance = {
+  ...mock.result,
   anticipation: {
     available: 10000,
     error: false,
     loading: false,
   },
+  currentPage: 1,
   dates: {
     end: moment().add(1, 'month'),
     start: moment(),
   },
-  ...mock.result,
+  disabled: false,
+  onAnticipationClick: action('anticipation'),
+  onCancel: action('Cancel'),
+  onCancelRequestClick: action('cancel request'),
+  onFilterClick: action('filter click'),
+  onPageChange: action('page click'),
+  onSave: action('Saved'),
+  onWithdrawClick: action('withdraw'),
   query: {
     dates: {
       end: moment().add(1, 'month'),
@@ -133,15 +139,6 @@ const mockBalance = {
     outcoming: 1000000,
     outgoing: 1000000,
   },
-  currentPage: 1,
-  disabled: false,
-  onAnticipationClick: action('anticipation'),
-  onCancel: action('Cancel'),
-  onCancelRequestClick: action('cancel request'),
-  onFilterClick: action('filter click'),
-  onPageChange: action('page click'),
-  onSave: action('Saved'),
-  onWithdrawClick: action('withdraw'),
 }
 
 const RecipientDetailsExample = () => (

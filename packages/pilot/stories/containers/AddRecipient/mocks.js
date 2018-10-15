@@ -1,20 +1,20 @@
 const mockFetchAccountsResponse = {
   accounts: [
     {
-      name: 'First account',
-      number: '0001',
-      type: 'conta_corrente',
       agency: '7',
       bank: '001',
       id: '1',
+      name: 'First account',
+      number: '0001',
+      type: 'conta_corrente',
     },
     {
-      name: 'Second account',
-      number: '0002',
-      type: 'conta_corrente',
       agency: '8',
       bank: '340',
       id: '2',
+      name: 'Second account',
+      number: '0002',
+      type: 'conta_corrente',
     },
   ],
 }

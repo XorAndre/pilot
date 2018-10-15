@@ -15,16 +15,25 @@ import mock from '../../../../src/containers/Balance/mock.json'
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
 
 const mockBalance = {
+  ...mock.result,
   anticipation: {
     available: 10000,
     error: false,
     loading: false,
   },
+  currentPage: 1,
   dates: {
     end: moment().add(1, 'month'),
     start: moment(),
   },
-  ...mock.result,
+  disabled: false,
+  onAnticipationClick: () => {},
+  onCancel: () => {},
+  onCancelRequestClick: () => {},
+  onFilterClick: () => {},
+  onPageChange: () => {},
+  onSave: () => {},
+  onWithdrawClick: () => {},
   query: {
     dates: {
       end: moment().add(1, 'month'),
@@ -37,15 +46,6 @@ const mockBalance = {
     outcoming: 1000000,
     outgoing: 1000000,
   },
-  currentPage: 1,
-  disabled: false,
-  onAnticipationClick: () => {},
-  onCancel: () => {},
-  onCancelRequestClick: () => {},
-  onFilterClick: () => {},
-  onPageChange: () => {},
-  onSave: () => {},
-  onWithdrawClick: () => {},
 }
 
 const mapStateToProps = (state) => {
@@ -75,8 +75,10 @@ class DetailRecipientPage extends Component {
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
     this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
     this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
-    this.handleSaveBankAccountWithId = this.handleSaveBankAccountWithId.bind(this)
-    this.handleSaveBankAccountWithBank = this.handleSaveBankAccountWithBank.bind(this)
+    this.handleSaveBankAccountWithId =
+      this.handleSaveBankAccountWithId.bind(this)
+    this.handleSaveBankAccountWithBank =
+      this.handleSaveBankAccountWithBank.bind(this)
   }
 
   componentDidMount () {
@@ -88,12 +90,14 @@ class DetailRecipientPage extends Component {
     const { id } = this.props.match.params
     return client.recipient.update(id, { configuration: data })
       .then(() => {
-        const updatedAnticipationConfig = assocPath([
-          'recipientData',
-          'configurationData',
-          'anticipation'],
-        data,
-        this.state
+        const updatedAnticipationConfig = assocPath(
+          [
+            'recipientData',
+            'configurationData',
+            'anticipation',
+          ],
+          data,
+          this.state
         )
         this.setState(updatedAnticipationConfig)
       })
@@ -105,12 +109,14 @@ class DetailRecipientPage extends Component {
 
     return client.recipient.update(id, { configuration: data })
       .then(() => {
-        const updatedTrasnferConfig = assocPath([
-          'recipientData',
-          'configurationData',
-          'transfer'],
-        data,
-        this.state
+        const updatedTrasnferConfig = assocPath(
+          [
+            'recipientData',
+            'configurationData',
+            'transfer',
+          ],
+          data,
+          this.state
         )
         this.setState(updatedTrasnferConfig)
       })
@@ -131,11 +137,12 @@ class DetailRecipientPage extends Component {
     const { documentType } = identification
 
     return client.recipient.createNewAccount({
+      bankAccount: getData,
       identification: {
         documentType,
-        [documentType]: this.state.recipientData.informationData.identification[documentType],
+        [documentType]: this.state.recipientData
+          .informationData.identification[documentType],
       },
-      bankAccount: getData,
     })
       .then((bankAccountCreated) => {
         const { accounts } = this.state.recipientData.configurationData
@@ -168,14 +175,16 @@ class DetailRecipientPage extends Component {
     }
     return operation
       .then((data) => {
-        this.setState(
-          pipe(
-            assocPath(['recipientData', 'configurationData', 'bankAccount'],
-              data.bank_account),
-            assocPath(['recipientData', 'companyData', 'name'],
-              data.bank_account.name)
+        this.setState(pipe(
+          assocPath(
+            ['recipientData', 'configurationData', 'bankAccount'],
+            data.bank_account
+          ),
+          assocPath(
+            ['recipientData', 'companyData', 'name'],
+            data.bank_account.name
           )
-        )
+        ))
       })
   }
 
@@ -223,8 +232,8 @@ class DetailRecipientPage extends Component {
           configurationProps={{
             ...this.state.recipientData.configurationData,
             handleSaveAnticipation: this.handleSaveAnticipation,
-            handleSaveTransfer: this.handleSaveTransfer,
             handleSaveBankAccount: this.handleSaveBankAccount,
+            handleSaveTransfer: this.handleSaveTransfer,
           }}
           recipient={this.state.recipientData.companyData}
           t={this.props.t}

@@ -6,6 +6,24 @@ import Section from '../../../Section'
 import ConfirmStep from '../../../../src/containers/AddRecipient/ConfirmStep'
 
 const mockData = {
+  bankAccount: {
+    agency: '1111',
+    agency_digit: '',
+    bank: '001',
+    name: 'Conta Bancária',
+    number: '11111',
+    number_digit: '1',
+    type: 'conta_corrente',
+  },
+  configuration: {
+    anticipationDays: '25',
+    anticipationModel: 'automatic_volume',
+    anticipationVolumePercentage: '50',
+    transferDay: '15',
+    transferEnabled: true,
+    transferInterval: 'monthly',
+    transferWeekday: 'tuesday',
+  },
   identification: {
     cnpj: '11.111.111/1111-11',
     cnpjEmail: 'pbftech@email.com',
@@ -20,7 +38,6 @@ const mockData = {
     cpfPhone: '21 99999-9999',
     cpfUrl: '',
     documentType: 'cnpj',
-    partnerNumber: '2',
     partner0: {
       cpf: '222.222.222-22',
       name: 'Paulo Barroso',
@@ -46,24 +63,7 @@ const mockData = {
       name: '',
       phone: '',
     },
-  },
-  configuration: {
-    anticipationDays: '25',
-    anticipationModel: 'automatic_volume',
-    anticipationVolumePercentage: '50',
-    transferDay: '15',
-    transferEnabled: true,
-    transferInterval: 'monthly',
-    transferWeekday: 'tuesday',
-  },
-  bankAccount: {
-    agency: '1111',
-    agency_digit: '',
-    bank: '001',
-    name: 'Conta Bancária',
-    number: '11111',
-    number_digit: '1',
-    type: 'conta_corrente',
+    partnerNumber: '2',
   },
 }
 

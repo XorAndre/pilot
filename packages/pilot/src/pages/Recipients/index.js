@@ -15,7 +15,7 @@ export const reducers = {
 const RecipientsRouter = () => (
   <Switch>
     <Route
-      path="/recipients/detail"
+      path="/recipients/detail/:id"
       component={RecipientDetail}
     />
     <Route
