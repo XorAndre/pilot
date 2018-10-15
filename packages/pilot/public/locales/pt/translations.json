@@ -1,4 +1,5 @@
 {
+  "-": "-",
   "amount": "Valor",
   "at": "às",
   "back_login_action": "Voltar para o login",
@@ -428,9 +429,13 @@
       "bank_account": "Conta Bancária",
       "cancel": "Cancelar",
       "disabled": "Desabilitada",
-      "enabled": "Habilidata",
-      "save": "Salvar",
-      "transfer": "Transferência"
+      "enabled": "Habilitada",
+      "save": "Salvar alterações",
+      "transfer": "Transferência",
+      "title": "Detalhes do Recebedor",
+      "recipient_information": "Dados cadastrais do recebedor",
+      "partner_information": "Dados cadastrais dos sócios",
+      "metadata": "Metadados"
     },
     "add_recipient": {
       "account_digit": "Dígito verificador da conta",
@@ -445,7 +450,7 @@
       "anticipation_days": "Prazo de recebimento (dias)",
       "anticipation_model": "Modelo de antecipação",
       "anticipation_volume_percentage": "Volume antecipável (%)",
-      "anticipation_volume": "Volume antecipável (%)",
+      "anticipation_volume": "Volume antecipável",
       "automatic_1025": "Automática nos Dias 10/25",
       "automatic_dx": "Automática D+X",
       "automatic_transfer_interval": "Intervalo de transferências automáticas",
@@ -695,6 +700,7 @@
     },
     "recipients": {
       "add": "Adicionar recebedor",
+      "active": "ativo",
       "anticipatable_volume_percentage": "Volume antecipado",
       "anticipation_model": "Modelo",
       "anticipation_model_of": {
@@ -716,17 +722,22 @@
         "1025": "10/25"
       },
       "automatic_anticipation_type": "Tipo de antecipação automática:",
+      "bank_account": "Conta bancária",
       "bank_account_document_number": "Número do Documento",
       "bank_account_document_type": "Tipo",
       "bank_account_id": "Id da Conta Bancária",
       "bank_account_legal_name": "Nome da Conta Bancária",
+      "configurations": "configurações",
       "count": "Número de recebedores",
       "date_created": "Data de criação",
       "date_updated": "Data da atualização",
       "details": "Detalhes",
+      "balance": "extrato",
+      "ID": "ID",
       "id": "Id do Recebedor",
       "items_per_page_plural": "{{count}} ítens por página",
       "items_per_page": "{{count}} ítem por página",
+      "more_information": "Mais informações",
       "no_results": "Não foram encontrados resultados para essa busca.",
       "show_details": "Ver Detalhes",
       "status": "Status",

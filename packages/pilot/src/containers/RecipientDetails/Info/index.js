@@ -29,7 +29,7 @@ const RecipientDetailInfo = ({
   <Fragment>
     <CardContent>
       <CardSection>
-        <CardTitle className={styles.title} title={t('dados_cadastrais_do_recebedor')} />
+        <CardTitle className={styles.title} title={t('pages.recipient_detail.recipient_information')} />
         <CardContent>
           <ReceiverInfo
             identification={pick([
@@ -54,7 +54,7 @@ const RecipientDetailInfo = ({
     </CardContent>
     <CardContent>
       <CardSection>
-        <CardTitle className={styles.title} title={t('dados_cadastrais_dos_socios')} />
+        <CardTitle className={styles.title} title={t('pages.recipient_detail.partner_information')} />
         <CardContent>
           <PartnerInfo
             identification={pick([
@@ -72,7 +72,7 @@ const RecipientDetailInfo = ({
     </CardContent>
     <CardContent>
       <CardSection>
-        <CardTitle className={styles.title} title={t('metadata')} />
+        <CardTitle className={styles.title} title={t('pages.recipient_detail.metadata')} />
         <CardContent>
           <Tree
             data={{

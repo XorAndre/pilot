@@ -79,7 +79,7 @@ export default {
   recipientsDetail: {
     hidden: true,
     path: '/recipients/detail',
-    title: 'pages.detail_recipient.title',
+    title: 'pages.recipient_detail.title',
   },
 }
 
