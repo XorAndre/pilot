@@ -74,12 +74,12 @@ const partnerDefaultTypes = {
 
 PartnerInfo.propTypes = {
   identification: PropTypes.shape({
-    partnerNumber: PropTypes.string,
     partner0: partnerPropTypes,
     partner1: partnerPropTypes,
     partner2: partnerPropTypes,
     partner3: partnerPropTypes,
     partner4: partnerPropTypes,
+    partnerNumber: PropTypes.string,
   }).isRequired,
   t: PropTypes.func.isRequired,
 
@@ -87,12 +87,12 @@ PartnerInfo.propTypes = {
 
 PartnerInfo.defaultProps = {
   identification: {
-    partnerNumber: '',
     partner0: partnerDefaultTypes,
     partner1: partnerDefaultTypes,
     partner2: partnerDefaultTypes,
     partner3: partnerDefaultTypes,
     partner4: partnerDefaultTypes,
+    partnerNumber: '',
   },
 }
 

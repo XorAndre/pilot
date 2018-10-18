@@ -1,0 +1,21 @@
+.label {
+  color: #a0a0a0;
+  display: block;
+  font-size: 12px;
+  line-height: 12px;
+  box-sizing: border-box;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.error {
+  color: #c2143e;
+  font-size: 12px;
+  margin: 0;
+  margin-top: 8px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Assistant", sans-serif;
+  letter-spacing: 0.02em;
+}

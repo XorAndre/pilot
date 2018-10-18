@@ -143,10 +143,10 @@ const renderBankAccount = (bankAccount, action, t) => (
 const renderAnticipationConfig = (configuration, action, t) => {
   const { anticipationModel } = configuration
   const anticipationTranslations = {
-    manual: t('pages.add_recipient.manual_volume'),
-    automatic_volume: t('pages.add_recipient.automatic_volume'),
     automatic_1025: t('pages.add_recipient.automatic_1025'),
     automatic_dx: t('pages.add_recipient.automatic_dx'),
+    automatic_volume: t('pages.add_recipient.automatic_volume'),
+    manual: t('pages.add_recipient.manual_volume'),
   }
   const anticipationType = anticipationTranslations[anticipationModel]
 
@@ -174,7 +174,9 @@ const renderAnticipationConfig = (configuration, action, t) => {
         </Col>
         <Col>
           <span className={styles.infoTitle}>{t('pages.add_recipient.anticipation_volume')}</span>
-          <span className={styles.info}>{configuration.anticipationVolumePercentage}</span>
+          <span className={styles.info}>
+            {configuration.anticipationVolumePercentage}
+          </span>
         </Col>
       </Row>
       <hr className={styles.line} />
@@ -184,16 +186,16 @@ const renderAnticipationConfig = (configuration, action, t) => {
 
 const renderTransferInterval = (configuration, t) => {
   const {
-    transferInterval,
-    transferEnabled,
     transferDay,
+    transferEnabled,
+    transferInterval,
     transferWeekday,
   } = configuration
 
   const transferTypes = {
     daily: t('pages.add_recipient.daily'),
-    weekly: t('pages.add_recipient.weekly'),
     monthly: t('pages.add_recipient.monthly'),
+    weekly: t('pages.add_recipient.weekly'),
   }
 
   if (transferEnabled) {
@@ -260,9 +262,9 @@ const renderTransferConfig = (configuration, action, t) => {
 const ConfirmStep = ({
   data,
   onBack,
-  onEdit,
   onCancel,
   onContinue,
+  onEdit,
   t,
 }) => (
   <Fragment>
@@ -323,6 +325,16 @@ const partnerDefaultTypes = {
 
 ConfirmStep.propTypes = {
   data: PropTypes.shape({
+    [BANK_ACCOUNT]: accountProps,
+    [CONFIGURATION]: PropTypes.shape({
+      anticipationDays: PropTypes.string,
+      anticipationModel: PropTypes.string,
+      anticipationVolumePercentage: PropTypes.string,
+      transferDay: PropTypes.string,
+      transferEnabled: PropTypes.bool,
+      transferInterval: PropTypes.string,
+      transferWeekday: PropTypes.string,
+    }).isRequired,
     [IDENTIFICATION]: PropTypes.shape({
       cnpj: PropTypes.string,
       cnpjEmail: PropTypes.string,
@@ -337,33 +349,33 @@ ConfirmStep.propTypes = {
       cpfPhone: PropTypes.string,
       cpfUrl: PropTypes.string,
       documentType: PropTypes.string,
-      partnerNumber: PropTypes.string,
       partner0: partnerPropTypes,
       partner1: partnerPropTypes,
       partner2: partnerPropTypes,
       partner3: partnerPropTypes,
       partner4: partnerPropTypes,
+      partnerNumber: PropTypes.string,
     }).isRequired,
-    [CONFIGURATION]: PropTypes.shape({
-      anticipationModel: PropTypes.string,
-      anticipationVolumePercentage: PropTypes.string,
-      anticipationDays: PropTypes.string,
-      transferEnabled: PropTypes.bool,
-      transferInterval: PropTypes.string,
-      transferDay: PropTypes.string,
-      transferWeekday: PropTypes.string,
-    }).isRequired,
-    [BANK_ACCOUNT]: accountProps,
   }),
   onBack: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 
 ConfirmStep.defaultProps = {
   data: {
+    [BANK_ACCOUNT]: accountDefaultProps,
+    [CONFIGURATION]: {
+      anticipationDays: '',
+      anticipationModel: '',
+      anticipationVolumePercentage: '',
+      transferDay: '',
+      transferEnabled: false,
+      transferInterval: '',
+      transferWeekday: '',
+    },
     [IDENTIFICATION]: {
       cnpj: '',
       cnpjEmail: '',
@@ -378,23 +390,13 @@ ConfirmStep.defaultProps = {
       cpfPhone: '',
       cpfUrl: '',
       documentType: '',
-      partnerNumber: '',
       partner0: partnerDefaultTypes,
       partner1: partnerDefaultTypes,
       partner2: partnerDefaultTypes,
       partner3: partnerDefaultTypes,
       partner4: partnerDefaultTypes,
+      partnerNumber: '',
     },
-    [CONFIGURATION]: {
-      anticipationModel: '',
-      anticipationVolumePercentage: '',
-      anticipationDays: '',
-      transferEnabled: false,
-      transferInterval: '',
-      transferDay: '',
-      transferWeekday: '',
-    },
-    [BANK_ACCOUNT]: accountDefaultProps,
   },
 }
 

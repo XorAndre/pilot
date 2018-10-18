@@ -61,8 +61,8 @@ const SelectAccount = ({
     >
       <CardContent>
         {SelectAccountContent({
-          t,
           options,
+          t,
         })}
       </CardContent>
       <div className={style.paddingTop}>
@@ -96,12 +96,12 @@ const SelectAccount = ({
 }
 
 export const userAccountProps = PropTypes.shape({
-  name: PropTypes.string,
-  number: PropTypes.string,
-  type: PropTypes.oneOf(accountTypes),
   agency: PropTypes.string,
   bank: PropTypes.string,
   id: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  type: PropTypes.oneOf(accountTypes),
 })
 
 SelectAccount.propTypes = {

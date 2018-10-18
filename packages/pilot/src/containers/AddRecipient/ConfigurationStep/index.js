@@ -88,7 +88,7 @@ class ConfigurationsStep extends Component {
     const start = 1
     const end = 100
     const betweenMessage =
-      t('pages.add_recipient.field_between', { start, end })
+      t('pages.add_recipient.field_between', { end, start })
     const between1and100 =
       createBetweenValidation(start, end, betweenMessage)
 
@@ -170,21 +170,21 @@ class ConfigurationsStep extends Component {
 ConfigurationsStep.propTypes = {
   canConfigureAnticipation: PropTypes.bool,
   data: PropTypes.shape({
+    anticipationDays: PropTypes.string,
     anticipationModel: PropTypes.string,
     anticipationVolumePercentage: PropTypes.string,
-    anticipationDays: PropTypes.string,
+    transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
   errors: PropTypes.shape({
+    anticipationDays: PropTypes.string,
     anticipationModel: PropTypes.string,
     anticipationVolumePercentage: PropTypes.string,
-    anticipationDays: PropTypes.string,
+    transferDay: PropTypes.string,
     transferEnabled: PropTypes.string,
     transferInterval: PropTypes.string,
-    transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
   maximumAnticipationDays: PropTypes.number,

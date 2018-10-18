@@ -110,9 +110,9 @@ BankAccountStep.propTypes = {
   accounts: PropTypes.arrayOf(userAccountProps),
   data: userAccountProps,
   errors: accountErrorProps,
-  onContinue: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onContinue: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

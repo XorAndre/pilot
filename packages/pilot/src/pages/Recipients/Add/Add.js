@@ -106,6 +106,9 @@ AddRecipientPage.propTypes = {
       bankAccount: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  history: PropTypes.shape({
+    replace: PropTypes.func,
+  }).isRequired,
   options: PropTypes.shape({
     canConfigureAnticipation: PropTypes.bool,
     maximumAnticipationDays: PropTypes.number,
@@ -114,9 +117,6 @@ AddRecipientPage.propTypes = {
   }).isRequired,
   redirectToLoginPage: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    replace: PropTypes.func,
-  }).isRequired,
 }
 
 export default enhanced(AddRecipientPage)

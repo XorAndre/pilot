@@ -12,7 +12,10 @@ import {
   UNKNOWN_ERROR,
 } from '../../../formatters/errorType'
 
-const ErrorMessage = ({ t, error }) => {
+const ErrorMessage = ({
+  error,
+  t,
+}) => {
   let errorMessage
 
   switch (error) {

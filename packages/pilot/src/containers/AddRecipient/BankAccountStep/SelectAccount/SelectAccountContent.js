@@ -25,12 +25,10 @@ const SelectAccount = ({
 )
 
 SelectAccount.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  options: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })),
   t: PropTypes.func.isRequired,
 }
 

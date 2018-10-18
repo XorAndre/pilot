@@ -71,7 +71,10 @@ class AddRecipients extends Component {
   }
 
   handleContinueNavigation (stepData) {
-    const { data, currentStepNumber } = this.state
+    const {
+      currentStepNumber,
+      data,
+    } = this.state
     const currentStep = this.steps[currentStepNumber]
     const nextStepNumber = currentStepNumber + 1
     const nextStep = this.steps[nextStepNumber]
@@ -100,8 +103,8 @@ class AddRecipients extends Component {
 
   handleAsyncNextStep (newData) {
     this.setState({
-      isLoading: true,
       data: newData,
+      isLoading: true,
     }, () => {
       this.fetchAndSetNextStepData()
     })
@@ -141,8 +144,8 @@ class AddRecipients extends Component {
     const stepsStatus = this.createNewStepStatus(previousStepNumber)
 
     this.setState({
-      stepsStatus,
       currentStepNumber: previousStepNumber,
+      stepsStatus,
     })
   }
 
@@ -250,9 +253,9 @@ class AddRecipients extends Component {
       onBack: this.handleBackNavigation,
       onCancel: this.openExitModal,
       onContinue: this.handleContinueNavigation,
+      onEdit: this.handleEdit,
       onExit,
       onViewDetails: this.handleViewDetails,
-      onEdit: this.handleEdit,
       t,
     }
 

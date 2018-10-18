@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { checkA11y } from '@storybook/addon-a11y'
 
+import SearchableDropdown from './SearchableDropdown'
 import BoletoRefundDetails from './BoletoRefundDetails'
 import ConfigurationCardForm from './ConfigurationCardForm'
 import CaptureDetails from './CaptureDetails'
@@ -38,6 +39,7 @@ import ConfirmModal from './ConfirmModal'
 
 storiesOf('Components|Custom components', module)
   .addDecorator(checkA11y)
+  .add('Searchable Dropdown', () => <SearchableDropdown />)
   .add('Configuration card form', () => <ConfigurationCardForm />)
   .add('Copy button', () => <CopyButton />)
   .add('Currency Input', () => <CurrencyInput />)

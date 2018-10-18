@@ -160,13 +160,13 @@ const Transfer = ({ data, t, transferHandler }) => (
 
 Transfer.propTypes = {
   data: PropTypes.shape({
+    transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferDay: PropTypes.string,
     transferWeekday: PropTypes.string,
   }),
-  transferHandler: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  transferHandler: PropTypes.func.isRequired,
 }
 
 Transfer.defaultProps = {

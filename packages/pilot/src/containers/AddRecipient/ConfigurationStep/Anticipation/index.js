@@ -118,18 +118,18 @@ const Anticipation = ({
 Anticipation.propTypes = {
   canConfigureAnticipation: PropTypes.bool,
   data: PropTypes.shape({
+    anticipationDays: PropTypes.string,
     anticipationModel: PropTypes.string,
     anticipationVolumePercentage: PropTypes.string,
-    anticipationDays: PropTypes.string,
   }),
   maximumAnticipationDays: PropTypes.number,
   t: PropTypes.func.isRequired,
 }
 
 Anticipation.defaultProps = {
-  maximumAnticipationDays: 31,
   canConfigureAnticipation: true,
   data: {},
+  maximumAnticipationDays: 31,
 }
 
 export default Anticipation

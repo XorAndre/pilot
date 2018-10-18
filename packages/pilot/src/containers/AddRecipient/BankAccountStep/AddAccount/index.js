@@ -48,12 +48,12 @@ const AddAccount = ({
       data={data}
       validateOn="blur"
       validation={{
-        agency_digit: [isAgencyDigit],
         agency: [required, isNumber, max5Characters],
+        agency_digit: [isAgencyDigit],
         bank: [required],
         name: [required, max30Characters],
-        number_digit: [required, isAccountDigit],
         number: [required, isNumber, max13Characters],
+        number_digit: [required, isAccountDigit],
         type: [required],
       }}
       onSubmit={(formData, formErrors) => {
@@ -96,32 +96,32 @@ const AddAccount = ({
 }
 
 export const accountProps = PropTypes.shape({
-  agency_digit: PropTypes.string,
   agency: PropTypes.string,
+  agency_digit: PropTypes.string,
   bank: PropTypes.string,
   name: PropTypes.string,
-  number_digit: PropTypes.string,
   number: PropTypes.string,
+  number_digit: PropTypes.string,
   type: PropTypes.oneOf(accountTypes),
 })
 
 export const accountErrorProps = PropTypes.shape({
-  agency_digit: PropTypes.string,
   agency: PropTypes.string,
+  agency_digit: PropTypes.string,
   bank: PropTypes.string,
   name: PropTypes.string,
-  number_digit: PropTypes.string,
   number: PropTypes.string,
+  number_digit: PropTypes.string,
   type: PropTypes.string,
 })
 
 export const accountDefaultProps = {
-  agency_digit: '',
   agency: '',
+  agency_digit: '',
   bank: '001',
   name: '',
-  number_digit: '',
   number: '',
+  number_digit: '',
   type: 'conta_corrente',
 }
 

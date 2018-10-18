@@ -90,20 +90,19 @@ const getValidations = (data, t) => {
     return validateUrl(url)
   }
 
-
   if (data.documentType === 'cnpj') {
     const partnerValidations = {
       cpf: [required, validateCpfCnpj],
-      name: [required],
       email: [required, validateEmailIfExists],
+      name: [required],
     }
 
     return {
       cnpj: [required, validateCpfCnpj],
       cnpjEmail: [required, validateEmailIfExists],
       cnpjName: [required],
-      cnpjUrl: [validateUrlIfExists],
       cnpjPhone: [validatePhoneIfExists],
+      cnpjUrl: [validateUrlIfExists],
       documentInformation: [required, validatePhone, validateEmailIfExists],
       documentType: [],
       partner0: partnerValidations,
@@ -118,8 +117,8 @@ const getValidations = (data, t) => {
     cpf: [required, validateCpfCnpj],
     cpfEmail: [required, validateEmailIfExists],
     cpfName: [required],
-    cpfUrl: [validateUrlIfExists],
     cpfPhone: [validatePhoneIfExists],
+    cpfUrl: [validateUrlIfExists],
   }
 }
 
@@ -430,10 +429,10 @@ class IdentificationStep extends Component {
 
     const {
       formData,
-      formErrors,
       formData: {
         documentType,
       },
+      formErrors,
     } = this.state
 
     return (
