@@ -39,10 +39,15 @@ class SearchableDropdown extends Component {
 
   // NOTE: react-select does not send the original onChange event
   onChange (selectedOption) {
-    if (this.state.selectedOption === selectedOption) return
+    if (this.state.selectedOption === selectedOption) {
+      return
+    }
+
     this.setState({ selectedOption })
-    const { onChange } = this.props
-    if (onChange) onChange(selectedOption.name)
+
+    if (this.props.onChange) {
+      this.props.onChange(selectedOption.name)
+    }
   }
 
   getNoOptionsMessage () {
@@ -63,10 +68,7 @@ class SearchableDropdown extends Component {
       ...props
     } = this.props
 
-    const value = (menuIsOpen)
-      ? null
-      : selectedOption
-
+    const value = !menuIsOpen && selectedOption
     const customStyle = getSelectCustomStyle(error)
 
     return (

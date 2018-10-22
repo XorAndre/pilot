@@ -9,6 +9,7 @@ import {
   Row,
 } from 'former-kit'
 
+import SearchableDropdown from '../../../../components/SearchableDropdown/'
 import accountTypes from '../../../../models/accountTypes'
 import bankCodes from '../../../../models/banks'
 
@@ -27,9 +28,11 @@ const AddAccountContent = ({ t }) => {
     <Grid>
       <Row>
         <Col tv={5} desk={7} tablet={9} palm={8}>
-          <FormDropdown
+          <SearchableDropdown
             name="bank"
+            placeholder={t('pages.add_recipient.type_bank_name')}
             label={t('pages.add_recipient.bank')}
+            noOptionsMessage={t('pages.add_recipient.no_results')}
             options={bankOptions}
           />
         </Col>
