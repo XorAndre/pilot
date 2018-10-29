@@ -17,7 +17,6 @@ import {
   isNil,
   juxt,
   mergeAll,
-  of,
   path,
   pipe,
   replace,
@@ -87,7 +86,7 @@ const isRecipientId = (recipientText) => {
   return recipientPattern.test(recipientText)
 }
 
-const isBanckAccount = (bankAccount) => {
+const isBankAccount = (bankAccount) => {
   const bankNumber = Number.parseInt(bankAccount, 10)
   return Number.isInteger(bankNumber)
 }
@@ -170,26 +169,54 @@ class RecipientsSearch extends React.Component {
 
   requestData (query) {
     this.props.onRequestSearch({ query })
-    const searchQuery = {}
-    let key = 'name'
 
-    if (query && query.search) {
-      if (isRecipientId(query.search)) {
-        key = 'id'
-      } else if (isBanckAccount(query.search)) {
-        key = 'bank_account_id'
+    const findByQuery = ({ search, count, offset }) => {
+      let key = 'name'
+
+      if (search) {
+        if (isRecipientId(search)) {
+          key = 'id'
+        } else if (isBankAccount(search)) {
+          key = 'bank_account_id'
+        }
       }
 
-      searchQuery[key] = query.search
+      return this.props.client
+        .recipients
+        .find({
+          [key]: search,
+          count,
+          page: offset,
+        })
+        .then(recipients => [recipients])
+        .catch((error) => {
+          this.props.onRequestSearchFail(error)
+        })
     }
 
-    searchQuery.count = query.count
-    searchQuery.page = query.offset
+    const findByExternalId = ({ search, offset, count }) => {
+      if (search &&
+          !isRecipientId(search)) {
+        return this.props.client
+          .recipients
+          .find({
+            count,
+            external_id: search,
+            page: offset,
+          })
+          .catch((error) => {
+            this.props.onRequestSearchFail(error)
+          })
+      }
 
-    return this.props.client
-      .recipients
-      .find(searchQuery)
-      .then(res => flatten(of(res)))
+      return Promise.resolve([])
+    }
+
+    return Promise.all([
+      findByExternalId(query),
+      findByQuery(query),
+    ])
+      .then(res => flatten(res))
       .then((res) => {
         const result = {
           list: {
