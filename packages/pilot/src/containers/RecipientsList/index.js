@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import AddIcon from 'emblematic-icons/svg/Add32.svg'
 import IconInfo from 'emblematic-icons/svg/Info32.svg'
 import Search32 from 'emblematic-icons/svg/Search32.svg'
 
 import {
   Alert,
+  Button,
   Card,
   CardActions,
   CardContent,
@@ -37,6 +39,7 @@ const RecipientsList = ({
   pagination,
   query,
   rows,
+  push,
   selectedRows,
   t,
 }) => {
@@ -97,6 +100,16 @@ const RecipientsList = ({
                 }
                 subtitle={
                   <div>
+                    <div className={style.marginRight}>
+                      <Button
+                        type="button"
+                        icon={<AddIcon width={16} height={16} />}
+                        fill="outline"
+                        onClick={() => { push('/recipients/add') }}
+                      >
+                        {t('pages.recipients.add')}
+                      </Button>
+                    </div>
                     <Pagination
                       currentPage={pagination.offset}
                       totalPages={pagination.total}
@@ -189,6 +202,7 @@ RecipientsList.propTypes = {
   })).isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   t: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 }
 
 RecipientsList.defaultProps = {

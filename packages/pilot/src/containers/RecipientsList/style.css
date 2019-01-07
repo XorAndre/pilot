@@ -8,3 +8,7 @@
 .marginBottom {
   margin-bottom: var(--spacing-medium);
 }
+
+.marginRight {
+  margin-right: var(--spacing-medium);
+}

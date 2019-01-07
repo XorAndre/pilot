@@ -316,6 +316,7 @@ class RecipientsSearch extends React.Component {
         count,
         offset,
       },
+      history: { push },
       t,
     } = this.props
 
@@ -336,8 +337,8 @@ class RecipientsSearch extends React.Component {
         expandedRows={expandedRows}
         filterOptions={[]}
         loading={loading}
+        push={push}
         onChangeViewMode={this.handleViewModeChange}
-        onChartsCollapse={this.handleChartsCollapse}
         onDetailsClick={this.handleRowDetailsClick}
         onExpandRow={this.handleExpandRow}
         onFilterChange={this.handleFilterChange}

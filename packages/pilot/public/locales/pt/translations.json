@@ -694,6 +694,7 @@
       "step_title_result": "Conclusão"
     },
     "recipients": {
+      "add": "Adicionar recebedor",
       "anticipatable_volume_percentage": "Volume antecipado",
       "anticipation_model": "Modelo",
       "anticipation_model_of": {
