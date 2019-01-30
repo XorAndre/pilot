@@ -55,7 +55,9 @@ const RecipientDetailConfigExample = () => (
         bankAccount={mockBankAccount}
         anticipation={mockAnticipation}
         transfer={mockTransfer}
-        onSave={action('Saved')}
+        onSaveAnticipation={action('Saved Anticipation Data')}
+        onSaveTransfer={action('Saved Transfer Data')}
+        onSaveBankAccount={action('Saved Bank Account Data')}
         onCancel={action('Cancel')}
         t={translate => translate}
       />
