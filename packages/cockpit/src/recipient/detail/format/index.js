@@ -105,14 +105,12 @@ function formatAntecipationAndTransferConfiguration (data) {
     transferEnabled: data.transfer_enabled,
     transferInterval: data.transfer_interval,
     transferDay: data.transfer_day.toString(),
-    transferWeekday: '',
   }
 
   const transfer = {
     transferDay: data.transfer_day.toString(),
     transferEnabled: data.transfer_enabled,
     transferInterval: data.transfer_interval,
-    transferWeekday: '',
   }
 
   if (data.transfer_interval === 'daily') {

@@ -33,23 +33,23 @@ const transferWeekdayOptions = t => (
   [
     {
       name: t('pages.add_recipient.monday'),
-      value: 'monday',
+      value: '1',
     },
     {
       name: t('pages.add_recipient.tuesday'),
-      value: 'tuesday',
+      value: '2',
     },
     {
       name: t('pages.add_recipient.wednesday'),
-      value: 'wednesday',
+      value: '3',
     },
     {
       name: t('pages.add_recipient.thursday'),
-      value: 'thursday',
+      value: '4',
     },
     {
       name: t('pages.add_recipient.friday'),
-      value: 'friday',
+      value: '5',
     },
   ]
 )
@@ -59,7 +59,6 @@ const renderTransferInput = (data, t) => {
     transferDay,
     transferEnabled,
     transferInterval,
-    transferWeekday,
   } = data
 
   const transferDayOptions = range(1, 32)
@@ -118,9 +117,9 @@ const renderTransferInput = (data, t) => {
       </span>
       <FormDropdown
         disabled={shouldDisable}
-        name="transferWeekday"
+        name="transferDay"
         options={transferWeekdayOptions(t)}
-        key={transferWeekday}
+        key={transferDay}
       />
       <div className={style.heightMedium} />
     </Fragment>

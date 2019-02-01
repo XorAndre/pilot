@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Form from 'react-vanilla-form'
+
 import {
   Button,
   CardActions,
@@ -9,6 +10,7 @@ import {
   Row,
   Spacing,
 } from 'former-kit'
+
 import Transfer from '../../../../../src/containers/AddRecipient/ConfigurationStep/Transfer'
 import createNumberValidation from '../../../../validation/number'
 import createRequiredValidation from '../../../../validation/required'
