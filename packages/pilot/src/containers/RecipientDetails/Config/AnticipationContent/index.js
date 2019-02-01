@@ -22,8 +22,8 @@ const AnticipationContent = ({
   onSave,
   t,
 }) => {
-  const required = createRequiredValidation(t('requiredMessage'))
-  const number = createNumberValidation(t('numberMessage'))
+  const required = createRequiredValidation(t('pages.recipient_detail.required'))
+  const number = createNumberValidation(t('pages.recipient_detail.number'))
   return (
     <Form
       data={data}

@@ -435,7 +435,9 @@
       "title": "Detalhes do Recebedor",
       "recipient_information": "Dados cadastrais do recebedor",
       "partner_information": "Dados cadastrais dos sócios",
-      "metadata": "Metadados"
+      "metadata": "Metadados",
+      "required": "Este campo é obrigatório",
+      "number": "Este campo precisa ser um número"
     },
     "add_recipient": {
       "account_digit": "Dígito verificador da conta",
