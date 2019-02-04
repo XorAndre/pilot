@@ -97,6 +97,8 @@ function formatAntecipationAndTransferConfiguration (data) {
     }
   }
 
+  const transferDay = (data.transfer_day) ? data.transfer_day.toString() : ''
+
   const configuration = {
     anticipationModel: data.automatic_anticipation_type,
     anticipationVolumePercentage: data
@@ -104,11 +106,11 @@ function formatAntecipationAndTransferConfiguration (data) {
     anticipationDays: data.automatic_anticipation_days,
     transferEnabled: data.transfer_enabled,
     transferInterval: data.transfer_interval,
-    transferDay: data.transfer_day.toString(),
+    transferDay,
   }
 
   const transfer = {
-    transferDay: data.transfer_day.toString(),
+    transferDay,
     transferEnabled: data.transfer_enabled,
     transferInterval: data.transfer_interval,
   }
@@ -118,8 +120,8 @@ function formatAntecipationAndTransferConfiguration (data) {
     transfer.transferDay = '0'
   }
   if (data.transfer_interval === 'weekly') {
-    configuration.transferDay = data.transfer_day.toString()
-    transfer.transferDay = data.transfer_day.toString()
+    configuration.transferDay = transferDay
+    transfer.transferDay = transferDay
   }
 
   const informationData = {
