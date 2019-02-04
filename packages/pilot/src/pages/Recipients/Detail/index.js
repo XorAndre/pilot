@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import withRouter from 'react-router-dom/withRouter'
 import { connect } from 'react-redux'
+
 import {
-  compose,
   assocPath,
+  compose,
   pipe,
 } from 'ramda'
 
@@ -48,13 +49,10 @@ const mockBalance = {
   },
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state = {}) => {
   const { account } = state
-  const { client } = account
-
-  return {
-    client,
-  }
+  const { client } = account || {}
+  return { client }
 }
 
 const enhanced = compose(
@@ -66,16 +64,20 @@ const enhanced = compose(
 class DetailRecipientPage extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      error: false,
+      loading: true,
+      recipientData: {},
+    }
 
-    this.requestClient = this.requestClient.bind(this)
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
-    this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
     this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
-    this.handleSaveBankAccountWithId =
-      this.handleSaveBankAccountWithId.bind(this)
     this.handleSaveBankAccountWithBank =
       this.handleSaveBankAccountWithBank.bind(this)
+    this.handleSaveBankAccountWithId =
+      this.handleSaveBankAccountWithId.bind(this)
+    this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
+    this.requestClient = this.requestClient.bind(this)
   }
 
   componentDidMount () {
@@ -192,45 +194,57 @@ class DetailRecipientPage extends Component {
     const { client } = this.props
     const { id } = this.props.match.params
 
-    client.recipient.detail(id)
+    return client.recipient.detail(id)
       .then((recipient) => {
-        const recipientIdentification = recipient.informationData.identification
+        const { identification } = recipient.informationData
+        const accountsPromise = client.recipient.bankAccount(identification)
 
-        return Promise.all([
-          recipient,
-          client.recipient.bankAccount(recipientIdentification),
-        ])
+        return Promise.all([recipient, accountsPromise])
       })
-      .then(([recipient, { accounts }]) => {
-        const recipientWithAccounts = assocPath(
-          ['configurationData', 'accounts'],
-          accounts,
-          recipient
-        )
+      .then(([recipient, bankAccounts]) => {
+        const { accounts } = bankAccounts
+        const accountsPath = ['configurationData', 'accounts']
+        const addAccounts = assocPath(accountsPath, accounts)
+        const recipientWithAccounts = addAccounts(recipient)
+
         this.setState({
+          loading: false,
           recipientData: recipientWithAccounts,
         })
       })
   }
 
   render () {
-    if (this.state.recipientData) {
-      return (
-        <DetailRecipient
-          informationProps={this.state.recipientData.informationData}
-          balanceProps={mockBalance}
-          configurationProps={{
-            ...this.state.recipientData.configurationData,
-            handleSaveAnticipation: this.handleSaveAnticipation,
-            handleSaveBankAccount: this.handleSaveBankAccount,
-            handleSaveTransfer: this.handleSaveTransfer,
-          }}
-          recipient={this.state.recipientData.companyData}
-          t={this.props.t}
-        />
-      )
-    }
-    return null
+    const {
+      error,
+      loading,
+      recipientData,
+    } = this.state
+
+    if (loading || error) return null
+
+    const {
+      companyData,
+      configurationData,
+      informationData,
+    } = recipientData
+
+    const { t } = this.props
+
+    return (
+      <DetailRecipient
+        informationProps={informationData}
+        balanceProps={mockBalance}
+        configurationProps={{
+          ...configurationData,
+          handleSaveAnticipation: this.handleSaveAnticipation,
+          handleSaveBankAccount: this.handleSaveBankAccount,
+          handleSaveTransfer: this.handleSaveTransfer,
+        }}
+        recipient={companyData}
+        t={t}
+      />
+    )
   }
 }
 
