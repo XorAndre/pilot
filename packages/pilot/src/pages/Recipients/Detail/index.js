@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import withRouter from 'react-router-dom/withRouter'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import {
   assocPath,
@@ -10,32 +11,16 @@ import {
   pipe,
 } from 'ramda'
 
-import moment from 'moment'
-import mock from '../../../../src/containers/Balance/mock.json'
-
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
 
 const mockBalance = {
-  dates: {
-    end: moment().add(1, 'month'),
-    start: moment(),
-  },
   disabled: false,
   onAnticipationClick: () => {},
   onCancel: () => {},
   onCancelRequestClick: () => {},
-  onFilterClick: () => {},
   onPageChange: () => {},
   onSave: () => {},
   onWithdrawClick: () => {},
-  ...mock.result,
-  query: {
-    dates: {
-      end: moment().add(1, 'month'),
-      start: moment(),
-    },
-    page: 1,
-  },
   total: {
     net: 1000000,
     outcoming: 1000000,
@@ -60,11 +45,22 @@ class DetailRecipientPage extends Component {
     super(props)
     this.state = {
       anticipationLimit: 0,
+      balance: {},
+      currentPage: 1,
+      dates: {
+        end: moment().add(1, 'month'),
+        start: moment(),
+      },
       error: false,
       loading: true,
       recipientData: {},
     }
 
+    this.fetchAnticipationLimit = this.fetchAnticipationLimit.bind(this)
+    this.fetchBalance = this.fetchBalance.bind(this)
+    this.fetchData = this.fetchData.bind(this)
+    this.fetchRecipientData = this.fetchRecipientData.bind(this)
+    this.handleDateFilter = this.handleDateFilter.bind(this)
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
     this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
     this.handleSaveBankAccountWithBank =
@@ -72,9 +68,6 @@ class DetailRecipientPage extends Component {
     this.handleSaveBankAccountWithId =
       this.handleSaveBankAccountWithId.bind(this)
     this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
-    this.fetchData = this.fetchData.bind(this)
-    this.fetchRecipientData = this.fetchRecipientData.bind(this)
-    this.fetchAnticipationLimit = this.fetchAnticipationLimit.bind(this)
   }
 
   componentDidMount () {
@@ -187,20 +180,41 @@ class DetailRecipientPage extends Component {
       })
   }
 
+  handleDateFilter (dates) {
+    const firstPage = 1
+    return this.fetchBalance(dates, firstPage)
+      .then((balance) => {
+        this.setState({
+          balance,
+          currentPage: firstPage,
+          dates,
+        })
+      })
+  }
+
   fetchData () {
+    const {
+      currentPage,
+      dates,
+    } = this.state
+
     const recipientDataPromise = this.fetchRecipientData()
     const anticipationLimitPromise = this.fetchAnticipationLimit()
+    const balancePromise = this.fetchBalance(dates, currentPage)
 
     return Promise.all([
       recipientDataPromise,
       anticipationLimitPromise,
+      balancePromise,
     ])
       .then(([
         recipientData,
         anticipationLimit,
+        balance,
       ]) => {
         this.setState({
           anticipationLimit,
+          balance,
           loading: false,
           recipientData,
         })
@@ -239,9 +253,21 @@ class DetailRecipientPage extends Component {
       .then(limits => limits.maximum.amount)
   }
 
+  fetchBalance (dates, page) {
+    const { client } = this.props
+    const { id } = this.props.match.params
+    const query = { dates, page }
+
+    return client.balance.data(id, query)
+      .then(response => response.result)
+  }
+
   render () {
     const {
       anticipationLimit,
+      balance,
+      currentPage,
+      dates,
       error,
       loading,
       recipientData,
@@ -267,8 +293,12 @@ class DetailRecipientPage extends Component {
       <DetailRecipient
         informationProps={informationData}
         balanceProps={{
-          anticipation,
           ...mockBalance,
+          ...balance,
+          anticipation,
+          currentPage,
+          dates,
+          onFilterClick: this.handleDateFilter,
         }}
         configurationProps={{
           ...configurationData,
