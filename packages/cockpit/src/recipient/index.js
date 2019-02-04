@@ -1,6 +1,8 @@
+import add from './add'
+import anticipationLimits from './anticipationLimits'
 import balance from './balance'
 import bankAccount from './account'
-import add from './add'
+
 import {
   detail,
   update,
@@ -8,10 +10,11 @@ import {
 } from './detail'
 
 export default {
+  add,
+  anticipationLimits,
   balance,
   bankAccount,
-  add,
+  createNewAccount,
   detail,
   update,
-  createNewAccount,
 }
