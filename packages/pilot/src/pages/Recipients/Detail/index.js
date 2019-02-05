@@ -8,14 +8,17 @@ import moment from 'moment'
 import {
   assocPath,
   compose,
+  lensPath,
   pipe,
+  propEq,
+  reject,
+  view,
 } from 'ramda'
 
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
 
 const mockBalance = {
   onCancel: () => {},
-  onCancelRequestClick: () => {},
   onSave: () => {},
 }
 
@@ -53,6 +56,7 @@ class DetailRecipientPage extends Component {
     this.fetchBalanceTotal = this.fetchBalanceTotal.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.fetchRecipientData = this.fetchRecipientData.bind(this)
+    this.handleAnticipationCancel = this.handleAnticipationCancel.bind(this)
     this.handleDateFilter = this.handleDateFilter.bind(this)
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
@@ -197,6 +201,36 @@ class DetailRecipientPage extends Component {
       })
   }
 
+  handleAnticipationCancel (anticipationId) {
+    // TODO: Show confirmation modal
+    const { client, match } = this.props
+    const requestBody = {
+      recipientId: match.params.id,
+      id: anticipationId,
+    }
+
+    return client.bulkAnticipations.cancel(requestBody)
+      .then((response) => {
+        const requestPath = ['balance', 'requests']
+        const getRequests = view(lensPath(requestPath))
+        const removeCanceled = reject(propEq('id', response.id))
+
+        const oldRequests = getRequests(this.state)
+        const newRequests = removeCanceled(oldRequests)
+
+        const updateRequests = assocPath(requestPath, newRequests)
+        const newState = updateRequests(this.state)
+
+        this.setState(newState)
+      })
+      .catch((error) => {
+        this.setState({
+          ...this.state,
+          error,
+        })
+      })
+  }
+
   fetchData () {
     const {
       currentPage,
@@ -333,6 +367,7 @@ class DetailRecipientPage extends Component {
           dates,
           disabled: loading,
           onAnticipationClick: this.sendToAnticipationPage,
+          onCancelRequestClick: this.handleAnticipationCancel,
           onFilterClick: this.handleDateFilter,
           onPageChange: this.handlePageChange,
           onWithdrawClick: this.sendToWithdrawPage,
@@ -356,6 +391,9 @@ DetailRecipientPage.propTypes = {
     recipient: PropTypes.shape({
       add: PropTypes.func.isRequired,
       bankAccount: PropTypes.func.isRequired,
+    }).isRequired,
+    bulkAnticipations: PropTypes.shape({
+      cancel: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({
