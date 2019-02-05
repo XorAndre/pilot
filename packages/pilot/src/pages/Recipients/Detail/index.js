@@ -93,26 +93,22 @@ class DetailRecipientPage extends Component {
       })
   }
 
-  handleSaveTransfer (data) {
+  handleSaveTransfer (transferData) {
     const { client } = this.props
     const { id } = this.props.match.params
-
-    return client.recipient.update(id, {
+    const updatedData = {
       configuration: {
-        ...data,
+        ...transferData,
         anticipationModel: null,
       },
-    })
+    }
+
+    return client.recipient.update(id, updatedData)
       .then(() => {
-        const updatedTrasnferConfig = assocPath(
-          [
-            'recipientData',
-            'configurationData',
-            'transfer'],
-          data,
-          this.state
-        )
-        this.setState(updatedTrasnferConfig)
+        const transferPath = ['recipientData', 'configurationData', 'transfer']
+        const updateTransfer = assocPath(transferPath, transferData)
+        const updatedState = updateTransfer(this.state)
+        this.setState(updatedState)
       })
   }
 
