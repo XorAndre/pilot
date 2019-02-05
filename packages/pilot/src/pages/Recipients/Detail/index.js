@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import withRouter from 'react-router-dom/withRouter'
@@ -16,11 +16,7 @@ import {
 } from 'ramda'
 
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
-
-const mockBalance = {
-  onCancel: () => {},
-  onSave: () => {},
-}
+import ConfirmModal from '../../../../src/components/ConfirmModal'
 
 const mapStateToProps = (state = {}) => {
   const { account } = state
@@ -39,6 +35,7 @@ class DetailRecipientPage extends Component {
     super(props)
     this.state = {
       anticipationLimit: 0,
+      anticipationToCancel: null,
       balance: {},
       currentPage: 1,
       dates: {
@@ -48,6 +45,7 @@ class DetailRecipientPage extends Component {
       error: false,
       loading: true,
       recipientData: {},
+      showModal: false,
       total: {},
     }
 
@@ -66,8 +64,12 @@ class DetailRecipientPage extends Component {
     this.handleSaveBankAccountWithId =
       this.handleSaveBankAccountWithId.bind(this)
     this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
+    this.hideCancelAnticipationModal =
+      this.hideCancelAnticipationModal.bind(this)
     this.sendToAnticipationPage = this.sendToAnticipationPage.bind(this)
     this.sendToWithdrawPage = this.sendToWithdrawPage.bind(this)
+    this.showCancelAnticipationModal =
+      this.showCancelAnticipationModal.bind(this)
   }
 
   componentDidMount () {
@@ -201,12 +203,11 @@ class DetailRecipientPage extends Component {
       })
   }
 
-  handleAnticipationCancel (anticipationId) {
-    // TODO: Show confirmation modal
+  handleAnticipationCancel () {
     const { client, match } = this.props
     const requestBody = {
+      id: this.state.anticipationToCancel,
       recipientId: match.params.id,
-      id: anticipationId,
     }
 
     return client.bulkAnticipations.cancel(requestBody)
@@ -221,14 +222,34 @@ class DetailRecipientPage extends Component {
         const updateRequests = assocPath(requestPath, newRequests)
         const newState = updateRequests(this.state)
 
-        this.setState(newState)
+        this.setState({
+          ...newState,
+          anticipationToCancel: null,
+          showModal: false,
+        })
       })
       .catch((error) => {
         this.setState({
           ...this.state,
+          anticipationToCancel: null,
           error,
+          showModal: false,
         })
       })
+  }
+
+  showCancelAnticipationModal (anticipationId) {
+    return this.setState({
+      anticipationToCancel: anticipationId,
+      showModal: true,
+    })
+  }
+
+  hideCancelAnticipationModal () {
+    return this.setState({
+      anticipationToCancel: null,
+      showModal: false,
+    })
   }
 
   fetchData () {
@@ -337,6 +358,7 @@ class DetailRecipientPage extends Component {
       error,
       loading,
       recipientData,
+      showModal,
       total,
     } = this.state
 
@@ -356,44 +378,61 @@ class DetailRecipientPage extends Component {
       loading,
     }
 
+    const style = {
+      textAlign: 'center',
+    }
+
     return (
-      <DetailRecipient
-        informationProps={informationData}
-        balanceProps={{
-          ...mockBalance,
-          ...balance,
-          anticipation,
-          currentPage,
-          dates,
-          disabled: loading,
-          onAnticipationClick: this.sendToAnticipationPage,
-          onCancelRequestClick: this.handleAnticipationCancel,
-          onFilterClick: this.handleDateFilter,
-          onPageChange: this.handlePageChange,
-          onWithdrawClick: this.sendToWithdrawPage,
-          total,
-        }}
-        configurationProps={{
-          ...configurationData,
-          handleSaveAnticipation: this.handleSaveAnticipation,
-          handleSaveBankAccount: this.handleSaveBankAccount,
-          handleSaveTransfer: this.handleSaveTransfer,
-        }}
-        recipient={companyData}
-        t={t}
-      />
+      <Fragment>
+        <DetailRecipient
+          informationProps={informationData}
+          balanceProps={{
+            ...balance,
+            anticipation,
+            currentPage,
+            dates,
+            disabled: loading,
+            onAnticipationClick: this.sendToAnticipationPage,
+            onCancelRequestClick: this.showCancelAnticipationModal,
+            onFilterClick: this.handleDateFilter,
+            onPageChange: this.handlePageChange,
+            onWithdrawClick: this.sendToWithdrawPage,
+            total,
+          }}
+          configurationProps={{
+            ...configurationData,
+            handleSaveAnticipation: this.handleSaveAnticipation,
+            handleSaveBankAccount: this.handleSaveBankAccount,
+            handleSaveTransfer: this.handleSaveTransfer,
+          }}
+          recipient={companyData}
+          t={t}
+        />
+        <ConfirmModal
+          cancelText={t('cancel_pending_request_cancel')}
+          confirmText={t('cancel_pending_request_confirm')}
+          isOpen={showModal}
+          onCancel={this.hideCancelAnticipationModal}
+          onConfirm={this.handleAnticipationCancel}
+          title={t('cancel_pending_request_title')}
+        >
+          <div style={style}>
+            {t('cancel_pending_request_text')}
+          </div>
+        </ConfirmModal>
+      </Fragment>
     )
   }
 }
 
 DetailRecipientPage.propTypes = {
   client: PropTypes.shape({
+    bulkAnticipations: PropTypes.shape({
+      cancel: PropTypes.func.isRequired,
+    }).isRequired,
     recipient: PropTypes.shape({
       add: PropTypes.func.isRequired,
       bankAccount: PropTypes.func.isRequired,
-    }).isRequired,
-    bulkAnticipations: PropTypes.shape({
-      cancel: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({

@@ -110,11 +110,14 @@ class RecipientBalance extends Component {
   getPendingRequest ({
     amount,
     created_at: createdAt,
-    type,
     status,
+    type,
   }) {
     const { t } = this.props
-    const { types, statuses } = bulkAnticipationsLabels
+    const {
+      statuses,
+      types,
+    } = bulkAnticipationsLabels
 
     return {
       amount: currencyFormatter(amount),
