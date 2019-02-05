@@ -15,8 +15,10 @@ import {
   view,
 } from 'ramda'
 
-import DetailRecipient from '../../../../src/containers/RecipientDetails'
 import ConfirmModal from '../../../../src/components/ConfirmModal'
+import DetailRecipient from '../../../../src/containers/RecipientDetails'
+import ErrorAlert from '../../../../src/components/ErrorAlert'
+import Loader from '../../../../src/components/Loader'
 
 const mapStateToProps = (state = {}) => {
   const { account } = state
@@ -39,8 +41,8 @@ class DetailRecipientPage extends Component {
       balance: {},
       currentPage: 1,
       dates: {
-        end: moment().add(1, 'month'),
-        start: moment(),
+        start: moment().subtract(1, 'month'),
+        end: moment(),
       },
       error: false,
       loading: true,
@@ -362,15 +364,21 @@ class DetailRecipientPage extends Component {
       total,
     } = this.state
 
-    if (loading || error) return null
+    const { t } = this.props
+
+    if (loading) {
+      return <Loader visible />
+    }
+
+    if (error) {
+      return <ErrorAlert t={t} error={error} />
+    }
 
     const {
       companyData,
       configurationData,
       informationData,
     } = recipientData
-
-    const { t } = this.props
 
     const anticipation = {
       available: anticipationLimit,
