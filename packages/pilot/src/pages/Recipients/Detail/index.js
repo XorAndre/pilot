@@ -16,7 +16,6 @@ import DetailRecipient from '../../../../src/containers/RecipientDetails'
 const mockBalance = {
   onCancel: () => {},
   onCancelRequestClick: () => {},
-  onPageChange: () => {},
   onSave: () => {},
   onWithdrawClick: () => {},
   total: {
@@ -61,6 +60,7 @@ class DetailRecipientPage extends Component {
     this.fetchData = this.fetchData.bind(this)
     this.fetchRecipientData = this.fetchRecipientData.bind(this)
     this.handleDateFilter = this.handleDateFilter.bind(this)
+    this.handlePageChange = this.handlePageChange.bind(this)
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
     this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
     this.handleSaveBankAccountWithBank =
@@ -189,6 +189,19 @@ class DetailRecipientPage extends Component {
       })
   }
 
+  handlePageChange (page) {
+    const { dates } = this.state
+
+    return this.fetchBalance(dates, page)
+      .then((balance) => {
+        this.setState({
+          balance,
+          currentPage: page,
+          dates,
+        })
+      })
+  }
+
   fetchData () {
     const {
       currentPage,
@@ -257,7 +270,7 @@ class DetailRecipientPage extends Component {
   fetchBalance (dates, page) {
     const { client } = this.props
     const { id } = this.props.match.params
-    const query = { dates, page }
+    const query = { dates, page, count: 10 }
 
     return client.balance.data(id, query)
       .then(response => response.result)
@@ -316,6 +329,7 @@ class DetailRecipientPage extends Component {
           disabled: loading,
           onAnticipationClick: this.sendToAnticipationPage,
           onFilterClick: this.handleDateFilter,
+          onPageChange: this.handlePageChange,
           total,
         }}
         configurationProps={{
