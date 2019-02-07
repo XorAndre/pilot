@@ -17,6 +17,7 @@ const DetailsHead = ({
         <Textfit
           mode="single"
           min={10}
+          max={40}
           className={style.identifier}
         >
           {identifier}
