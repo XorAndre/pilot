@@ -41,8 +41,8 @@ class DetailRecipientPage extends Component {
       balance: {},
       currentPage: 1,
       dates: {
-        start: moment().subtract(1, 'month'),
         end: moment(),
+        start: moment().subtract(1, 'month'),
       },
       error: false,
       loading: true,
