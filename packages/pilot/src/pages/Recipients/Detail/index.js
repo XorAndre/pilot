@@ -182,12 +182,21 @@ class DetailRecipientPage extends Component {
 
   handleDateFilter (dates) {
     const firstPage = 1
-    return this.fetchBalance(dates, firstPage)
-      .then((balance) => {
+    const balancePromise = this.fetchBalance(dates, firstPage)
+    const balanceTotalPromise = this.fetchBalanceTotal(dates)
+
+    return Promise.all([balancePromise, balanceTotalPromise])
+      .then(([balance, total]) => {
         this.setState({
           balance,
           currentPage: firstPage,
           dates,
+          total,
+        })
+      })
+      .catch((error) => {
+        this.setState({
+          error,
         })
       })
   }
