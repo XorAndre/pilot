@@ -1,3 +1,4 @@
+import { pathOr } from 'ramda'
 import { formatHeaderData } from './formatRecipient'
 
 const mountPartners = (previousState, partner, index) => ({
@@ -53,15 +54,19 @@ function formatAntecipationAndTransferConfiguration (data) {
     cpfUrl: '',
     documentType: data.bank_account.document_type,
   }
-  if (data.bank_account.document_type === 'cpf' && data.register_information) {
+
+  const register = data.register_information
+  const phone = pathOr('', ['phone_numbers', 0, 'number'], register)
+
+  if (data.bank_account.document_type === 'cpf' && register) {
     identification = {
       ...identification,
       cpf: data.bank_account.document_number,
-      cpfEmail: data.register_information.email,
+      cpfEmail: register.email,
       cpfInformation: true,
-      cpfName: data.register_information.name,
-      cpfPhone: data.register_information.phone_numbers[0].number,
-      cpfUrl: data.register_information.site_url,
+      cpfName: register.name,
+      cpfPhone: phone,
+      cpfUrl: register.site_url,
       documentType: 'cpf',
     }
   } else {
@@ -72,18 +77,17 @@ function formatAntecipationAndTransferConfiguration (data) {
     }
   }
 
-
-  if (data.bank_account.document_type === 'cnpj' && data.register_information) {
+  if (data.bank_account.document_type === 'cnpj' && register) {
     const partnersData = getPartnersData(data
       .register_information.managing_partners)
     identification = {
       ...identification,
       cnpj: data.bank_account.document_number,
-      cnpjEmail: data.register_information.email,
+      cnpjEmail: register.email,
       cnpjInformation: true,
-      cnpjName: data.register_information.company_name,
-      cnpjPhone: data.register_information.phone_numbers[0].number,
-      cnpjUrl: data.register_information.site_url,
+      cnpjName: register.company_name,
+      cnpjPhone: phone,
+      cnpjUrl: register.site_url,
       documentType: 'cnpj',
       partnerNumber: data
         .register_information.managing_partners.length.toString(),
