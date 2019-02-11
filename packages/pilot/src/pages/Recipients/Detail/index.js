@@ -4,11 +4,14 @@ import { translate } from 'react-i18next'
 import withRouter from 'react-router-dom/withRouter'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { Alert } from 'former-kit'
+import IconInfo from 'emblematic-icons/svg/Info32.svg'
 
 import {
   assocPath,
   compose,
   lensPath,
+  pathOr,
   pipe,
   propEq,
   reject,
@@ -17,7 +20,6 @@ import {
 
 import ConfirmModal from '../../../../src/components/ConfirmModal'
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
-import ErrorAlert from '../../../../src/components/ErrorAlert'
 import Loader from '../../../../src/components/Loader'
 
 const mapStateToProps = (state = {}) => {
@@ -380,7 +382,16 @@ class DetailRecipientPage extends Component {
     }
 
     if (error) {
-      return <ErrorAlert t={t} error={error} />
+      const unknownErrorMessage = t('unknown_error')
+      const errorMessagePath = ['response', 'errors', 0, 'message']
+      const getErrorMessage = pathOr(unknownErrorMessage, errorMessagePath)
+      const errorMessage = getErrorMessage(error)
+
+      return (
+        <Alert icon={<IconInfo height={16} width={16} />} type="info">
+          <span>{errorMessage}</span>
+        </Alert>
+      )
     }
 
     const {

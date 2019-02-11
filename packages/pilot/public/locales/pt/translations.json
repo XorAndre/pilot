@@ -46,6 +46,7 @@
   "empty_password": "Senha não informada",
   "enter_password": "Digite sua senha",
   "error": "Erro",
+  "unknown_error": "Erro desconhecido",
   "export": "Exportar",
   "filter_action": "Filtrar",
   "go_back": "voltar",
