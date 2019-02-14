@@ -71,5 +71,5 @@ storiesOf('Components|Custom components', module)
   .add('Password Input', () => <PasswordInput />)
   .add('TotalDisplay', () => <TotalDisplay />)
 
-storiesOf('Components|HOC\'s', module)
+storiesOf('Components|High Order Components', module)
   .add('with loader', () => <WithLoader />)
