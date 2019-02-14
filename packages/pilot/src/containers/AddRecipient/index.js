@@ -304,9 +304,20 @@ class AddRecipients extends Component {
       isLoading,
       openModal,
       stepsStatus,
+      currentStepNumber,
     } = this.state
 
-    const { onExit, t } = this.props
+    const {
+      onExit,
+      t,
+    } = this.props
+
+    const isConclusion = this.steps[currentStepNumber].id === CONCLUSION
+    const shouldRemoveCardBorder = (error || isConclusion)
+
+    const cardStyle = shouldRemoveCardBorder
+      ? style.noBorder
+      : style.marginTop
 
     return (
       <Fragment>
@@ -317,7 +328,7 @@ class AddRecipients extends Component {
             steps={this.steps}
           />
         </Card>
-        <Card className={style.marginTop}>
+        <Card className={cardStyle}>
           {
             (error)
               ? this.renderError(error)

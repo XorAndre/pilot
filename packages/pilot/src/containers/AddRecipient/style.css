@@ -6,12 +6,20 @@
   margin-top: var(--spacing-small);
 }
 
+.noBorder {
+  margin-top: var(--spacing-small);
+  border: none;
+  box-shadow: none;
+}
+
 .flex {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  padding: 0;
+  background-color: #eeeeee;
 }
 
 .centerText {
