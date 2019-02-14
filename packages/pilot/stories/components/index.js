@@ -34,6 +34,7 @@ import Loader from './Loader'
 import Message from './Message'
 import MessageActions from './MessageActions'
 import PasswordInput from './PasswordInput'
+import WithLoader from './withLoader'
 
 storiesOf('Components|Custom components', module)
   .addDecorator(checkA11y)
@@ -69,3 +70,6 @@ storiesOf('Components|Custom components', module)
   .add('Message with actions', () => <MessageActions />)
   .add('Password Input', () => <PasswordInput />)
   .add('TotalDisplay', () => <TotalDisplay />)
+
+storiesOf('Components|HOC\'s', module)
+  .add('with loader', () => <WithLoader />)

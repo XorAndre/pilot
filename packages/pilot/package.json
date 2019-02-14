@@ -38,6 +38,7 @@
     "redux-localstorage-simple": "2.1.4",
     "redux-observable": "1.0.0",
     "rxjs": "6.4.0",
+    "shortid": "2.2.14",
     "validator": "10.6.0",
     "xlsx": "0.14.0"
   },
