@@ -56,8 +56,9 @@ function formatAntecipationAndTransferConfiguration (data) {
   }
 
   if (data.bank_account.document_type === 'cnpj' && register) {
-    const partnersData = getPartnersData(data
-      .register_information.managing_partners)
+    const partners = data.register_information.managing_partners || []
+    const partnersData = getPartnersData(partners)
+
     identification = {
       ...identification,
       cnpj: data.bank_account.document_number,
@@ -67,8 +68,7 @@ function formatAntecipationAndTransferConfiguration (data) {
       cnpjPhone: phone,
       cnpjUrl: register.site_url,
       documentType: 'cnpj',
-      partnerNumber: data
-        .register_information.managing_partners.length.toString(),
+      partnerNumber: partners.length.toString(),
       ...partnersData,
     }
   } else {
