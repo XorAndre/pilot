@@ -347,7 +347,7 @@ class IdentificationStep extends Component {
           </Col>
           <Col>
             <FormInput
-              label={t('pages.add_recipient.optional_email')}
+              label={t('pages.add_recipient.email')}
               name={`${documentType}Email`}
               size={35}
             />

@@ -11,30 +11,38 @@ import styles from '../style.css'
 const renderPartners = (identification, t) => {
   const amountOfPartners = parseInt(identification.partnerNumber, 10)
   const partnersNumberRange = range(0, amountOfPartners)
+
+
   const cpfLabel = t('pages.add_recipient.cpf')
 
-  const name = (identification.documentType === 'cpf')
+  const nameLabel = (identification.documentType === 'cpf')
     ? t('pages.add_recipient.name')
     : t('pages.add_recipient.company_name')
 
-  const phone = t('pages.add_recipient.optional_phone')
+  const emailLabel = t('pages.add_recipient.email')
 
-  const partnersRows = partnersNumberRange.map(partnerNumber => (
-    <Row key={`partner${partnerNumber}`}>
-      <Col>
-        <span className={styles.infoTitle}>{cpfLabel}</span>
-        <span className={styles.info}>{identification[`partner${partnerNumber}`].cpf}</span>
-      </Col>
-      <Col>
-        <span className={styles.infoTitle}>{name}</span>
-        <span className={styles.info}>{identification[`partner${partnerNumber}`].name}</span>
-      </Col>
-      <Col>
-        <span className={styles.infoTitle}>{phone}</span>
-        <span className={styles.info}>{identification[`partner${partnerNumber}`].phone}</span>
-      </Col>
-    </Row>
-  ))
+  const partnersRows = partnersNumberRange.map((partnerNumber) => {
+    const key = `partner${partnerNumber}`
+    const partner = identification[key]
+
+    return (
+      <Row key={key}>
+        <Col>
+          <span className={styles.infoTitle}>{cpfLabel}</span>
+          <span className={styles.info}>{partner.cpf}</span>
+        </Col>
+        <Col>
+          <span className={styles.infoTitle}>{nameLabel}</span>
+          <span className={styles.info}>{partner.name}</span>
+        </Col>
+        <Col>
+          <span className={styles.infoTitle}>{emailLabel}</span>
+          <span className={styles.info}>{partner.email}</span>
+        </Col>
+      </Row>
+    )
+  })
+
   const partners = (partnersRows.length > 0)
     ? partnersRows
     : (
@@ -44,6 +52,7 @@ const renderPartners = (identification, t) => {
         </Col>
       </Row>
     )
+
   return (
     <Fragment>
       {partners}

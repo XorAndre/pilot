@@ -21,27 +21,27 @@ const identification = {
   partner0: {
     cpf: '222.222.222-22',
     name: 'Luke Skywalker',
-    phone: '21 99999-9999',
+    email: 'mail@email.com',
   },
   partner1: {
     cpf: '111.111.111-11',
     name: 'Han Solo',
-    phone: '21 99999-9999',
+    email: 'mail@email.com',
   },
   partner2: {
     cpf: '333.333.333-33',
     name: 'Princess Leia',
-    phone: '11 88888-8888',
+    email: 'mail@email.com',
   },
   partner3: {
     cpf: '444.444.444-44',
     name: 'Chewie',
-    phone: '11 77777-7777',
+    email: 'mail@email.com',
   },
   partner4: {
     cpf: '',
     name: '',
-    phone: '',
+    email: '',
   },
   partnerNumber: '4',
 }

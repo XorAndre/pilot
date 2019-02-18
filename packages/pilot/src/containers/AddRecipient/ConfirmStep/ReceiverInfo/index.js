@@ -12,7 +12,7 @@ const renderReceiverNameEmailInfo = (identification, t) => {
     ? t('pages.add_recipient.name')
     : t('pages.add_recipient.company_name')
 
-  const email = t('pages.add_recipient.optional_email')
+  const email = t('pages.add_recipient.email')
   if (identification.cnpjInformation || identification.cpfInformation) {
     return (
       <Fragment>

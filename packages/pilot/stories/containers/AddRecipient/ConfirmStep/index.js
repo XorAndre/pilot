@@ -41,27 +41,27 @@ const mockData = {
     partner0: {
       cpf: '222.222.222-22',
       name: 'Paulo Barroso',
-      phone: '21 99999-9999',
+      email: 'email@mail.com',
     },
     partner1: {
       cpf: '111.111.111-11',
       name: 'Guilherme Barroso',
-      phone: '21 99999-9999',
+      email: 'email@mail.com',
     },
     partner2: {
       cpf: '',
       name: '',
-      phone: '',
+      email: '',
     },
     partner3: {
       cpf: '',
       name: '',
-      phone: '',
+      email: '',
     },
     partner4: {
       cpf: '',
       name: '',
-      phone: '',
+      email: '',
     },
     partnerNumber: '2',
   },
