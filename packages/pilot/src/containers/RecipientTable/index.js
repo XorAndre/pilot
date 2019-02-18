@@ -24,7 +24,7 @@ import style from './style.css'
 import Filter from '../Filter'
 import tableColumns from './tableColumns'
 
-const RecipientsList = ({
+const RecipientTable = ({
   expandedRows,
   filterOptions,
   loading,
@@ -156,7 +156,7 @@ const RecipientsList = ({
   )
 }
 
-RecipientsList.propTypes = {
+RecipientTable.propTypes = {
   expandedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   filterOptions: PropTypes.arrayOf(PropTypes.shape({
     items: PropTypes.arrayOf(PropTypes.shape({
@@ -205,10 +205,10 @@ RecipientsList.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-RecipientsList.defaultProps = {
+RecipientTable.defaultProps = {
   query: {
     search: '',
   },
 }
 
-export default RecipientsList
+export default RecipientTable

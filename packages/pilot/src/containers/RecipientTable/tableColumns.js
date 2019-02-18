@@ -12,7 +12,7 @@ import {
 } from 'former-kit'
 
 import formatDate from '../../formatters/longDate'
-import StatusLegend from '../../containers/RecipientsList/statusLegend'
+import StatusLegend from './statusLegend'
 import style from './style.css'
 
 const columnData = data => (

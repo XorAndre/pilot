@@ -1,18 +1,12 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Col,
-  Row,
-} from 'former-kit'
+import { Col, Row } from 'former-kit'
 import { range } from 'ramda'
-
 import styles from '../style.css'
 
 const renderPartners = (identification, t) => {
   const amountOfPartners = parseInt(identification.partnerNumber, 10)
   const partnersNumberRange = range(0, amountOfPartners)
-
-
   const cpfLabel = t('pages.add_recipient.cpf')
 
   const nameLabel = (identification.documentType === 'cpf')

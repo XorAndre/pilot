@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import qs from 'qs'
+
 import {
   append,
   applySpec,
@@ -24,14 +25,16 @@ import {
   when,
   without,
 } from 'ramda'
+
 import {
   requestSearch,
   receiveSearch,
 } from './actions'
+
 import { requestLogout } from '../../Account/actions'
 
 import dateSelectorPresets from '../../../models/dateSelectorPresets'
-import RecipientsList from '../../../containers/RecipientsList'
+import RecipientTable from '../../../containers/RecipientTable'
 
 const mapStateToProps = ({
   account: { client },
@@ -365,7 +368,7 @@ class RecipientsSearch extends React.Component {
     }
 
     return (
-      <RecipientsList
+      <RecipientTable
         amount={0}
         collapsed={collapsed}
         columns={columns}
