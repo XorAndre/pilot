@@ -13,17 +13,11 @@ import { pick } from 'ramda'
 import PartnerInfo from '../../AddRecipient/ConfirmStep/PartnerInfo'
 import ReceiverInfo from '../../AddRecipient/ConfirmStep/ReceiverInfo'
 
-import {
-  accountProps,
-  accountDefaultProps,
-} from '../../AddRecipient/BankAccountStep'
-
 import styles from './style.css'
 
 const RecipientDetailInfo = ({
-  bankAccount,
-  configuration,
   identification,
+  metadata,
   t,
 }) => (
   <Fragment>
@@ -76,9 +70,7 @@ const RecipientDetailInfo = ({
         <CardContent>
           <Tree
             data={{
-              bankAccount,
-              configuration,
-              identification,
+              ...metadata,
             }}
             theme={{
               arrowSign: () => ({ className: styles.arrow }),
@@ -107,16 +99,6 @@ const partnerDefaultTypes = {
 }
 
 RecipientDetailInfo.propTypes = {
-  bankAccount: accountProps,
-  configuration: PropTypes.shape({
-    anticipationDays: PropTypes.string,
-    anticipationModel: PropTypes.string,
-    anticipationVolumePercentage: PropTypes.string,
-    transferDay: PropTypes.string,
-    transferEnabled: PropTypes.bool,
-    transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
-  }),
   identification: PropTypes.shape({
     cnpj: PropTypes.string,
     cnpjEmail: PropTypes.string,
@@ -138,20 +120,12 @@ RecipientDetailInfo.propTypes = {
     partner4: partnerPropTypes,
     partnerNumber: PropTypes.string,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
+  metadata: PropTypes.object,
   t: PropTypes.func.isRequired,
 }
 
 RecipientDetailInfo.defaultProps = {
-  bankAccount: accountDefaultProps,
-  configuration: {
-    anticipationDays: '',
-    anticipationModel: '',
-    anticipationVolumePercentage: '',
-    transferDay: '',
-    transferEnabled: false,
-    transferInterval: '',
-    transferWeekday: '',
-  },
   identification: {
     cnpj: '',
     cnpjEmail: '',
@@ -173,6 +147,7 @@ RecipientDetailInfo.defaultProps = {
     partner4: partnerDefaultTypes,
     partnerNumber: '',
   },
+  metadata: {},
 }
 
 export default RecipientDetailInfo

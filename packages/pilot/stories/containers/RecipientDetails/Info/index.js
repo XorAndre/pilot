@@ -20,50 +20,37 @@ const identification = {
   documentType: 'cnpj',
   partner0: {
     cpf: '222.222.222-22',
-    name: 'Luke Skywalker',
     email: 'mail@email.com',
+    name: 'Luke Skywalker',
   },
   partner1: {
     cpf: '111.111.111-11',
-    name: 'Han Solo',
     email: 'mail@email.com',
+    name: 'Han Solo',
   },
   partner2: {
     cpf: '333.333.333-33',
-    name: 'Princess Leia',
     email: 'mail@email.com',
+    name: 'Princess Leia',
   },
   partner3: {
     cpf: '444.444.444-44',
-    name: 'Chewie',
     email: 'mail@email.com',
+    name: 'Chewie',
   },
   partner4: {
     cpf: '',
-    name: '',
     email: '',
+    name: '',
   },
   partnerNumber: '4',
 }
 
-const configuration = {
-  anticipationDays: '',
-  anticipationModel: 'Automática por volume',
-  anticipationVolumePercentage: '50',
-  transferDay: '15',
-  transferEnabled: true,
-  transferInterval: 'Mensal',
-  transferWeekday: 'Terça-feira',
-}
-
-const bankAccount = {
-  agency: '1111',
-  agency_digit: '',
-  bank: '001',
-  name: 'Conta Bancária',
-  number: '11111',
-  number_digit: '1',
-  type: 'conta_corrente',
+const metadata = {
+  custom: 'custom data',
+  fields: {
+    abc: '123',
+  },
 }
 
 const RecipientDetailInfoExample = () => (
@@ -71,8 +58,7 @@ const RecipientDetailInfoExample = () => (
     <Card>
       <RecipientDetailInfo
         identification={identification}
-        configuration={configuration}
-        bankAccount={bankAccount}
+        metadata={metadata}
         t={t => t}
       />
     </Card>

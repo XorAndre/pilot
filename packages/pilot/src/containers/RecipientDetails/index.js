@@ -91,7 +91,6 @@ class RecipientDetails extends Component {
             </TabItem>
             <TabItem text={t('pages.recipients.more_information')}>
               <Information
-                fetchAccounts={informationProps.identification.documentType}
                 {...informationProps}
                 t={t}
               />

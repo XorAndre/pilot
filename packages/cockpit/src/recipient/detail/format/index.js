@@ -118,6 +118,7 @@ function formatAntecipationAndTransferConfiguration (data) {
       number: data.bank_account.conta,
       type: data.bank_account.type,
     },
+    metadata: data.metadata,
   }
 
   const anticipation = formatAnticipationData(data)
