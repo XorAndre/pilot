@@ -1,5 +1,8 @@
 import { pathOr } from 'ramda'
-import { formatHeaderData } from './formatRecipient'
+import {
+  formatHeaderData,
+  formatAnticipationData,
+} from './formatRecipient'
 
 const mountPartners = (previousState, partner, index) => ({
   ...previousState,
@@ -11,31 +14,6 @@ const mountPartners = (previousState, partner, index) => ({
 })
 
 const getPartnersData = partners => partners.reduce(mountPartners, {})
-
-const formatAnticipation = (data) => {
-  const anticipation = {
-    anticipationDays: data.automatic_anticipation_days,
-    anticipationModel: '',
-    anticipationVolumePercentage: data
-      .anticipatable_volume_percentage.toString(),
-  }
-
-  if (data.automatic_anticipation_type === 'full' &&
-      data.automatic_anticipation_enabled) {
-    anticipation.anticipationModel = 'automatic_volume'
-  } else if (data.automatic_anticipation_type === '1025' &&
-      data.automatic_anticipation_enabled) {
-    anticipation.anticipationModel = 'automatic_dx'
-  } else if (data.automatic_anticipation_type === '1025' &&
-      data.automatic_anticipation_1025_delay === 15) {
-    anticipation.anticipationModel = 'automatic_1025'
-  } else if (data.automatic_anticipation_type === 'full' &&
-      data.automatic_anticipation_enabled === false) {
-    anticipation.anticipationModel = 'manual'
-  }
-
-  return anticipation
-}
 
 function formatAntecipationAndTransferConfiguration (data) {
   const companyData = formatHeaderData(data)
@@ -142,7 +120,7 @@ function formatAntecipationAndTransferConfiguration (data) {
     },
   }
 
-  const anticipation = formatAnticipation(data)
+  const anticipation = formatAnticipationData(data)
 
   const configurationData = {
     anticipation,
