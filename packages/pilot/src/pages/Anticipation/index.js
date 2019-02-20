@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, matchPath } from 'react-router-dom'
 import {
   allPass,
   always,
@@ -321,14 +321,19 @@ class Anticipation extends Component {
     const {
       client,
       history,
-      match: {
-        params: {
-          id,
-        },
-      },
     } = this.props
 
     let recipientPromise
+
+    // Workaround for empty match.params
+    // https://github.com/ReactTraining/react-router/issues/5870#issuecomment-394194338
+    const match = matchPath(history.location.pathname, {
+      path: '/anticipation/:id',
+      exact: true,
+      strict: false,
+    })
+
+    const { id } = match.params
 
     if (!id) {
       recipientPromise = getDefaultRecipient(client)
@@ -887,6 +892,9 @@ Anticipation.propTypes = {
     goBack: PropTypes.func,
     push: PropTypes.func,
     replace: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
