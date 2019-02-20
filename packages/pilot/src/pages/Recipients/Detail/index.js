@@ -38,7 +38,8 @@ class DetailRecipientPage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      anticipationLimit: 0,
+      anticipationError: false,
+      anticipationLimitAmount: 0,
       anticipationToCancel: null,
       balance: {},
       currentPage: 1,
@@ -46,8 +47,8 @@ class DetailRecipientPage extends Component {
         end: moment(),
         start: moment().subtract(1, 'month'),
       },
-      error: false,
       loading: true,
+      pageError: false,
       recipientData: {},
       showModal: false,
       total: {},
@@ -196,9 +197,9 @@ class DetailRecipientPage extends Component {
           total,
         })
       })
-      .catch((error) => {
+      .catch((pageError) => {
         this.setState({
-          error,
+          pageError,
         })
       })
   }
@@ -241,11 +242,11 @@ class DetailRecipientPage extends Component {
           showModal: false,
         })
       })
-      .catch((error) => {
+      .catch((pageError) => {
         this.setState({
           ...this.state,
           anticipationToCancel: null,
-          error,
+          pageError,
           showModal: false,
         })
       })
@@ -288,18 +289,20 @@ class DetailRecipientPage extends Component {
         balance,
         total,
       ]) => {
+        const { amount, error } = anticipationLimit
         this.setState({
-          anticipationLimit,
+          anticipationError: error,
+          anticipationLimitAmount: amount,
           balance,
           loading: false,
           recipientData,
           total,
         })
       })
-      .catch((error) => {
+      .catch((pageError) => {
         this.setState({
-          error,
           loading: false,
+          pageError,
         })
       })
   }
@@ -327,7 +330,8 @@ class DetailRecipientPage extends Component {
     const { client } = this.props
     const { id } = this.props.match.params
     return client.recipient.anticipationLimits(id)
-      .then(limits => limits.maximum.amount)
+      .then(limits => ({ amount: limits.maximum.amount, error: false }))
+      .catch(error => ({ amount: 0, error }))
   }
 
   fetchBalance (dates, page) {
@@ -364,12 +368,13 @@ class DetailRecipientPage extends Component {
 
   render () {
     const {
-      anticipationLimit,
+      anticipationError,
+      anticipationLimitAmount,
       balance,
       currentPage,
       dates,
-      error,
       loading,
+      pageError,
       recipientData,
       showModal,
       total,
@@ -381,11 +386,11 @@ class DetailRecipientPage extends Component {
       return <Loader visible />
     }
 
-    if (error) {
+    if (pageError) {
       const unknownErrorMessage = t('unknown_error')
       const errorMessagePath = ['response', 'errors', 0, 'message']
       const getErrorMessage = pathOr(unknownErrorMessage, errorMessagePath)
-      const errorMessage = getErrorMessage(error)
+      const errorMessage = getErrorMessage(pageError)
 
       return (
         <Alert icon={<IconInfo height={16} width={16} />} type="info">
@@ -404,8 +409,8 @@ class DetailRecipientPage extends Component {
 
     const anticipation = {
       automaticTransfer: transferEnabled,
-      available: anticipationLimit,
-      error,
+      available: anticipationLimitAmount,
+      error: anticipationError,
       loading,
     }
 
