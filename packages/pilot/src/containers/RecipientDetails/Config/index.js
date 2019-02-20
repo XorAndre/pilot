@@ -9,6 +9,7 @@ import AnticipationContent from './AnticipationContent'
 import TransferContent from './TransferContent'
 import BankAccountContent from './BankAccountContent'
 import RecipientItem from './RecipientItem'
+import HelpModal from './HelpModal'
 
 import {
   userAccountProps,
@@ -38,6 +39,8 @@ class RecipientDetailConfig extends Component {
     this.handleSaveAnticipation = this.handleSaveAnticipation.bind(this)
     this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
     this.handleSaveBankAccount = this.handleSaveBankAccount.bind(this)
+    this.handleOpenHelpModal = this.handleOpenHelpModal.bind(this)
+    this.handleCloseHelpModal = this.handleCloseHelpModal.bind(this)
   }
 
   handleChangeAnticipation (anticipation) {
@@ -122,7 +125,6 @@ class RecipientDetailConfig extends Component {
   renderAnticipationSub () {
     const {
       anticipation,
-      openHelpModal,
       t,
     } = this.props
     const model = t('pages.add_recipient.anticipation_model')
@@ -136,7 +138,7 @@ class RecipientDetailConfig extends Component {
         type="button"
         size="tiny"
         fill="outline"
-        onClick={openHelpModal}
+        onClick={this.handleOpenHelpModal}
       >
         {t('pages.recipient_detail.help')}
       </Button>
@@ -144,7 +146,7 @@ class RecipientDetailConfig extends Component {
 
     if (anticipation.anticipationModel === 'manual') {
       return (
-        <div classNAme={style.alignItems}>
+        <div className={style.alignItems}>
           {`${model}: ${anticipationManual}`}
           <Spacing size="large" />
           {`${volume}: ${anticipation.anticipationVolumePercentage}%`}
@@ -286,7 +288,7 @@ class RecipientDetailConfig extends Component {
         <HelpModal
           isOpen={openedModal}
           onExit={this.handleCloseHelpModal}
-          title={t('pages.recipient_detail.help_title')}
+          title={t('pages.recipient_detail.title_modal')}
           t={t}
         />
       </Fragment>
@@ -307,7 +309,6 @@ RecipientDetailConfig.propTypes = {
   handleSaveAnticipation: PropTypes.func.isRequired,
   handleSaveBankAccount: PropTypes.func.isRequired,
   handleSaveTransfer: PropTypes.func.isRequired,
-  openHelpModal: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   transfer: PropTypes.shape({
     transferDay: PropTypes.string,

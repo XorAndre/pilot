@@ -20,6 +20,8 @@ import createRequiredValidation from '../../../validation/required'
 import createBetweenValidation from '../../../validation/between'
 import createLessThanValidation from '../../../validation/lessThan'
 
+import HelpModal from '../../RecipientDetails/Config/HelpModal'
+
 import style from './style.css'
 
 class ConfigurationsStep extends Component {
@@ -31,8 +33,8 @@ class ConfigurationsStep extends Component {
         anticipationDays: '15',
         anticipationModel: 'manual',
         anticipationVolumePercentage: '100',
-        transferDay: '5',
         openedModal: false,
+        transferDay: '5',
         transferEnabled: false,
         transferInterval: 'daily',
         transferWeekday: 'monday',
@@ -43,6 +45,8 @@ class ConfigurationsStep extends Component {
     this.onFormChange = this.onFormChange.bind(this)
     this.onFormSubmit = this.onFormSubmit.bind(this)
     this.transferHandler = this.transferHandler.bind(this)
+    this.handleOpenHelpModal = this.handleOpenHelpModal.bind(this)
+    this.handleCloseHelpModal = this.handleCloseHelpModal.bind(this)
   }
 
   onFormSubmit (formData, formErrors) {
@@ -189,7 +193,7 @@ class ConfigurationsStep extends Component {
         <HelpModal
           isOpen={openedModal}
           onExit={this.handleCloseHelpModal}
-          title={t('pages.recipient_detail.help_title')}
+          title={t('pages.recipient_detail.title_modal')}
           t={t}
         />
       </Fragment>

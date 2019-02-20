@@ -427,19 +427,32 @@
   "pages": {
     "recipient_detail": {
       "anticipation": "Antecipação",
+      "anticipation_1025": "Antecipação 1025",
+      "anticipation_1025_explanation_1": "Neste modelo você terá duas antecipações por mês, e terá os valores disponíveis em sua conta Pagar.me nos dias 10 e 25 de cada mês, caso eles sejam dias úteis - nesse caso, todas as vendas que você fizer no período entre o dia 26 e 10, serão recebidas no próximo dia 25, e todas as vendas que você fizer no período entre os dias 11 e 25, serão recebidas no próximo dia 10.",
+      "anticipation_dx": "Antecipação dx",
+      "anticipation_dx_explanation_1": "Antecipe todas as suas vendas escolhendo um intervalo de tempo para recebê-las. Suponha que você escolheu um intervalo de 15 dias, conhecido como D+15. Neste caso, as suas vendas realizadas hoje serão recebidas integralmente em 15 dias, ou seja, você receberá todas as parcelas de todas as vendas.",
       "bank_account": "Conta Bancária",
       "cancel": "Cancelar",
       "disabled": "Desabilitada",
       "enabled": "Habilitada",
+      "exit_modal": "Sair",
       "help": "Dúvidas?",
+      "manual_by_volume": "Manual por volume",
+      "manual_by_volume_explanation_1": "Neste modelo, você escolhe quando e quanto antecipar, respeitando os limites do percentual antecipável. Ou seja, se você não precisa sempre de antecipações, pode usar o modelo Manual por volume para fazer isso apenas quando for necessário.",
+      "manual_by_volume_explanation_2": "Na antecipação Manual por volume, você solicita um volume dos seus recebíveis pontualmente, quando sentir necessidade. O volume liberado para antecipar é um percentual das suas vendas e, nesse caso, é possível definir se deseja antecipar as parcelas do final (mais caras) ou do começo (mais econômicas), de forma que o custo financeiro do lojista seja sempre minimizado e que tenha controle sobre seus recebimentos ao longo do tempo.",
+      "automatic_by_volume": "Automático por volume",
+      "automatic_by_volume_explanation_1": "Antecipe parte das suas vendas. Nesse caso, você recebe diariamente um percentual do volume financeiro que tem a receber. ATENÇÃO: é preciso levar em conta que o percentual liberado para antecipar foi pré-fixado nas suas negociações, e este percentual varia de acordo com o volume que você já está antecipando. Para mais informações, veja:",
+      "automatic_by_volume_explanation_link": " Qual percentual das vendas pode ser recebido antecipadamente?",
       "save": "Salvar alterações",
       "transfer": "Transferência",
       "title": "Detalhes do Recebedor",
+      "title_modal": "Dúvidas sobre os modelos de antecipação?",
       "recipient_information": "Dados cadastrais do recebedor",
       "partner_information": "Dados cadastrais dos sócios",
       "metadata": "Metadados",
+      "number": "Este campo precisa ser um número",
       "required": "Este campo é obrigatório",
-      "number": "Este campo precisa ser um número"
+      "subtitle_modal": "Veja abaixo uma explicação sobre todos os modelos de antecipação disponíveis"
     },
     "add_recipient": {
       "account_digit": "Dígito verificador da conta",
