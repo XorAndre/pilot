@@ -300,11 +300,11 @@ class AddRecipients extends Component {
 
   render () {
     const {
+      currentStepNumber,
       error,
       isLoading,
       openModal,
       stepsStatus,
-      currentStepNumber,
     } = this.state
 
     const {

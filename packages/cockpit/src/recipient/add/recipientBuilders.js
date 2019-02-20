@@ -79,10 +79,11 @@ export const formatToTransfer = (data) => {
 }
 
 const format = (data) => {
-  const recipientBankAccountData = {}
+  const recipient = {}
   const { documentType } = data.identification
   const document = data.identification[documentType]
-  recipientBankAccountData.bank_account = {
+
+  recipient.bank_account = {
     bank_code: data.bankAccount.bank,
     agencia: data.bankAccount.agency,
     conta: data.bankAccount.number,
@@ -91,11 +92,12 @@ const format = (data) => {
     document_number: getOnlyNumbers(document),
     legal_name: data.bankAccount.name,
   }
+
   if (data.bankAccount.agency_digit) {
-    recipientBankAccountData.agencia_dv = data.bankAccount.agency_digit
+    recipient.bank_account.agencia_dv = data.bankAccount.agency_digit
   }
 
-  return recipientBankAccountData
+  return recipient
 }
 
 export const formatToBankAccount = (data) => {

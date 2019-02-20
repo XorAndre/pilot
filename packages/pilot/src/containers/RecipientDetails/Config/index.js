@@ -217,9 +217,13 @@ class RecipientDetailConfig extends Component {
       account.id === bankAccount.id
     )) || {}
 
-    return (
-      `${selectedAccount.name} - ${selectedAccount.bank} - ${selectedAccount.agency} - ${selectedAccount.number}`
-    )
+    const agency = (selectedAccount.agency_digit)
+      ? `${selectedAccount.agency}-${selectedAccount.agency_digit}`
+      : selectedAccount.agency
+
+    const number = `${selectedAccount.number}-${selectedAccount.number_digit}`
+
+    return `${selectedAccount.name} - ${selectedAccount.bank} - ${agency} - ${number}`
   }
 
   render () {

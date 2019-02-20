@@ -116,7 +116,11 @@ const renderBankAccount = (bankAccount, action, t) => (
           {t('pages.add_recipient.agency')}
         </span>
         <span className={styles.info}>
-          {bankAccount.agency + bankAccount.agency_digit}
+          {
+            (bankAccount.agency_digit)
+              ? `${bankAccount.agency}-${bankAccount.agency_digit}`
+              : bankAccount.agency
+          }
         </span>
       </Col>
       <Col>
