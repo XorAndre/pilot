@@ -3,3 +3,12 @@
 .paddingTop {
   padding-top: var(--spacing-small);
 }
+
+.alignItems {
+  display: flex;
+  align-items: center;
+}
+
+ .marginLeft {
+  margin-left: var(--spacing-small);
+}

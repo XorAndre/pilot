@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Spacing } from 'former-kit'
+import { Button, Spacing } from 'former-kit'
 
 import AnticipationIcon from 'emblematic-icons/svg/Undo32.svg'
 import TransferIcon from 'emblematic-icons/svg/Transaction32.svg'
@@ -15,6 +15,8 @@ import {
   userAccountDefaultProps,
 } from '../../AddRecipient/BankAccountStep'
 
+import style from './style.css'
+
 class RecipientDetailConfig extends Component {
   constructor (props) {
     super(props)
@@ -22,6 +24,7 @@ class RecipientDetailConfig extends Component {
       anticipation: this.props.anticipation,
       bankAccount: this.props.bankAccount,
       expanded: {},
+      openedModal: false,
       transfer: this.props.transfer,
     }
 
@@ -108,9 +111,18 @@ class RecipientDetailConfig extends Component {
     })
   }
 
+  handleOpenHelpModal () {
+    this.setState({ openedModal: true })
+  }
+
+  handleCloseHelpModal () {
+    this.setState({ openedModal: false })
+  }
+
   renderAnticipationSub () {
     const {
       anticipation,
+      openHelpModal,
       t,
     } = this.props
     const model = t('pages.add_recipient.anticipation_model')
@@ -119,30 +131,56 @@ class RecipientDetailConfig extends Component {
     const anticipationVolume = t('pages.add_recipient.automatic_volume')
     const anticipation1025 = t('pages.add_recipient.automatic_1025')
     const anticipationDx = t('pages.add_recipient.automatic_dx')
+    const HelpButton = (
+      <Button
+        type="button"
+        size="tiny"
+        fill="outline"
+        onClick={openHelpModal}
+      >
+        {t('pages.recipient_detail.help')}
+      </Button>
+    )
 
     if (anticipation.anticipationModel === 'manual') {
       return (
-        <Fragment>
+        <div classNAme={style.alignItems}>
           {`${model}: ${anticipationManual}`}
           <Spacing size="large" />
           {`${volume}: ${anticipation.anticipationVolumePercentage}%`}
-        </Fragment>
+          <Spacing size="large" />
+          {HelpButton}
+        </div>
       )
     }
     if (anticipation.anticipationModel === 'automatic_volume') {
       return (
-        <Fragment>
+        <div className={style.alignItems}>
           {`${model}: ${anticipationVolume}`}
           <Spacing size="large" />
           {`${volume}: ${anticipation.anticipationVolumePercentage}%`}
-        </Fragment>
+          <Spacing size="large" />
+          {HelpButton}
+        </div>
       )
     }
     if (anticipation.anticipationModel === 'automatic_1025') {
-      return `${model}: ${anticipation1025}`
+      return (
+        <div className={style.alignItems}>
+          {`${model}: ${anticipation1025}`}
+          <Spacing size="large" />
+          {HelpButton}
+        </div>
+      )
     }
     if (anticipation.anticipationModel === 'automatic_dx') {
-      return `${model}: ${anticipationDx}`
+      return (
+        <div className={style.alignItems}>
+          {`${model}: ${anticipationDx}`}
+          <Spacing size="large" />
+          {HelpButton}
+        </div>
+      )
     }
     return null
   }
@@ -190,6 +228,7 @@ class RecipientDetailConfig extends Component {
     const {
       anticipation,
       bankAccount,
+      openedModal,
       transfer,
     } = this.state
     return (
@@ -244,6 +283,12 @@ class RecipientDetailConfig extends Component {
             t={t}
           />
         </RecipientItem>
+        <HelpModal
+          isOpen={openedModal}
+          onExit={this.handleCloseHelpModal}
+          title={t('pages.recipient_detail.help_title')}
+          t={t}
+        />
       </Fragment>
     )
   }
@@ -262,6 +307,7 @@ RecipientDetailConfig.propTypes = {
   handleSaveAnticipation: PropTypes.func.isRequired,
   handleSaveBankAccount: PropTypes.func.isRequired,
   handleSaveTransfer: PropTypes.func.isRequired,
+  openHelpModal: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   transfer: PropTypes.shape({
     transferDay: PropTypes.string,
