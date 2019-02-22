@@ -116,7 +116,7 @@ storiesOf('Pages|Login', module)
     />
   ))
 
-storiesOf('Pages|Signup')
+storiesOf('Pages|Signup', module)
   .addDecorator(checkA11y)
   .add('Signup', () => (
     <Account
