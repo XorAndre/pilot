@@ -30,7 +30,7 @@
                 <path d="M248,3 C248,1.34314575 248.895431,0 250,0 C251.104569,0 252,1.34314575 252,3 L252,21 C252,22.6568542 251.104569,24 250,24 C248.895431,24 248,22.6568542 248,21 L248,3 Z" id="Shape" fill="#8459B9"></path>
                 <path d="M72,3 C72,1.34314575 72.8954305,0 74,0 C75.1045695,0 76,1.34314575 76,3 L76,21 C76,22.6568542 75.1045695,24 74,24 C72.8954305,24 72,22.6568542 72,21 L72,3 Z" id="Path" fill="#8459B9"></path>
             </g>
-            <g id="coluna-7" transform="translate(281.000000, 89.000000)" font-family="UniNeueRegular, Uni Neue" font-size="24" font-weight="normal">
+            <g id="coluna-7" transform="translate(281.000000, 89.000000)" font-family="inherit" font-size="24" font-weight="normal">
                 <text id="31" fill="#C2C5C7">
                     <tspan x="2" y="193">31</tspan>
                 </text>

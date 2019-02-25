@@ -31,7 +31,7 @@
                 <path d="M72,3 C72,1.34314575 72.8954305,0 74,0 C75.1045695,0 76,1.34314575 76,3 L76,21 C76,22.6568542 75.1045695,24 74,24 C72.8954305,24 72,22.6568542 72,21 L72,3 Z" id="Path" fill="#8459B9"></path>
             </g>
             <path d="M227.5,212.5 L227.5,249.5 L322.5,249.5 L322.5,212.5 L227.5,212.5 Z M2.5,254.5 L2.5,291.5 L189.5,291.5 L189.5,254.5 L2.5,254.5 Z" id="Rectangle-3" stroke="#979797" fill="#F6F6F6" fill-rule="nonzero"></path>
-            <g id="coluna-7" transform="translate(281.000000, 89.000000)" font-family="UniNeueRegular, Uni Neue" font-size="24" font-weight="normal">
+            <g id="coluna-7" transform="translate(281.000000, 89.000000)" font-family="inherit" font-size="24" font-weight="normal">
                 <text id="3" fill="#EAEAEA">
                     <tspan x="7" y="193">3</tspan>
                 </text>
