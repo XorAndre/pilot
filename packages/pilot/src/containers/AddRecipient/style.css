@@ -19,7 +19,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 0;
-  background-color: #eeeeee;
+  background-color: var(--color-light-silver-40);
 }
 
 .centerText {

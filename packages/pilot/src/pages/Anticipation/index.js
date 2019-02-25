@@ -328,8 +328,8 @@ class Anticipation extends Component {
     // Workaround for empty match.params
     // https://github.com/ReactTraining/react-router/issues/5870#issuecomment-394194338
     const match = matchPath(history.location.pathname, {
-      path: '/anticipation/:id',
       exact: true,
+      path: '/anticipation/:id',
       strict: false,
     })
 
@@ -890,11 +890,11 @@ Anticipation.propTypes = {
   }).isRequired,
   history: PropTypes.shape({
     goBack: PropTypes.func,
-    push: PropTypes.func,
-    replace: PropTypes.func,
     location: PropTypes.shape({
       pathname: PropTypes.string,
     }),
+    push: PropTypes.func,
+    replace: PropTypes.func,
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({

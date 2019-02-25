@@ -37,6 +37,7 @@ const toDropdownOptions = (account) => {
     agency,
     agency_digit: agencyDigit,
     bank,
+    id,
     name,
     number,
     number_digit: numberDigit,
@@ -50,7 +51,7 @@ const toDropdownOptions = (account) => {
 
   return {
     name: `${name} - ${bank} - ${agencyNumber} - ${accountNumber}`,
-    value: account.id,
+    value: id,
   }
 }
 

@@ -100,4 +100,3 @@ PartnerInfo.defaultProps = {
 }
 
 export default PartnerInfo
-
