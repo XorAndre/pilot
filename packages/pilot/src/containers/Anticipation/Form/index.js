@@ -3,23 +3,16 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { always } from 'ramda'
 import {
-  Button,
   Card,
-  CardActions,
-  CardContent,
   Col,
   Row,
-  Grid,
-  Spacing,
   Tooltip,
   isMomentPropValidation,
 } from 'former-kit'
 import IconInfo from 'emblematic-icons/svg/Info32.svg'
 
-import TotalDisplay from '../../../components/TotalDisplay'
 import Form from './Form'
-import formatCurrency from '../../../formatters/currency'
-import style from './style.css'
+import Results from './Results'
 
 const renderInfo = (text, placement) => (
   <Tooltip
@@ -29,12 +22,6 @@ const renderInfo = (text, placement) => (
     <IconInfo height={16} width={16} />
   </Tooltip>
 )
-
-const colors = {
-  amount: '#37cc9a',
-  cost: '#ff796f',
-  requested: '#37cc9a',
-}
 
 class AnticipationFormContainer extends Component {
   constructor (props) {
@@ -131,135 +118,19 @@ class AnticipationFormContainer extends Component {
             tablet={12}
             tv={4}
           >
-            <Card className={style.summaryContainer}>
-              <CardContent className={style.summary}>
-                <Grid>
-                  <Row>
-                    <Col
-                      align="end"
-                      desk={12}
-                      palm={12}
-                      tablet={12}
-                      tv={12}
-                    >
-                      <TotalDisplay
-                        align="end"
-                        amount={approximateRequested}
-                        amountSize="huge"
-                        color={colors.requested}
-                        title={
-                          <div className={style.titleInfo}>
-                            {renderInfo(
-                              t('pages.anticipation.requested.advise'),
-                              'leftMiddle'
-                            )}
-                            <Spacing size="tiny" />
-                            <span>{t('pages.anticipation.requested.title')}</span>
-                          </div>
-                        }
-                        titleColor="#757575"
-                        titleSize="small"
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col
-                      align="end"
-                      desk={12}
-                      palm={12}
-                      tablet={12}
-                      tv={12}
-                    >
-                      <TotalDisplay
-                        align="end"
-                        amount={(cost + transferCost)}
-                        amountSize="huge"
-                        color={colors.cost}
-                        subtitle={
-                          <span>
-                            <Spacing size="tiny" />
-                            <div>
-                              {t(
-                                'pages.anticipation.cost.anticipation',
-                                { cost: formatCurrency(cost) }
-                              )}
-                            </div>
-                            {isAutomaticTransfer &&
-                              <div>
-                                {t(
-                                  'pages.anticipation.cost.transfer',
-                                  { cost: formatCurrency(transferCost) }
-                                )}
-                              </div>
-                            }
-                          </span>
-                        }
-                        title={
-                          <div className={style.titleInfo}>
-                            {renderInfo(
-                              t('pages.anticipation.cost.advise'),
-                              'leftMiddle'
-                            )}
-                            <Spacing size="tiny" />
-                            <span>{t('pages.anticipation.cost.title')}</span>
-                          </div>
-                        }
-                        titleColor="#757575"
-                        titleSize="small"
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col
-                      align="end"
-                      desk={12}
-                      palm={12}
-                      tablet={12}
-                      tv={12}
-                    >
-                      <TotalDisplay
-                        align="end"
-                        amount={amount}
-                        amountSize="huge"
-                        color={amount > 0
-                          ? colors.amount
-                          : colors.cost
-                        }
-                        title={
-                          <div className={style.titleInfo}>
-                            {renderInfo(
-                              t('pages.anticipation.amount.advise'),
-                              'leftMiddle'
-                            )}
-                            <Spacing size="tiny" />
-                            <span>{t('pages.anticipation.amount.title')}</span>
-                          </div>
-                        }
-                        titleColor="#757575"
-                        titleSize="small"
-                      />
-                    </Col>
-                  </Row>
-                </Grid>
-              </CardContent>
-              <CardActions>
-                <Button
-                  disabled={loading || hasErrors || amount < 0}
-                  fill="outline"
-                  onClick={onCancel}
-                  type="button"
-                >
-                  {t('pages.anticipation.cancel')}
-                </Button>
-                <Button
-                  disabled={loading || hasErrors || amount < 0}
-                  onClick={onConfirm}
-                  type="button"
-                >
-                  {t('pages.anticipation.continue')}
-                </Button>
-              </CardActions>
-            </Card>
+            <Results
+              amount={amount}
+              approximateRequested={approximateRequested}
+              cost={cost}
+              hasErrors={hasErrors}
+              isAutomaticTransfer={isAutomaticTransfer}
+              loading={loading}
+              onCancel={onCancel}
+              onConfirm={onConfirm}
+              renderInfo={renderInfo}
+              t={t}
+              transferCost={transferCost}
+            />
           </Col>
         </Row>
       </Fragment>

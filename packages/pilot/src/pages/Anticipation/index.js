@@ -7,4 +7,3 @@ export {
   destroyAnticipation,
 } from './actions'
 export { default as epic } from './epic'
-
