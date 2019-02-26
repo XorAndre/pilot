@@ -34,10 +34,10 @@ class ConfigurationsStep extends Component {
         anticipationDays: '15',
         anticipationModel: 'manual',
         anticipationVolumePercentage: '100',
-        transferDay: '5',
+        openedModal: false,
+        transferDay: '1',
         transferEnabled: false,
         transferInterval: 'daily',
-        transferWeekday: 'monday',
         ...props.data,
       },
       openedModal: false,
@@ -135,7 +135,6 @@ class ConfigurationsStep extends Component {
             transferDay: [required, isNumber],
             transferEnabled: [required],
             transferInterval: [required],
-            transferWeekday: [required],
           }}
         >
           <CardContent>
@@ -218,7 +217,6 @@ ConfigurationsStep.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   errors: PropTypes.shape({
     anticipationDays: PropTypes.string,
@@ -227,7 +225,6 @@ ConfigurationsStep.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.string,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   maximumAnticipationDays: PropTypes.number,
   minimumAnticipationDelay: PropTypes.number,

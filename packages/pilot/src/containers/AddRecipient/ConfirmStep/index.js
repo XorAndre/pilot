@@ -196,7 +196,6 @@ const renderTransferInterval = (configuration, t) => {
     transferDay,
     transferEnabled,
     transferInterval,
-    transferWeekday,
   } = configuration
 
   const transferTypes = {
@@ -224,7 +223,7 @@ const renderTransferInterval = (configuration, t) => {
             <span className={styles.info}>
               {
                 (transferInterval === 'weekly')
-                  ? t(`pages.add_recipient.${transferWeekday}`)
+                  ? t(`pages.add_recipient.${transferDay}`)
                   : transferDay
               }
             </span>
@@ -353,7 +352,6 @@ ConfirmStep.propTypes = {
       transferDay: PropTypes.string,
       transferEnabled: PropTypes.bool,
       transferInterval: PropTypes.string,
-      transferWeekday: PropTypes.string,
     }).isRequired,
     [IDENTIFICATION]: PropTypes.shape({
       cnpj: PropTypes.string,
@@ -394,7 +392,6 @@ ConfirmStep.defaultProps = {
       transferDay: '',
       transferEnabled: false,
       transferInterval: '',
-      transferWeekday: '',
     },
     [IDENTIFICATION]: {
       cnpj: '',

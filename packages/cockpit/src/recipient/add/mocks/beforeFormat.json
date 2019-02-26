@@ -12,10 +12,9 @@
     "anticipationDays": "15",
     "anticipationModel": "manual",
     "anticipationVolumePercentage": "100",
-    "transferDay": "5",
+    "transferDay": "1",
     "transferEnabled": true,
-    "transferInterval": "weekly",
-    "transferWeekday": "tuesday"
+    "transferInterval": "weekly"
   },
   "identification": {
     "cnpj": "",

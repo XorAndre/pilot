@@ -51,6 +51,23 @@ const antecipationModel = (data) => {
   return 'custom'
 }
 
+const renderColumnTransferDay = (data, t) => {
+  const weekDaysMap = {
+    1: t('pages.add_recipient.monday'),
+    2: t('pages.add_recipient.tuesday'),
+    3: t('pages.add_recipient.wednesday'),
+    4: t('pages.add_recipient.thursday'),
+    5: t('pages.add_recipient.friday'),
+  }
+
+  return (
+    {
+      content: weekDaysMap[data.transfer_day],
+      title: t('pages.recipients.transfer_day'),
+    }
+  )
+}
+
 const getDefaultColumns = ({
   onDetailsClick,
   t,

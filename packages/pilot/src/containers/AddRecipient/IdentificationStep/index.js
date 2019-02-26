@@ -569,7 +569,6 @@ IdentificationStep.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.string,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
