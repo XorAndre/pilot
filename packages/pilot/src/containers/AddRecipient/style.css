@@ -27,4 +27,9 @@
   font-size: 16px;
   font-weight: var(--title-font-style);
   text-align: center;
+  margin-top: 0;
+}
+
+.title {
+  font-size: 24px;
 }

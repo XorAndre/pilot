@@ -17,23 +17,20 @@ const ConclusionStep = ({
 }) => (
   <CardContent className={style.flex}>
     <SuccessIcon />
+    <h2 className={style.title}>
+      {t('pages.add_recipient.everything_ok')}
+    </h2>
     <p className={style.centerText}>
       {t('pages.add_recipient.recipient_created_success')}
       <br />
       {t('pages.add_recipient.can_see_recipient')}
     </p>
     <div>
-      <Button
-        fill="outline"
-        onClick={onExit}
-      >
+      <Button fill="outline" onClick={onExit}>
         {t('pages.add_recipient.exit')}
       </Button>
       <Spacing size="large" />
-      <Button
-        fill="gradient"
-        onClick={onViewDetails}
-      >
+      <Button fill="gradient" onClick={onViewDetails}>
         {t('pages.add_recipient.see_recipient')}
       </Button>
     </div>
