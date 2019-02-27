@@ -44,6 +44,7 @@ const partnerInitialization = {
 }
 
 const getValidations = (data, t) => {
+  console.log(data)
   const requiredMessage =
     t('pages.add_recipient.field_required')
 
@@ -113,7 +114,6 @@ const getValidations = (data, t) => {
       partner4: partnerValidations,
     }
   }
-
   return {
     cpf: [required, validateCpfCnpj],
     cpfEmail: [required, validateEmailIfExists],

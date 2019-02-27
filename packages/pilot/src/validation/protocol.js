@@ -1,2 +1,3 @@
-const webSite = /https?:\/\/.+/
-export default message => value => !webSite.test(value) && message
+import isUrl from 'validator/lib/isURL'
+
+export default message => value => (!value || !isUrl(value)) && message
