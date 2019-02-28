@@ -44,7 +44,6 @@ const partnerInitialization = {
 }
 
 const getValidations = (data, t) => {
-  console.log(data)
   const requiredMessage =
     t('pages.add_recipient.field_required')
 

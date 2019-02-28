@@ -19,10 +19,9 @@ const mockData = {
     anticipationDays: '25',
     anticipationModel: 'automatic_volume',
     anticipationVolumePercentage: '50',
-    transferDay: '15',
+    transferDay: '1',
     transferEnabled: true,
     transferInterval: 'monthly',
-    transferWeekday: 'tuesday',
   },
   identification: {
     cnpj: '11.111.111/1111-11',
