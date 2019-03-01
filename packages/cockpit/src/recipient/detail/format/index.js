@@ -46,12 +46,14 @@ function formatAntecipationAndTransferConfiguration (data) {
       cpfPhone: phone,
       cpfUrl: register.site_url,
       documentType: 'cpf',
+      cnpj: '',
     }
   } else {
     identification = {
       ...identification,
       cpf: data.bank_account.document_number,
       cpfInformation: false,
+      cnpj: '',
     }
   }
 
@@ -70,12 +72,14 @@ function formatAntecipationAndTransferConfiguration (data) {
       documentType: 'cnpj',
       partnerNumber: partners.length.toString(),
       ...partnersData,
+      cpf: '',
     }
   } else {
     identification = {
       ...identification,
       cnpj: data.bank_account.document_number,
       cnpjInformation: false,
+      cpf: '',
     }
   }
 
