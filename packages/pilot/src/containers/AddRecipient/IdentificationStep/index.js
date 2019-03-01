@@ -54,10 +54,6 @@ const getValidations = (data, t) => {
     validateCpfCnpjMessage = t('pages.add_recipient.field_invalid_cnpj')
   }
 
-  if (data.documentType === 'cnpj' && data.cnpjInformation === true) {
-    validateCpfCnpjMessage = t('pages.add_recipient.field_invalid_cpf')
-  }
-
   const validateEmailMessage =
     t('pages.add_recipient.field_invalid_email')
 
