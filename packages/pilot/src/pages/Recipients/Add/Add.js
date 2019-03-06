@@ -72,7 +72,7 @@ class AddRecipientPage extends Component {
   }
 
   onViewDetails (recipientId) {
-    this.props.history.replace(`/recipients/details/${recipientId}`)
+    this.props.history.replace(`/recipients/detail/${recipientId}`)
   }
 
   submitRecipient (recipient) {
