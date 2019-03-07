@@ -34,13 +34,13 @@ class ConfigurationsStep extends Component {
         anticipationDays: '15',
         anticipationModel: 'manual',
         anticipationVolumePercentage: '100',
-        openedModal: false,
         transferDay: '5',
         transferEnabled: false,
         transferInterval: 'daily',
         transferWeekday: 'monday',
         ...props.data,
       },
+      openedModal: false,
     }
 
     this.onFormChange = this.onFormChange.bind(this)
