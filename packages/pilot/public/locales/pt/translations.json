@@ -457,7 +457,7 @@
     },
     "add_recipient": {
       "account_digit": "Dígito",
-      "account_name": "Nome da conta",
+      "account_name": "Nome da conta bancária",
       "account_type": "Tipo de conta bancária",
       "account": "Conta",
       "add_account": "Adicionar uma conta",
@@ -564,7 +564,7 @@
       "type_account": "Digite o número da conta",
       "type_agency_digit": "Digite o dígito verificador da agência",
       "type_agency_number": "Digite o número da agência",
-      "type_bank_name": "Digite o nome do banco",
+      "type_bank_name": "Digite o nome ou código do banco",
       "url": "URL do Site",
       "wednesday": "Quarta-feira",
       "weekly": "Semanal",
@@ -782,7 +782,7 @@
         "registration": "Em Credenciamento",
         "suspended": "Temporariamente Suspenso"
       },
-      "text_search_placeholder": "Filtre por ID do recebedor, ID da conta bancária ou nome da conta",
+      "text_search_placeholder": "Filtre por nome da conta bancária, id da conta bancária ou id do recebedor.",
       "title": "Recebedores",
       "total_amount": "Total",
       "transfer_day": "Dia da transferência",
