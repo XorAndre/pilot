@@ -21,6 +21,7 @@ import createBetweenValidation from '../../../validation/between'
 import createLessThanValidation from '../../../validation/lessThan'
 
 import HelpModal from '../../RecipientDetails/Config/HelpModal'
+import { virtualPageView } from '../../../vendor/googleTagManager'
 
 import style from './style.css'
 
@@ -47,6 +48,13 @@ class ConfigurationsStep extends Component {
     this.transferHandler = this.transferHandler.bind(this)
     this.handleOpenHelpModal = this.handleOpenHelpModal.bind(this)
     this.handleCloseHelpModal = this.handleCloseHelpModal.bind(this)
+  }
+
+  componentDidMount () {
+    virtualPageView({
+      path: '/virtual/recipient/add/configuration',
+      title: 'Add Recipient - Configuration',
+    })
   }
 
   onFormSubmit (formData, formErrors) {

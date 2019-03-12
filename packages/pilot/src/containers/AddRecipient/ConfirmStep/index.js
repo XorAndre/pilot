@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -17,6 +17,7 @@ import PartnerInfo from './PartnerInfo'
 import styles from './style.css'
 
 import { accountProps, accountDefaultProps } from '../BankAccountStep'
+import { virtualPageView } from '../../../vendor/googleTagManager'
 
 import {
   BANK_ACCOUNT,
@@ -265,57 +266,70 @@ const renderTransferConfig = (configuration, action, t) => {
   )
 }
 
-const ConfirmStep = ({
-  data,
-  onBack,
-  onCancel,
-  onContinue,
-  onEdit,
-  t,
-}) => (
-  <Fragment>
-    <CardContent className={styles.paddingBottom}>
-      <h3 className={styles.title}>{t('pages.add_recipient.confirm_recipient_registration')}</h3>
-      <h4 className={styles.subtitle}>
-        {t('pages.add_recipient.confirm_and_finish')}
-      </h4>
-      <Grid className={styles.paddingBottom}>
-        <hr className={styles.line} />
-        {renderReceiverInfo(data[IDENTIFICATION], onEdit, t)}
-        {renderPartnerInfo(data[IDENTIFICATION], onEdit, t)}
-        {renderBankAccount(data[BANK_ACCOUNT], onEdit, t)}
-        {renderAnticipationConfig(data[CONFIGURATION], onEdit, t)}
-        {renderTransferConfig(data[CONFIGURATION], onEdit, t)}
-      </Grid>
-    </CardContent>
-    <CardActions>
-      <Button
-        type="button"
-        relevance="low"
-        onClick={onCancel}
-        fill="outline"
-      >
-        {t('pages.add_recipient.cancel')}
-      </Button>
-      <Spacing />
-      <Button
-        type="button"
-        onClick={onBack}
-        fill="outline"
-      >
-        {t('pages.add_recipient.back')}
-      </Button>
-      <Spacing size="medium" />
-      <Button
-        type="submit"
-        fill="gradient"
-        onClick={() => onContinue()}
-      >
-        {t('pages.add_recipient.create_recipient')}
-      </Button>
-    </CardActions>
-  </Fragment>
-)
+class ConfirmStep extends Component {
+  componentDidMount () {
+    virtualPageView({
+      path: '/virtual/recipient/add/confirm',
+      title: 'Add Recipient - Confirm',
+    })
+  }
+
+  render () {
+    const {
+      data,
+      onBack,
+      onCancel,
+      onContinue,
+      onEdit,
+      t,
+    } = this.props
+
+    return (
+      <Fragment>
+        <CardContent className={styles.paddingBottom}>
+          <h3 className={styles.title}>{t('pages.add_recipient.confirm_recipient_registration')}</h3>
+          <h4 className={styles.subtitle}>
+            {t('pages.add_recipient.confirm_and_finish')}
+          </h4>
+          <Grid className={styles.paddingBottom}>
+            <hr className={styles.line} />
+            {renderReceiverInfo(data[IDENTIFICATION], onEdit, t)}
+            {renderPartnerInfo(data[IDENTIFICATION], onEdit, t)}
+            {renderBankAccount(data[BANK_ACCOUNT], onEdit, t)}
+            {renderAnticipationConfig(data[CONFIGURATION], onEdit, t)}
+            {renderTransferConfig(data[CONFIGURATION], onEdit, t)}
+          </Grid>
+        </CardContent>
+        <CardActions>
+          <Button
+            type="button"
+            relevance="low"
+            onClick={onCancel}
+            fill="outline"
+          >
+            {t('pages.add_recipient.cancel')}
+          </Button>
+          <Spacing />
+          <Button
+            type="button"
+            onClick={onBack}
+            fill="outline"
+          >
+            {t('pages.add_recipient.back')}
+          </Button>
+          <Spacing size="medium" />
+          <Button
+            type="submit"
+            fill="gradient"
+            onClick={() => onContinue()}
+          >
+            {t('pages.add_recipient.create_recipient')}
+          </Button>
+        </CardActions>
+      </Fragment>
+    )
+  }
+}
 
 const partnerPropTypes = PropTypes.shape({
   cpf: PropTypes.string,

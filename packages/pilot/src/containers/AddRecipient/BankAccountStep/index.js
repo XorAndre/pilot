@@ -16,6 +16,7 @@ import AddAccount, {
 } from './AddAccount'
 
 import SelectAccount, { userAccountProps } from './SelectAccount'
+import { virtualPageView } from '../../../vendor/googleTagManager'
 import style from './style.css'
 
 const hasItems = complement(either(isEmpty, isNil))
@@ -40,6 +41,13 @@ class BankAccountStep extends Component {
 
     this.state = { selectedForm }
     this.handleFormSelectionChange = this.handleFormSelectionChange.bind(this)
+  }
+
+  componentDidMount () {
+    virtualPageView({
+      path: '/virtual/recipient/add/bank_account',
+      title: 'Add Recipient - Bank Account',
+    })
   }
 
   handleFormSelectionChange (selectedForm) {

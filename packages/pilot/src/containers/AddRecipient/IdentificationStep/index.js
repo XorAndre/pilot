@@ -18,6 +18,7 @@ import {
 
 import { range } from 'ramda'
 
+import { virtualPageView } from '../../../vendor/googleTagManager'
 import createCpfCnpjValidation from '../../../validation/cpfCnpj'
 import createEmailValidation from '../../../validation/email'
 import createPhoneValidation from '../../../validation/phone'
@@ -158,6 +159,13 @@ class IdentificationStep extends Component {
     this.toggleAdditionalInformation =
       this.toggleAdditionalInformation.bind(this)
     this.validateRepeatedDocuments = this.validateRepeatedDocuments.bind(this)
+  }
+
+  componentDidMount () {
+    virtualPageView({
+      path: '/virtual/recipient/add/identification',
+      title: 'Add Recipient - Identification',
+    })
   }
 
   onFormSubmit (formData, formErrors) {
