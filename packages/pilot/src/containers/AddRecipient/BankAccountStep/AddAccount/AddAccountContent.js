@@ -27,7 +27,7 @@ const AddAccountContent = ({ t }) => {
   return (
     <Grid>
       <Row>
-        <Col tv={5} desk={7} tablet={9} palm={8}>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
           <SearchableDropdown
             name="bank"
             placeholder={t('pages.add_recipient.type_bank_name')}
@@ -38,7 +38,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
       </Row>
       <Row>
-        <Col tv={3} desk={4} tablet={5} palm={8}>
+        <Col tv={2} desk={3} tablet={4} palm={8}>
           <FormInput
             type="text"
             label={t('pages.add_recipient.agency')}
@@ -46,7 +46,7 @@ const AddAccountContent = ({ t }) => {
             placeholder={t('pages.add_recipient.type_agency_number')}
           />
         </Col>
-        <Col tv={2} desk={3} tablet={4} palm={8}>
+        <Col tv={1} desk={1} tablet={1} palm={8}>
           <FormInput
             type="text"
             label={t('pages.add_recipient.agency_digit')}
@@ -56,7 +56,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
       </Row>
       <Row>
-        <Col tv={3} desk={4} tablet={5} palm={8}>
+        <Col tv={2} desk={3} tablet={4} palm={8}>
           <FormInput
             type="text"
             label={t('pages.add_recipient.account')}
@@ -64,7 +64,7 @@ const AddAccountContent = ({ t }) => {
             placeholder={t('pages.add_recipient.type_account')}
           />
         </Col>
-        <Col tv={2} desk={3} tablet={4} palm={8}>
+        <Col tv={1} desk={1} tablet={1} palm={8}>
           <FormInput
             type="text"
             label={t('pages.add_recipient.account_digit')}
@@ -74,7 +74,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
       </Row>
       <Row>
-        <Col tv={4} desk={5} tablet={6} palm={8}>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
           <FormDropdown
             name="type"
             label={t('pages.add_recipient.account_type')}
@@ -83,7 +83,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
       </Row>
       <Row>
-        <Col tv={5} desk={7} tablet={9} palm={8}>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
           <FormInput
             type="text"
             label={t('pages.add_recipient.account_name')}
