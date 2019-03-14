@@ -34,6 +34,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { withRouter } from 'react-router-dom'
 import { Alert } from 'former-kit'
+import { withError } from '../ErrorBoundary'
 import {
   requestBalance,
   receiveBalance,
@@ -95,7 +96,8 @@ const enhanced = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withRouter
+  withRouter,
+  withError
 )
 
 const isNilOrEmpty = anyPass([isNil, isEmpty])
@@ -342,6 +344,7 @@ class Balance extends Component {
         loading: true,
       },
     })
+
     return getBulkAnticipationsLimits(client, id)
       .then((anticipationLimits) => {
         this.setState({
@@ -352,7 +355,8 @@ class Balance extends Component {
           },
         })
       })
-      .catch(() => {
+      .catch((error) => {
+        this.props.throwError(error)
         this.setState({
           anticipation: {
             error: true,
@@ -633,6 +637,7 @@ Balance.propTypes = {
     },
   }),
   t: PropTypes.func.isRequired,
+  throwError: PropTypes.func,
   user: PropTypes.shape({
     permission: PropTypes.oneOf([
       'admin', 'read_only', 'write',
@@ -644,6 +649,7 @@ Balance.defaultProps = {
   company: null,
   error: null,
   query: null,
+  throwError: identity,
   user: null,
 }
 
