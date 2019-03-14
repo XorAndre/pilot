@@ -544,6 +544,13 @@
       "token_capture_link": "Mais informações",
       "value_to_capture": "Valor a ser capturado R$"
     },
+    "error": {
+      "back_to_home": "voltar para login",
+      "no_connection": "Por favor verifique sua conexão com a internet e recarrege a página",
+      "no_connection_title": "Sem internet?",
+      "unauthorized": "Parece que sua sessão expirou",
+      "unauthorized_title": "Oh não!"
+    },
     "manual_review": {
       "approve_action": "Aprovar transação",
       "legal_warning_approves_approve": "aprovação.",

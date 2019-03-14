@@ -1,7 +1,15 @@
+import React from 'react'
 import {
+  __,
   append,
+  curry,
+  either,
   equals,
+  isEmpty,
   includes,
+  pipe,
+  props,
+  propSatisfies,
   reject,
   uncurryN,
   unless,
@@ -11,10 +19,13 @@ import {
   API_ERROR_RECEIVE,
   CLEAR_ALL_ERRORS,
   CLEAR_ERROR,
+  CLEAR_ERRORS_BY_CODE,
   REACT_ERROR_RECEIVE,
 } from '.'
 import getResponseError from '../../formatters/apiError'
 import getReactError from '../../formatters/reactError'
+
+import UnauthorizedError from './ErrorsStates/Unauthorized'
 
 const initialState = []
 
@@ -28,42 +39,84 @@ const removeError = uncurryN(2, err => when(
   reject(equals(err))
 ))
 
+const isInCodes = codes => includes(__, codes)
+
+const hasStatusInCodes = codes => propSatisfies(isInCodes(codes), 'status')
+
+const isGenericApiError = pipe(
+  props(['type', 'global', 'status']),
+  equals(['apiError', true, undefined])
+)
+
+const removeErrorsByStatusCode = uncurryN(
+  2,
+  codes => reject(either(
+    hasStatusInCodes(codes),
+    isGenericApiError
+  ))
+)
+
 const classifier = {
-  400: 'not authorized',
-  401: 'not authorized',
-  403: 'not authorized',
+  400: () => 'Bad request',
+  401: () => <UnauthorizedError />,
+  403: () => 'Forbiden',
+  404: () => 'Not found',
+  405: () => 'Method Not Allowed',
+  410: () => <UnauthorizedError />,
+  500: () => 'Internal server error',
 }
 
-const mapErrorToAction = (error) => {
-  const x = classifier[error.status]
-  // add call to action field to the error object
-  // use this call to action to get the empty state which will be shown
-  // add routes and global fields to the error
-  // map all api and react errors
+const addErrorComponent = (error) => {
+  let getErrorComponent = classifier[error.status]
+  const globalError = !error.affectedRoutes || isEmpty(error.affectedRoutes)
 
-  return null
+  if (!getErrorComponent && globalError) {
+    getErrorComponent = () => 'Generic error'
+  }
+
+  return {
+    ...error,
+    getErrorComponent,
+    global: globalError,
+  }
+}
+
+const formatError = uncurryN(3, (formatter, error) => pipe(
+  curry(formatter)(error),
+  addErrorComponent
+))
+
+const addError = (formatter, payload, state) => {
+  let formmatedError
+  if (payload && payload.error && payload.affectedRoutes) {
+    formmatedError = formatError(
+      formatter,
+      payload.error,
+      payload.affectedRoutes
+    )
+  } else {
+    formmatedError = formatError(formatter, payload, payload.affectedRoutes)
+  }
+
+  return addNewError(formmatedError, state)
 }
 
 export default function loginReducer (state = initialState, action) {
   switch (action.type) {
     case API_ERROR_RECEIVE: {
-      const error = getResponseError(action.payload)
-
-      const newState = addNewError(error, state)
-
-      debugger // eslint-disable-line
-
-      return newState
+      return addError(
+        getResponseError,
+        action.payload,
+        state
+      )
     }
 
     case REACT_ERROR_RECEIVE: {
-      const error = getReactError(action.payload)
-
-      const newState = addNewError(error, state)
-
-      debugger // eslint-disable-line
-
-      return newState
+      return addError(
+        getReactError,
+        action.payload.error,
+        state
+      )
     }
 
     case CLEAR_ERROR: {
@@ -76,6 +129,12 @@ export default function loginReducer (state = initialState, action) {
 
     case CLEAR_ALL_ERRORS:
       return initialState
+
+    case CLEAR_ERRORS_BY_CODE: {
+      const newState = removeErrorsByStatusCode(action.payload, state)
+
+      return newState
+    }
 
     default:
       return state
