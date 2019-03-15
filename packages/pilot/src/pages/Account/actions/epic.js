@@ -28,17 +28,24 @@ import {
   receiveRecipientBalance,
 } from '.'
 
+import { store } from '../../../App'
+
 import { WITHDRAW_RECEIVE } from '../../Withdraw/actions'
+import { receiveError } from '../../ErrorBoundary'
 import { activeCompanyLogin, inactiveCompanyLogin } from '../../../vendor/googleTagManager'
 
 const getRecipientId = pathOr(null, ['account', 'company', 'default_recipient_id', env])
+
+const errorHandler = (error) => {
+  store.dispatch(receiveError(error))
+}
 
 const loginEpic = action$ =>
   action$
     .pipe(
       ofType(LOGIN_REQUEST),
       mergeMap(action => pagarme.client.connect(action.payload)
-        .then(cockpit)
+        .then(client => cockpit(client, errorHandler))
         .then(receiveLogin)
         .catch((error) => {
           try {
