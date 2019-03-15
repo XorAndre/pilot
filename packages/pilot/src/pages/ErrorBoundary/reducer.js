@@ -26,6 +26,7 @@ import getResponseError from '../../formatters/apiError'
 import getReactError from '../../formatters/reactError'
 
 import UnauthorizedError from './ErrorsStates/Unauthorized'
+import NoConnectionError from './ErrorsStates/NoConnection'
 
 const initialState = []
 
@@ -104,6 +105,19 @@ const addError = (formatter, payload, state) => {
 export default function loginReducer (state = initialState, action) {
   switch (action.type) {
     case API_ERROR_RECEIVE: {
+      const error = getResponseError(action.payload)
+      // eslint-disable-next-line no-undef
+      if (error.message === 'Failed to fetch' && !navigator.onLine) {
+        return addNewError(
+          {
+            ...error,
+            getErrorComponent: () => <NoConnectionError />,
+            global: true,
+          },
+          state
+        )
+      }
+
       return addError(
         getResponseError,
         action.payload,
