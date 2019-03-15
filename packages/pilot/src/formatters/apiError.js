@@ -1,14 +1,31 @@
-export const getResponseErrorMessage = ({ message, response }) => {
-  if (response && response.errors) {
-    const error = response.errors[0]
-    return error.message
-      ? error.message
-      : message
+import { getErrorMessage, getErrorName } from './error'
+
+const getResponseErrorStatus = ({ response, status }) => (
+  response && response.status
+    ? response.status
+    : status
+)
+
+const getResponseError = (responseError, affectedRoutes) => {
+  if (responseError) {
+    return {
+      affectedRoutes,
+      message: getErrorMessage(responseError),
+      method: responseError.method,
+      name: getErrorName(responseError),
+      status: getResponseErrorStatus(responseError),
+      type: 'apiError',
+      url: responseError.url,
+    }
   }
 
-  return message
+  return null
 }
 
-export default {
-  getResponseErrorMessage,
+export default getResponseError
+
+export {
+  getErrorMessage as getResponseErrorMessage,
+  getErrorName as getResponseErrorName,
+  getResponseErrorStatus,
 }
