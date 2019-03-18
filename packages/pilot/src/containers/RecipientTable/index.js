@@ -38,7 +38,6 @@ const RecipientTable = ({
   onSelectRow,
   pagination,
   push,
-  query,
   rows,
   selectedRows,
   t,
@@ -60,10 +59,9 @@ const RecipientTable = ({
         >
           <Filter
             disabled={loading}
-            onChange={onFilterChange}
+            onConfirm={onFilterChange}
             onClear={onFilterClear}
             options={filterOptions}
-            query={query}
             t={t}
           >
             <Input
@@ -180,9 +178,6 @@ RecipientTable.propTypes = {
     total: PropTypes.number,
   }).isRequired,
   push: PropTypes.func.isRequired,
-  query: PropTypes.shape({
-    search: PropTypes.string,
-  }),
   rows: PropTypes.arrayOf(PropTypes.shape({
     anticipatable_volume_percentage: PropTypes.number,
     automatic_anticipation_days: PropTypes.string,
@@ -203,12 +198,6 @@ RecipientTable.propTypes = {
   })).isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   t: PropTypes.func.isRequired,
-}
-
-RecipientTable.defaultProps = {
-  query: {
-    search: '',
-  },
 }
 
 export default RecipientTable
