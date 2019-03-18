@@ -97,6 +97,15 @@ const mockConfiguration = {
     anticipationModel: 'automatic_volume',
     anticipationVolumePercentage: '85',
   },
+  bankAccount: {
+    agency: '1111',
+    agency_digit: '',
+    bank: '001',
+    name: 'Conta Bancária',
+    number: '11111',
+    number_digit: '1',
+    type: 'conta_corrente',
+  },
   onCancel: action('Cancel'),
   onSave: action('Saved'),
   transfer: {
