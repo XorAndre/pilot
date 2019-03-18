@@ -40,28 +40,28 @@ const mockData = {
     documentType: 'cnpj',
     partner0: {
       cpf: '222.222.222-22',
-      name: 'Paulo Barroso',
       email: 'email@mail.com',
+      name: 'Paulo Barroso',
     },
     partner1: {
       cpf: '111.111.111-11',
-      name: 'Guilherme Barroso',
       email: 'email@mail.com',
+      name: 'Guilherme Barroso',
     },
     partner2: {
       cpf: '',
-      name: '',
       email: '',
+      name: '',
     },
     partner3: {
       cpf: '',
-      name: '',
       email: '',
+      name: '',
     },
     partner4: {
       cpf: '',
-      name: '',
       email: '',
+      name: '',
     },
     partnerNumber: '2',
   },
