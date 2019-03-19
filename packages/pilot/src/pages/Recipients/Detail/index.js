@@ -1,11 +1,12 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import withRouter from 'react-router-dom/withRouter'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { Alert } from 'former-kit'
+import { Alert, Snackbar } from 'former-kit'
 import IconInfo from 'emblematic-icons/svg/Info32.svg'
+import IconClose from 'emblematic-icons/svg/ClearClose32.svg'
 
 import {
   assocPath,
@@ -21,6 +22,7 @@ import {
 import ConfirmModal from '../../../../src/components/ConfirmModal'
 import DetailRecipient from '../../../../src/containers/RecipientDetails'
 import Loader from '../../../../src/components/Loader'
+import style from './style.css'
 
 const mapStateToProps = (state = {}) => {
   const { account } = state
@@ -51,6 +53,7 @@ class DetailRecipientPage extends Component {
       pageError: false,
       recipientData: {},
       showModal: false,
+      showSnackbar: false,
       total: {},
     }
 
@@ -71,6 +74,8 @@ class DetailRecipientPage extends Component {
     this.handleSaveTransfer = this.handleSaveTransfer.bind(this)
     this.hideCancelAnticipationModal =
       this.hideCancelAnticipationModal.bind(this)
+    this.handleOpenSnackbar = this.handleOpenSnackbar.bind(this)
+    this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this)
     this.sendToAnticipationPage = this.sendToAnticipationPage.bind(this)
     this.sendToWithdrawPage = this.sendToWithdrawPage.bind(this)
     this.showCancelAnticipationModal =
@@ -81,21 +86,30 @@ class DetailRecipientPage extends Component {
     this.fetchData()
   }
 
-  handleSaveAnticipation (data) {
+  handleOpenSnackbar () {
+    this.setState({ showSnackbar: true })
+  }
+
+  handleCloseSnackbar () {
+    this.setState({ showSnackbar: false })
+  }
+
+  handleSaveAnticipation (anticipationData) {
     const { client } = this.props
     const { id } = this.props.match.params
-    return client.recipient.update(id, { configuration: data })
+    return client.recipient.update(id, { configuration: anticipationData })
       .then(() => {
-        const updatedAnticipationConfig = assocPath(
-          [
-            'recipientData',
-            'configurationData',
-            'anticipation',
-          ],
-          data,
-          this.state
-        )
-        this.setState(updatedAnticipationConfig)
+        const anticipationPath = [
+          'recipientData',
+          'configurationData',
+          'anticipation',
+        ]
+        const updateAnticipation = assocPath(anticipationPath, anticipationData)
+        const newState = updateAnticipation(this.state)
+        this.setState({
+          ...newState,
+          showSnackbar: true,
+        })
       })
   }
 
@@ -113,8 +127,11 @@ class DetailRecipientPage extends Component {
       .then(() => {
         const transferPath = ['recipientData', 'configurationData', 'transfer']
         const updateTransfer = assocPath(transferPath, transferData)
-        const updatedState = updateTransfer(this.state)
-        this.setState(updatedState)
+        const newState = updateTransfer(this.state)
+        this.setState({
+          ...newState,
+          showSnackbar: true,
+        })
       })
   }
 
@@ -170,7 +187,7 @@ class DetailRecipientPage extends Component {
     }
     return operation
       .then((dataUpdated) => {
-        this.setState(pipe(
+        const newState = pipe(
           assocPath(
             ['recipientData', 'configurationData', 'bankAccount'],
             dataUpdated.bank_account
@@ -179,7 +196,11 @@ class DetailRecipientPage extends Component {
             ['recipientData', 'companyData', 'name'],
             dataUpdated.bank_account.name
           )
-        ))
+        )
+        this.setState({
+          ...newState,
+          showSnackbar: true,
+        })
       })
   }
 
@@ -414,12 +435,18 @@ class DetailRecipientPage extends Component {
       loading,
     }
 
-    const style = {
-      textAlign: 'center',
-    }
-
     return (
-      <Fragment>
+      <div className={style.relative}>
+        {this.state.showSnackbar &&
+          <Snackbar
+            icon={<IconClose height={12} width={12} />}
+            dismissTimeout={2500}
+            onDismiss={this.handleCloseSnackbar}
+            type="info"
+          >
+            <p>{t('pages.recipient_detail.configuration_changed')}</p>
+          </Snackbar>
+          }
         <DetailRecipient
           informationProps={informationData}
           balanceProps={{
@@ -456,7 +483,7 @@ class DetailRecipientPage extends Component {
             {t('cancel_pending_request_text')}
           </div>
         </ConfirmModal>
-      </Fragment>
+      </div>
     )
   }
 }

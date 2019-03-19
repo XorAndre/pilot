@@ -436,6 +436,7 @@ class RecipientBalance extends Component {
                   ofLabel={t('of')}
                   onExport={() => null}
                   onPageChange={this.handleOperationsPageChange}
+                  onExportData={() => null}
                   rows={operations.rows}
                   subtitle={
                     <span>

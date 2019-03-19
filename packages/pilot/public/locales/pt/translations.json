@@ -437,6 +437,7 @@
       "enabled": "Habilitada",
       "exit_modal": "Sair",
       "help": "Dúvidas?",
+      "configuration_changed": "Configuração alterada com sucesso",
       "manual_by_volume": "Manual por volume",
       "manual_by_volume_explanation_1": "Neste modelo, você escolhe quando e quanto antecipar, respeitando os limites do percentual antecipável. Ou seja, se você não precisa sempre de antecipações, pode usar o modelo Manual por volume para fazer isso apenas quando for necessário.",
       "manual_by_volume_explanation_2": "Na antecipação Manual por volume, você solicita um volume dos seus recebíveis pontualmente, quando sentir necessidade. O volume liberado para antecipar é um percentual das suas vendas e, nesse caso, é possível definir se deseja antecipar as parcelas do final (mais caras) ou do começo (mais econômicas), de forma que o custo financeiro do lojista seja sempre minimizado e que tenha controle sobre seus recebimentos ao longo do tempo.",
