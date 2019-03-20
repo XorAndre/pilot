@@ -30,7 +30,6 @@ import {
   Pagination,
   Row,
   SegmentedSwitch,
-  Table,
   isMomentPropValidation,
 } from 'former-kit'
 
@@ -38,7 +37,9 @@ import style from './style.css'
 
 import Filter from '../Filter'
 import Charts from './Charts'
+import TableList from './TableList'
 import ExportData from '../../components/ExportData'
+
 import tableColumns from './tableColumns'
 
 import itemsPerPage from '../../models/itemsPerPage'
@@ -273,9 +274,10 @@ const TransactionsList = ({
                   />
                 }
                 {viewMode === 'table' &&
-                  <Table
+                  <TableList
                     columns={columns}
                     disabled={loading}
+                    loading={loading}
                     expandable
                     expandedRows={expandedRows}
                     maxColumns={7}
