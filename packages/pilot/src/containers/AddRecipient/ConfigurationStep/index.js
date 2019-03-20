@@ -6,7 +6,6 @@ import {
   Button,
   CardActions,
   CardContent,
-  Col,
   Grid,
   Row,
   Spacing,
@@ -138,27 +137,29 @@ class ConfigurationsStep extends Component {
           }}
         >
           <CardContent>
+            <Row>
+              <h2 className={style.title}>
+                {t('pages.add_recipient.anticipation_configuration')}
+              </h2>
+            </Row>
+            <Row>
+              <div className={style.alignItems}>
+                <h3 className={style.subtitle}>
+                  {t('pages.add_recipient.choose_anticipation_model')}
+                </h3>
+                <Spacing size="medium" />
+                <Button
+                  type="button"
+                  size="tiny"
+                  fill="outline"
+                  onClick={this.handleOpenHelpModal}
+                >
+                  {t('pages.recipient_detail.help')}
+                </Button>
+              </div>
+            </Row>
             <Grid>
               <Row>
-                <Col tv={12} desk={12} tablet={12} palm={12}>
-                  <h2 className={style.title}>
-                    {t('pages.add_recipient.anticipation_configuration')}
-                  </h2>
-                  <div className={style.alignItems}>
-                    <h3 className={style.subtitle}>
-                      {t('pages.add_recipient.choose_anticipation_model')}
-                    </h3>
-                    <Spacing size="medium" />
-                    <Button
-                      type="button"
-                      size="tiny"
-                      fill="outline"
-                      onClick={this.handleOpenHelpModal}
-                    >
-                      {t('pages.recipient_detail.help')}
-                    </Button>
-                  </div>
-                </Col>
                 {
                   Anticipation({
                     canConfigureAnticipation,
@@ -168,7 +169,7 @@ class ConfigurationsStep extends Component {
                   })
                 }
               </Row>
-              <h2 className={style.title}>
+              <h2 className={style.transferTitle}>
                 {t('pages.add_recipient.transfer_configuration')}
               </h2>
               { Transfer({ data, t, transferHandler }) }

@@ -78,7 +78,7 @@ class SearchableDropdown extends Component {
         }
         <Select
           {...props}
-          className="react-select-container"
+          className={style.marginBottom}
           classNamePrefix="react-select"
           components={{ DropdownIndicator: ChevronDown }}
           isDisabled={disabled}

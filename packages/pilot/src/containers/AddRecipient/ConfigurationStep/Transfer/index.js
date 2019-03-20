@@ -129,7 +129,7 @@ const renderTransferInput = (data, t) => {
 const Transfer = ({ data, t, transferHandler }) => (
   <Fragment>
     <Row>
-      <Col tv={12} desk={12} tablet={12} palm={12}>
+      <div className={style.marginBottom}>
         <FormCheckbox
           checked={data.transferEnabled}
           label={t('pages.add_recipient.transfer_enabled')}
@@ -137,7 +137,7 @@ const Transfer = ({ data, t, transferHandler }) => (
           onChange={transferHandler}
           value="false"
         />
-      </Col>
+      </div>
     </Row>
     <Row>
       <Col tv={12} desk={12} tablet={12} palm={12}>

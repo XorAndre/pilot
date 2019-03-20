@@ -30,6 +30,7 @@
   font-size: 14px;
   font-weight: var(--title-font-style);
   margin: 0;
+  margin-bottom: 20px;
 }
 
 .label {
@@ -50,4 +51,12 @@
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+.changeContext {
+  margin-bottom: 40px;
+}
+
+.inputMarginBottom {
+  margin-bottom: 20px;
 }

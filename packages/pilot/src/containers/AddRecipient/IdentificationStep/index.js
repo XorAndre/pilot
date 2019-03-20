@@ -266,6 +266,7 @@ class IdentificationStep extends Component {
     if (documentType === 'cpf') {
       return (
         <FormInput
+          className={style.inputMarginBottom}
           key="cpf"
           label={t('pages.add_recipient.cpf')}
           mask={masks.cpf}
@@ -277,6 +278,7 @@ class IdentificationStep extends Component {
 
     return (
       <FormInput
+        className={style.inputMarginBottom}
         key="cnpj"
         label={t('pages.add_recipient.cnpj')}
         mask={masks.cnpj}
@@ -295,13 +297,15 @@ class IdentificationStep extends Component {
       : t('pages.add_recipient.more_company_information')
 
     return (
-      <FormCheckbox
-        checked={this.state.formData[`${documentType}Information`]}
-        label={info}
-        name={`${documentType}Information`}
-        onChange={this.toggleAdditionalInformation}
-        value=""
-      />
+      <div className={style.changeContext}>
+        <FormCheckbox
+          checked={this.state.formData[`${documentType}Information`]}
+          label={info}
+          name={`${documentType}Information`}
+          onChange={this.toggleAdditionalInformation}
+          value=""
+        />
+      </div>
     )
   }
 
@@ -337,6 +341,7 @@ class IdentificationStep extends Component {
         <Row>
           <Col>
             <FormInput
+              className={style.inputMarginBottom}
               label={
                 (documentType === 'cpf')
                   ? t('pages.add_recipient.name')
@@ -347,6 +352,7 @@ class IdentificationStep extends Component {
           </Col>
           <Col>
             <FormInput
+              className={style.inputMarginBottom}
               label={t('pages.add_recipient.email')}
               name={`${documentType}Email`}
             />
@@ -355,12 +361,14 @@ class IdentificationStep extends Component {
         <Row stretch>
           <Col>
             <FormInput
+              className={style.inputMarginBottom}
               label={t('pages.add_recipient.optional_url')}
               name={`${documentType}Url`}
             />
           </Col>
           <Col>
             <FormInput
+              className={style.inputMarginBottom}
               key="documentPhone"
               label={t('pages.add_recipient.optional_phone')}
               mask={masks.phone}
@@ -387,12 +395,14 @@ class IdentificationStep extends Component {
           <Row stretch>
             <Col>
               <FormInput
+                className={style.inputMarginBottom}
                 label={t('pages.add_recipient.name')}
                 name="name"
               />
             </Col>
             <Col>
               <FormInput
+                className={style.inputMarginBottom}
                 label={t('pages.add_recipient.cpf')}
                 mask={masks.cpf}
                 name="cpf"
@@ -402,6 +412,7 @@ class IdentificationStep extends Component {
             </Col>
             <Col>
               <FormInput
+                className={style.inputMarginBottom}
                 label={t('pages.add_recipient.email')}
                 name="email"
                 onChange={event =>

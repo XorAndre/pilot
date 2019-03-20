@@ -9,7 +9,19 @@
   font-weight: var(--title-font-weight);
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: var(--spacing-tiny);
+  margin-bottom: 4px;
+  padding-bottom: 0;
+}
+
+.transferTitle {
+  color: var(--color-light-steel-100);
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: var(--title-font-weight);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding-bottom: 0;
 }
 
 .subtitle {
@@ -17,6 +29,7 @@
   font-size: 14px;
   font-weight: var(--title-font-style);
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .label {
@@ -37,4 +50,8 @@
 .alignItems {
   display: flex;
   align-items: baseline;
+}
+
+.marginBottom {
+  margin-bottom: 20px;
 }

@@ -13,6 +13,8 @@ import SearchableDropdown from '../../../../components/SearchableDropdown/'
 import accountTypes from '../../../../models/accountTypes'
 import bankCodes from '../../../../models/banks'
 
+import style from './style.css'
+
 const AddAccountContent = ({ t }) => {
   const accountTypeOptions = accountTypes.map(accountType => ({
     name: t(`models.account_type.${accountType}`),
@@ -40,6 +42,7 @@ const AddAccountContent = ({ t }) => {
       <Row>
         <Col tv={2} desk={3} tablet={4} palm={8}>
           <FormInput
+            className={style.marginBottom}
             type="text"
             label={t('pages.add_recipient.agency')}
             name="agency"
@@ -48,6 +51,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
         <Col tv={1} desk={1} tablet={1} palm={8}>
           <FormInput
+            className={style.marginBottom}
             type="text"
             label={t('pages.add_recipient.agency_digit')}
             name="agency_digit"
@@ -58,6 +62,7 @@ const AddAccountContent = ({ t }) => {
       <Row>
         <Col tv={2} desk={3} tablet={4} palm={8}>
           <FormInput
+            className={style.marginBottom}
             type="text"
             label={t('pages.add_recipient.account')}
             name="number"
@@ -66,6 +71,7 @@ const AddAccountContent = ({ t }) => {
         </Col>
         <Col tv={1} desk={1} tablet={1} palm={8}>
           <FormInput
+            className={style.marginBottom}
             type="text"
             label={t('pages.add_recipient.account_digit')}
             name="number_digit"
@@ -75,16 +81,19 @@ const AddAccountContent = ({ t }) => {
       </Row>
       <Row>
         <Col tv={2} desk={4} tablet={5} palm={8}>
-          <FormDropdown
-            name="type"
-            label={t('pages.add_recipient.account_type')}
-            options={accountTypeOptions}
-          />
+          <div className={style.marginBottom}>
+            <FormDropdown
+              name="type"
+              label={t('pages.add_recipient.account_type')}
+              options={accountTypeOptions}
+            />
+          </div>
         </Col>
       </Row>
       <Row>
         <Col tv={2} desk={4} tablet={5} palm={8}>
           <FormInput
+            className={style.marginBottom}
             type="text"
             label={t('pages.add_recipient.account_name')}
             name="name"

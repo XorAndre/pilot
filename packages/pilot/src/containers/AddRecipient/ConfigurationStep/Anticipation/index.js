@@ -66,6 +66,7 @@ const renderAnticipationInput = (data, t) => {
     return (
       <Col tv={3} desk={3} tablet={5} palm={5}>
         <FormInput
+          className={style.marginBottom}
           label={t('pages.add_recipient.anticipation_volume_percentage')}
           name="anticipationVolumePercentage"
           type="number"
@@ -79,6 +80,7 @@ const renderAnticipationInput = (data, t) => {
     return (
       <Col tv={3} desk={3} tablet={5} palm={5}>
         <FormInput
+          className={style.marginBottom}
           label={t('pages.add_recipient.anticipation_days')}
           name="anticipationDays"
           type="number"

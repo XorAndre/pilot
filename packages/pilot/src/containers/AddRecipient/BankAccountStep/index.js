@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { SegmentedSwitch, CardContent } from 'former-kit'
+import {
+  SegmentedSwitch,
+  CardContent,
+  Row,
+} from 'former-kit'
 
 import {
   complement,
@@ -79,8 +83,12 @@ class BankAccountStep extends Component {
       return (
         <Fragment>
           <CardContent>
-            <h2 className={style.title}>{t('pages.add_recipient.bank_account')}</h2>
-            <h3 className={style.subtitle}>{t('pages.add_recipient.select_or_add_account')}</h3>
+            <Row>
+              <h2 className={style.title}>{t('pages.add_recipient.bank_account')}</h2>
+            </Row>
+            <Row>
+              <h3 className={style.subtitle}>{t('pages.add_recipient.select_or_add_account')}</h3>
+            </Row>
             <SegmentedSwitch
               options={[
                 {
