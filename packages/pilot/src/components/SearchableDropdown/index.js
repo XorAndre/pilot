@@ -25,8 +25,8 @@ class SearchableDropdown extends Component {
 
     this.getNoOptionsMessage = this.getNoOptionsMessage.bind(this)
     this.onChange = this.onChange.bind(this)
-    this.onMenuClose = this.onMenuClose.bind(this)
-    this.onMenuOpen = this.onMenuOpen.bind(this)
+    // this.onMenuClose = this.onMenuClose.bind(this)
+    // this.onMenuOpen = this.onMenuOpen.bind(this)
   }
 
   onMenuClose () {
@@ -70,6 +70,9 @@ class SearchableDropdown extends Component {
 
     const value = !menuIsOpen && selectedOption
     const customStyle = getSelectCustomStyle(error)
+
+    console.log(this.state.selectedOption)
+    console.log(this.props.label)
 
     return (
       <Fragment>
