@@ -6,7 +6,10 @@ import {
   Button,
   CardActions,
   CardContent,
+  Col,
+  FormInput,
   Spacing,
+  Row,
 } from 'former-kit'
 
 import accountTypes from '../../../../models/accountTypes'
@@ -20,12 +23,45 @@ import createAgencyDigitValidation from '../../../../validation/agencyCheckDigit
 
 import style from '../style.css'
 
+const renderDocumentNumber = (data, t) => {
+  if (data.identification.documentType === 'cpf') {
+    return (
+      <Row>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
+          <FormInput
+            disabled
+            className={style.marginBottom}
+            label={t('pages.add_recipient.document_owner')}
+            type="text"
+            value={data.identification.cpf}
+          />
+        </Col>
+      </Row>
+    )
+  }
+
+  return (
+    <Row>
+      <Col tv={2} desk={4} tablet={5} palm={8}>
+        <FormInput
+          disabled
+          className={style.marginBottom}
+          label={t('pages.add_recipient.document_owner')}
+          type="text"
+          value={data.identification.cnpj}
+        />
+      </Col>
+    </Row>
+  )
+}
+
 const AddAccount = ({
   data,
   errors,
   onBack,
   onCancel,
   onContinue,
+  sharedData,
   t,
 }) => {
   const max30Message = t('pages.add_recipient.field_max', { number: 30 })
@@ -62,6 +98,7 @@ const AddAccount = ({
       errors={errors}
     >
       <CardContent>
+        {renderDocumentNumber(sharedData, t)}
         {AddAccountContent({ t })}
       </CardContent>
       <div className={style.paddingTop}>
@@ -131,12 +168,14 @@ AddAccount.propTypes = {
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
+  sharedData: PropTypes.shape({}),
   t: PropTypes.func.isRequired,
 }
 
 AddAccount.defaultProps = {
   data: accountDefaultProps,
   errors: {},
+  sharedData: {},
 }
 
 export default AddAccount

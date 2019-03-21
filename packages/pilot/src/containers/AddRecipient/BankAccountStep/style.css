@@ -24,3 +24,7 @@
 .paddingTop {
   padding-top: var(--spacing-small);
 }
+
+.marginBottom {
+  margin-bottom: 20px;
+}

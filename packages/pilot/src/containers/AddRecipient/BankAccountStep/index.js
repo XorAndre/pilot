@@ -36,7 +36,9 @@ const SELECT_ACCOUNT = 'selectAccount'
 class BankAccountStep extends Component {
   constructor (props) {
     super(props)
-    const { data } = props
+    const {
+      data,
+    } = props
     let selectedForm = SELECT_ACCOUNT
 
     if (isNewAccount(data)) {
@@ -60,15 +62,24 @@ class BankAccountStep extends Component {
 
   renderSelectedForm () {
     const { selectedForm } = this.state
-    const { data } = this.props
+    const { data, sharedData } = this.props
 
     if (selectedForm === ADD_ACCOUNT) {
       let addAccountData
       if (isNewAccount(data)) addAccountData = data
-      return <AddAccount {...this.props} data={addAccountData} />
+      return (
+        <AddAccount
+          {...this.props}
+          data={addAccountData}
+        />
+      )
     }
-
-    return <SelectAccount {...this.props} />
+    return (
+      <SelectAccount
+        {...this.props}
+        sharedData={sharedData}
+      />
+    )
   }
 
   render () {
@@ -129,6 +140,10 @@ BankAccountStep.propTypes = {
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
+  sharedData: PropTypes.shape({
+    cnpj: PropTypes.string,
+    cpf: PropTypes.string,
+  }),
   t: PropTypes.func.isRequired,
 }
 
@@ -136,6 +151,7 @@ BankAccountStep.defaultProps = {
   accounts: [],
   data: accountDefaultProps,
   errors: {},
+  sharedData: {},
 }
 
 const userAccountDefaultProps = {

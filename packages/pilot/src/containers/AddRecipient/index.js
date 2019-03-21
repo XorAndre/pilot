@@ -264,7 +264,7 @@ class AddRecipients extends Component {
         return <IdentificationStep {...stepProps} />
 
       case BANK_ACCOUNT:
-        return <BankAccountStep {...stepProps} />
+        return <BankAccountStep {...stepProps} sharedData={data} />
 
       case CONFIGURATION:
         return <ConfigurationStep {...stepProps} />

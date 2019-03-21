@@ -132,12 +132,13 @@ function formatAntecipationAndTransferConfiguration (data) {
     anticipation,
     transfer,
     bankAccount: {
+      agency: data.bank_account.agencia,
+      bank: data.bank_account.bank_code,
+      documentNumber: data.bank_account.document_number,
+      id: data.bank_account.id.toString(),
       name: data.bank_account.legal_name,
       number: data.bank_account.conta.toString(),
       type: data.bank_account.type,
-      agency: data.bank_account.agencia,
-      bank: data.bank_account.bank_code,
-      id: data.bank_account.id.toString(),
     },
   }
 

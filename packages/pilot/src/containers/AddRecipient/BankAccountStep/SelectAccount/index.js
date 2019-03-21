@@ -7,7 +7,10 @@ import {
   Button,
   CardActions,
   CardContent,
+  Col,
+  FormInput,
   Spacing,
+  Row,
 } from 'former-kit'
 
 import accountTypes from '../../../../models/accountTypes'
@@ -17,12 +20,45 @@ import style from '../style.css'
 
 const removeBankCode = replace(/^\d+ - /, '')
 
+const renderDocumentNumber = (data, t) => {
+  if (data.identification.documentType === 'cpf') {
+    return (
+      <Row>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
+          <FormInput
+            disabled
+            className={style.marginBottom}
+            label={t('pages.add_recipient.document_owner')}
+            type="text"
+            value={data.identification.cpf}
+          />
+        </Col>
+      </Row>
+    )
+  }
+
+  return (
+    <Row>
+      <Col tv={2} desk={4} tablet={5} palm={8}>
+        <FormInput
+          disabled
+          className={style.marginBottom}
+          label={t('pages.add_recipient.document_owner')}
+          type="text"
+          value={data.identification.cnpj}
+        />
+      </Col>
+    </Row>
+  )
+}
+
 const SelectAccount = ({
   accounts,
   data,
   onBack,
   onCancel,
   onContinue,
+  sharedData,
   t,
 }) => {
   const options = accounts.map((account) => {
@@ -63,6 +99,7 @@ const SelectAccount = ({
       }}
     >
       <CardContent>
+        {renderDocumentNumber(sharedData, t)}
         {SelectAccountContent({
           options,
           t,
@@ -115,12 +152,14 @@ SelectAccount.propTypes = {
   onBack: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,
+  sharedData: PropTypes.shape({}),
   t: PropTypes.func.isRequired,
 }
 
 SelectAccount.defaultProps = {
   accounts: [],
   data: {},
+  sharedData: {},
 }
 
 export default SelectAccount

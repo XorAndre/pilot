@@ -65,12 +65,12 @@ export function formatTransferData (data) {
 
 export function formatBankAccountData (data) {
   const accountFormat = {
-    name: data.legal_name,
-    number: data.conta,
-    type: data.type,
     agency: data.agencia,
     bank: data.bank_code,
     id: data.id.toString(),
+    name: data.legal_name,
+    number: data.conta,
+    type: data.type,
   }
 
   return accountFormat

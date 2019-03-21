@@ -5,8 +5,12 @@ import Form from 'react-vanilla-form'
 import {
   Button,
   CardActions,
+  Col,
+  FormInput,
+  Grid,
   SegmentedSwitch,
   Spacing,
+  Row,
 } from 'former-kit'
 
 import {
@@ -55,6 +59,11 @@ const toDropdownOptions = (account) => {
   }
 }
 
+const masks = {
+  cnpj: '11.111.111/1111-11',
+  cpf: '111.111.111-11',
+}
+
 class BankAccountContent extends Component {
   constructor (props) {
     super(props)
@@ -89,6 +98,42 @@ class BankAccountContent extends Component {
     this.setState({ selectedForm })
   }
 
+  renderDocumentNumber () {
+    const { data, t } = this.props
+
+    if (data.documentNumber.length === 11) {
+      return (
+        <Row>
+          <Col tv={2} desk={4} tablet={5} palm={8}>
+            <FormInput
+              disabled
+              className={styles.marginBottom}
+              label={t('pages.add_recipient.document_owner')}
+              type="text"
+              mask={masks.cpf}
+              name="documentNumber"
+            />
+          </Col>
+        </Row>
+      )
+    }
+
+    return (
+      <Row>
+        <Col tv={2} desk={4} tablet={5} palm={8}>
+          <FormInput
+            disabled
+            className={styles.marginBottom}
+            label={t('pages.add_recipient.document_owner')}
+            type="text"
+            mask={masks.cnpj}
+            name="documentNumber"
+          />
+        </Col>
+      </Row>
+    )
+  }
+
   renderSelectedForm () {
     const { selectedForm } = this.state
     const {
@@ -100,22 +145,28 @@ class BankAccountContent extends Component {
     if (selectedForm === ADD_ACCOUNT) {
       return (
         <div className={styles.paddingTop}>
-          {AddAccountContent({
-            data: data.addAccount,
-            t,
-          })}
+          <Grid>
+            {this.renderDocumentNumber()}
+            {AddAccountContent({
+              data,
+              t,
+            })}
+          </Grid>
         </div>
       )
     }
 
     return (
       <div className={styles.paddingTop}>
-        {SelectAccountContent({
-          accounts,
-          data: data.selectAccount,
-          options: accounts.map(toDropdownOptions),
-          t,
-        })}
+        <Grid>
+          {this.renderDocumentNumber()}
+          {SelectAccountContent({
+            accounts,
+            data,
+            options: accounts.map(toDropdownOptions),
+            t,
+          })}
+        </Grid>
       </div>
     )
   }
@@ -123,6 +174,7 @@ class BankAccountContent extends Component {
   render () {
     const {
       accounts,
+      data,
       onCancel,
       onChange,
       t,
@@ -166,6 +218,7 @@ class BankAccountContent extends Component {
             data={{
               agency: '',
               bank: '',
+              documentNumber: data.documentNumber,
               id: accounts[0].id,
               name: '',
               number: '',
@@ -219,6 +272,7 @@ BankAccountContent.propTypes = {
     [BANK_ACCOUNT]: PropTypes.shape({
       agency: PropTypes.string,
       bank: PropTypes.string,
+      documentNumber: PropTypes.string,
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
