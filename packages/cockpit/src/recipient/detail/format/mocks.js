@@ -175,7 +175,6 @@ const recipientTransferDataUpdated = {
   transferDay: '5',
   transferEnabled: true,
   transferInterval: 'monthly',
-  transferWeekday: '',
 }
 
 const recipientBankAccountDataUpdated = {

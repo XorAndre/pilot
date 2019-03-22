@@ -318,7 +318,6 @@ RecipientDetailConfig.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
 }
 
@@ -334,7 +333,6 @@ RecipientDetailConfig.defaultProps = {
     transferDay: '',
     transferEnabled: true,
     transferInterval: '',
-    transferWeekday: '',
   },
 }
 

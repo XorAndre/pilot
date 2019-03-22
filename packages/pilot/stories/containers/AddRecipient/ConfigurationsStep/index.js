@@ -9,10 +9,9 @@ const defaultData = {
   anticipationDays: '25',
   anticipationModel: 'automatic_volume',
   anticipationVolumePercentage: '85',
-  transferDay: '5',
+  transferDay: '1',
   transferEnabled: true,
   transferInterval: 'weekly',
-  transferWeekday: 'wednesday',
 }
 
 const ConfigurationStep = () => (

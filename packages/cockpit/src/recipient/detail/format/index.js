@@ -36,46 +36,51 @@ function formatAntecipationAndTransferConfiguration (data) {
   const register = data.register_information
   const phone = pathOr('', ['phone_numbers', 0, 'number'], register)
 
-  if (data.bank_account.document_type === 'cpf' && register) {
-    identification = {
-      ...identification,
-      cpf: data.bank_account.document_number,
-      cpfEmail: register.email,
-      cpfInformation: true,
-      cpfName: register.name,
-      cpfPhone: phone,
-      cpfUrl: register.site_url,
-      documentType: 'cpf',
+  if (data.bank_account.document_type === 'cpf') {
+    if (register) {
+      identification = {
+        ...identification,
+        cpf: data.bank_account.document_number,
+        cpfEmail: register.email,
+        cpfInformation: true,
+        cpfName: register.name,
+        cpfPhone: phone,
+        cpfUrl: register.site_url,
+        documentType: 'cpf',
+        cnpj: '',
+      }
+    } else {
+      identification = {
+        ...identification,
+        cpf: data.bank_account.document_number,
+        cpfInformation: false,
+        cnpj: '',
+      }
     }
-  } else {
-    identification = {
-      ...identification,
-      cpf: data.bank_account.document_number,
-      cpfInformation: false,
-    }
-  }
-
-  if (data.bank_account.document_type === 'cnpj' && register) {
-    const partners = data.register_information.managing_partners || []
-    const partnersData = getPartnersData(partners)
-
-    identification = {
-      ...identification,
-      cnpj: data.bank_account.document_number,
-      cnpjEmail: register.email,
-      cnpjInformation: true,
-      cnpjName: register.company_name,
-      cnpjPhone: phone,
-      cnpjUrl: register.site_url,
-      documentType: 'cnpj',
-      partnerNumber: partners.length.toString(),
-      ...partnersData,
-    }
-  } else {
-    identification = {
-      ...identification,
-      cnpj: data.bank_account.document_number,
-      cnpjInformation: false,
+  } else if (data.bank_account.document_type === 'cnpj') {
+    if (register) {
+      const partners = data.register_information.managing_partners || []
+      const partnersData = getPartnersData(partners)
+      identification = {
+        ...identification,
+        cnpj: data.bank_account.document_number,
+        cnpjEmail: register.email,
+        cnpjInformation: true,
+        cnpjName: register.company_name,
+        cnpjPhone: phone,
+        cnpjUrl: register.site_url,
+        documentType: 'cnpj',
+        partnerNumber: partners.length.toString(),
+        ...partnersData,
+        cpf: '',
+      }
+    } else {
+      identification = {
+        ...identification,
+        cnpj: data.bank_account.document_number,
+        cnpjInformation: false,
+        cpf: '',
+      }
     }
   }
 

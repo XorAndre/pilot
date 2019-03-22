@@ -28,10 +28,9 @@ const mockInformation = {
     anticipationDays: '',
     anticipationModel: 'Automática por volume',
     anticipationVolumePercentage: '50',
-    transferDay: '15',
+    transferDay: '1',
     transferEnabled: true,
     transferInterval: 'Mensal',
-    transferWeekday: 'Terça-feira',
   },
   identification: {
     cnpj: '11.111.111/1111-11',
@@ -109,10 +108,9 @@ const mockConfiguration = {
   onCancel: action('Cancel'),
   onSave: action('Saved'),
   transfer: {
-    transferDay: '5',
+    transferDay: '1',
     transferEnabled: true,
     transferInterval: 'weekly',
-    transferWeekday: 'wednesday',
   },
 }
 

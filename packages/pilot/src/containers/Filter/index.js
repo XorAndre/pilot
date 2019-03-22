@@ -11,7 +11,6 @@ import {
   Row,
   Col,
   CheckboxGroup,
-  Spacing,
 } from 'former-kit'
 
 import Form from 'react-vanilla-form'
@@ -95,15 +94,35 @@ class Filters extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const prevQuery = stringifyDates(prevState.query)
-    const currQuery = stringifyDates(this.props.query)
+    const prevStateQuery = stringifyDates(prevState.query)
+    const currStateQuery = stringifyDates(this.state.query)
+    const prevPropQuery = stringifyDates(prevProps.query)
+    const currPropQuery = stringifyDates(this.props.query)
 
-    if (!equals(prevQuery, currQuery)) {
-      this.setState({ // eslint-disable-line react/no-did-update-set-state
+    const propQueryVerify = (
+      !equals(prevPropQuery, currPropQuery)
+      && !isEmpty(currPropQuery)
+    )
+
+    const stateQueryVerify = (
+      !equals(prevStateQuery, currStateQuery)
+      && !isEmpty(currStateQuery)
+    )
+
+    if (propQueryVerify) {
+      return this.setState({ // eslint-disable-line react/no-did-update-set-state
         hasChanged: true,
         query: this.props.query,
       })
     }
+
+    if (stateQueryVerify) {
+      return this.setState({ // eslint-disable-line react/no-did-update-set-state
+        hasChanged: true,
+      })
+    }
+
+    return undefined
   }
 
   handleToogeMoreFilters () {
@@ -168,7 +187,6 @@ class Filters extends Component {
             {t('components.filter.more')}
           </Button>
         }
-        <Spacing size="flex" />
         <Button
           relevance={
             hasChanged

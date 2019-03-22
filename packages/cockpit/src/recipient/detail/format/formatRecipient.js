@@ -51,14 +51,13 @@ export function formatTransferData (data) {
     transferDay: data.transfer_day.toString(),
     transferEnabled: data.transfer_enabled,
     transferInterval: data.transfer_interval,
-    transferWeekday: '',
   }
 
   if (data.transfer_interval === 'daily') {
     transfer.transferDay = '0'
   }
   if (data.transfer_interval === 'weekly') {
-    transfer.transferWeekday = data.transfer_day.toString()
+    transfer.transferDay = data.transfer_day.toString()
   }
 
   return transfer

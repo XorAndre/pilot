@@ -34,7 +34,6 @@ const TransferContent = ({
         transferDay: [required, number],
         transferEnabled: [required],
         transferInterval: [required],
-        transferWeekday: [required],
       }}
       onChange={onChange}
       onSubmit={onSave}
@@ -77,7 +76,6 @@ TransferContent.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.bool,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   onCancel: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,

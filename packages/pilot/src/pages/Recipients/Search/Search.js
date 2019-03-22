@@ -90,7 +90,11 @@ const isRecipientId = (recipientText) => {
 }
 
 const isBankAccount = (bankAccount) => {
+  if (bankAccount.length > 10) {
+    return false
+  }
   const bankNumber = Number.parseInt(bankAccount, 10)
+
   return Number.isInteger(bankNumber)
 }
 

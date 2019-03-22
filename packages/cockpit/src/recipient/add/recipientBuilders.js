@@ -58,16 +58,8 @@ export const formatToTransfer = (data) => {
   recipientTransferData.transfer_enabled = data.configuration.transferEnabled
 
   if (data.configuration.transferInterval === 'weekly') {
-    const weekDayNumberMap = {
-      monday: '1',
-      tuesday: '2',
-      wednesday: '3',
-      thursday: '4',
-      friday: '5',
-    }
-    const weekDay = data.configuration.transferWeekday
-    const transferDay = weekDayNumberMap[weekDay]
-    recipientTransferData.transfer_day = transferDay
+    const weekDay = data.configuration.transferDay
+    recipientTransferData.transfer_day = weekDay
   }
 
   if (data.configuration.transferInterval === 'daily') {

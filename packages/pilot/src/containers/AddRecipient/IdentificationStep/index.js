@@ -54,10 +54,6 @@ const getValidations = (data, t) => {
     validateCpfCnpjMessage = t('pages.add_recipient.field_invalid_cnpj')
   }
 
-  if (data.documentType === 'cnpj' && data.cnpjInformation === true) {
-    validateCpfCnpjMessage = t('pages.add_recipient.field_invalid_cpf')
-  }
-
   const validateEmailMessage =
     t('pages.add_recipient.field_invalid_email')
 
@@ -113,7 +109,6 @@ const getValidations = (data, t) => {
       partner4: partnerValidations,
     }
   }
-
   return {
     cpf: [required, validateCpfCnpj],
     cpfEmail: [required, validateEmailIfExists],
@@ -569,7 +564,6 @@ IdentificationStep.propTypes = {
     transferDay: PropTypes.string,
     transferEnabled: PropTypes.string,
     transferInterval: PropTypes.string,
-    transferWeekday: PropTypes.string,
   }),
   onCancel: PropTypes.func.isRequired,
   onContinue: PropTypes.func.isRequired,

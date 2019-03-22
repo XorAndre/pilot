@@ -33,10 +33,9 @@ const mockAnticipation = {
 }
 
 const mockTransfer = {
-  transferDay: '5',
+  transferDay: '1',
   transferEnabled: true,
   transferInterval: 'weekly',
-  transferWeekday: 'wednesday',
 }
 
 const mockBankAccount = {

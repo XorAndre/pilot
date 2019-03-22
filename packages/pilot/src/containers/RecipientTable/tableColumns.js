@@ -51,6 +51,23 @@ const antecipationModel = (data) => {
   return 'custom'
 }
 
+const renderColumnTransferDay = (data, t) => {
+  const weekDaysMap = {
+    1: t('pages.add_recipient.monday'),
+    2: t('pages.add_recipient.tuesday'),
+    3: t('pages.add_recipient.wednesday'),
+    4: t('pages.add_recipient.thursday'),
+    5: t('pages.add_recipient.friday'),
+  }
+
+  return (
+    {
+      content: weekDaysMap[data.transfer_day],
+      title: t('pages.recipients.transfer_day'),
+    }
+  )
+}
+
 const getDefaultColumns = ({
   onDetailsClick,
   t,
@@ -132,7 +149,8 @@ const getDefaultColumns = ({
           tv={6}
         >
           <Row>
-            {columnData([
+            {data.transfer_day !== 0 && data.transfer_interval === 'weekly' &&
+              columnData([
               {
                 content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
                 title: t('pages.recipients.transfer_enabled'),
@@ -141,11 +159,19 @@ const getDefaultColumns = ({
                 content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
                 title: t('pages.recipients.transfer_interval'),
               },
-              {
-                content: data.transfer_day,
-                title: t('pages.recipients.transfer_day'),
-              },
+              renderColumnTransferDay(data, t),
             ])}
+            {data.transfer_day === 0 &&
+              columnData([
+              {
+                content: t(`pages.recipients.transfer_enabled_boolean.${data.transfer_enabled}`),
+                title: t('pages.recipients.transfer_enabled'),
+              }, {
+                content: t(`pages.recipients.transfer_interval_of.${data.transfer_interval}`),
+                title: t('pages.recipients.transfer_interval'),
+              },
+            ])
+            }
           </Row>
         </Col>
       </Grid>
