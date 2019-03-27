@@ -196,7 +196,8 @@ class DetailRecipientPage extends Component {
             ['recipientData', 'companyData', 'name'],
             dataUpdated.bank_account.name
           )
-        )
+        )(this.state)
+
         this.setState({
           ...newState,
           showSnackbar: true,
