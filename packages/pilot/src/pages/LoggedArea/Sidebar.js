@@ -34,6 +34,7 @@ const handleLinkClick = curry((push, currentPath, route) => {
 })
 
 const Sidebar = ({
+  anticipationLimit,
   balance,
   companyName,
   history,
@@ -41,6 +42,7 @@ const Sidebar = ({
   recipientId,
   sessionId,
   t,
+  transfersPricing,
 }) => (
   <SidebarContainer
     balance={balance}
@@ -53,15 +55,18 @@ const Sidebar = ({
       }))
     }
     logo={Logo}
+    anticipationLimit={anticipationLimit}
     onAnticipate={() => history.push(`/anticipation/${recipientId}`)}
     onLinkClick={handleLinkClick(history.push, pathname)}
     onWithdraw={() => history.push(`/withdraw/${recipientId}`)}
     sessionId={sessionId}
     t={t}
+    transfersPricing={transfersPricing}
   />
 )
 
 Sidebar.propTypes = {
+  anticipationLimit: PropTypes.number,
   balance: PropTypes.shape({
     available: PropTypes.number,
     waitingFunds: PropTypes.number,
@@ -76,12 +81,17 @@ Sidebar.propTypes = {
   recipientId: PropTypes.string,
   sessionId: PropTypes.string,
   t: PropTypes.func.isRequired,
+  transfersPricing: PropTypes.shape({
+    ted: PropTypes.number,
+  }),
 }
 
 Sidebar.defaultProps = {
+  anticipationLimit: null,
   companyName: '',
   recipientId: null,
   sessionId: '',
+  transfersPricing: {},
 }
 
 export default withRouter(Sidebar)

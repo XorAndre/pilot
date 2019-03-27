@@ -21,16 +21,20 @@ import Header from './Header'
 
 import routes from './routes'
 
+const getAnticipationLimit = path(['anticipation', 'limits', 'max'])
 const getRecipientId = path(['account', 'company', 'default_recipient_id', env])
 const getBalance = path(['account', 'balance'])
 const getCompanyName = path(['account', 'company', 'name'])
 const getAccountSessionId = path(['account', 'sessionId'])
+const getTransfersPricing = path(['account', 'company', 'pricing', 'transfers'])
 
 const mapStateToProps = applySpec({
+  anticipationLimit: getAnticipationLimit,
   balance: getBalance,
   companyName: getCompanyName,
   recipientId: getRecipientId,
   sessionId: getAccountSessionId,
+  transfersPricing: getTransfersPricing,
 })
 
 const enhanced = compose(
@@ -40,20 +44,24 @@ const enhanced = compose(
 )
 
 const LoggedArea = ({
+  anticipationLimit,
   balance,
   companyName,
   recipientId,
   sessionId,
   t,
+  transfersPricing,
 }) => (
   <Layout
     sidebar={
       <Sidebar
+        anticipationLimit={anticipationLimit}
         companyName={companyName}
         balance={balance}
         recipientId={recipientId}
         sessionId={sessionId}
         t={t}
+        transfersPricing={transfersPricing}
       />
     }
     header={<Header t={t} />}
@@ -78,6 +86,7 @@ const LoggedArea = ({
 )
 
 LoggedArea.propTypes = {
+  anticipationLimit: PropTypes.number,
   balance: PropTypes.shape({
     available: PropTypes.number,
     waitingFunds: PropTypes.number,
@@ -86,13 +95,18 @@ LoggedArea.propTypes = {
   recipientId: PropTypes.string,
   sessionId: PropTypes.string,
   t: PropTypes.func.isRequired,
+  transfersPricing: PropTypes.shape({
+    ted: PropTypes.number,
+  }),
 }
 
 LoggedArea.defaultProps = {
+  anticipationLimit: null,
   balance: {},
   companyName: '',
   recipientId: null,
   sessionId: '',
+  transfersPricing: {},
 }
 
 export default enhanced(LoggedArea)

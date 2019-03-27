@@ -41,15 +41,18 @@ class SidebarContainer extends React.Component {
 
   renderSections () {
     const {
+      anticipationLimit,
       balance,
       onAnticipate,
       onWithdraw,
       t,
+      transfersPricing,
     } = this.props
 
     const getFrombalance = propOr(null, __, balance)
     const available = getFrombalance('available')
     const waitingFunds = getFrombalance('waitingFunds')
+    const apiMinValue = 100
 
     return (
       <SidebarSections
@@ -57,12 +60,14 @@ class SidebarContainer extends React.Component {
           {
             action: onWithdraw,
             actionTitle: t('pages.sidebar.withdraw'),
+            disabled: available <= transfersPricing.ted + apiMinValue,
             title: t('pages.sidebar.available'),
             value: <span><small>{t('pages.sidebar.currency_symbol')}</small> {formatDecimalCurrency(available)}</span>,
           },
           {
             action: onAnticipate,
             actionTitle: t('pages.sidebar.anticipation'),
+            disabled: anticipationLimit < apiMinValue,
             title: t('pages.sidebar.waiting_funds'),
             value: <span><small>{t('pages.sidebar.currency_symbol')}</small> {formatDecimalCurrency(waitingFunds)}</span>,
           },
@@ -177,6 +182,7 @@ class SidebarContainer extends React.Component {
 }
 
 SidebarContainer.propTypes = {
+  anticipationLimit: PropTypes.number,
   balance: PropTypes.shape({
     available: PropTypes.number,
     waitingFunds: PropTypes.number,
@@ -195,13 +201,18 @@ SidebarContainer.propTypes = {
   onWithdraw: PropTypes.func,
   sessionId: PropTypes.string,
   t: PropTypes.func.isRequired,
+  transfersPricing: PropTypes.shape({
+    ted: PropTypes.number,
+  }),
 }
 
 SidebarContainer.defaultProps = {
+  anticipationLimit: null,
   companyName: '',
   onAnticipate: null,
   onWithdraw: null,
   sessionId: '',
+  transfersPricing: {},
 }
 
 export default SidebarContainer

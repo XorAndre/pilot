@@ -12,6 +12,7 @@ const SidebarSections = ({
       {sections.map(({
         action,
         actionTitle,
+        disabled,
         title,
         value,
       }) => (
@@ -24,6 +25,7 @@ const SidebarSections = ({
           {actionTitle &&
             <Button
               className={style.action}
+              disabled={disabled}
               onClick={action}
               size="tiny"
             >
@@ -40,6 +42,7 @@ SidebarSections.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.shape({
     action: PropTypes.func,
     actionTitle: PropTypes.string,
+    disabled: PropTypes.bool,
     title: PropTypes.string.isRequired,
     value: PropTypes.element.isRequired,
   })).isRequired,
